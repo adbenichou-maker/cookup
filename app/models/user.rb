@@ -6,8 +6,12 @@ class User < ApplicationRecord
   has_many :recipes
 
   devise :database_authenticatable, :registerable,
+<<<<<<< HEAD
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
 
+=======
+          :recoverable, :rememberable, :validatable
+>>>>>>> cce00dff691f86d990871d53c5f793e832c75fe6
 end
