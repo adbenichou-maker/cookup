@@ -25,19 +25,19 @@
         </ul>
       </section>
 
-      <section class="card shadow-sm">
+      <section class="card shadow-sm mb-4">
         <div class="card-header text-white" style="background-color: #F2C94C;">
           <h2 class="h5 mb-0">Key Techniques & Steps</h2>
         </div>
-        <div class="card-body" style="background-color: #F7EEDB;">
+        <div class="card-body" >
           <ul class="list-unstyled">
             <% @recipe.steps.each_with_index do |step, index| %>
 
               <% if step.skill.present? %>
                 <%= link_to skill_path(step.skill), style: "text-decoration: none;" do %>
                   <li class="d-flex align-items-center mt-2 p-1 border rounded">
-                    <i class="bi bi-star-fill me-2" style="color: #4A4A4A;"></i>
-                    <p style="color: #8BAA7B;"><%= step.skill.title %></p>
+                    <%# <i class="bi bi-star-fill me-2" style="color: #4A4A4A;"></i> %>
+                    <p style="color: #4A4A4A;"><%= step.skill.title %></p>
                   </li>
                 <% end %>
 
@@ -45,9 +45,35 @@
 
           <% end %>
           </ul>
-          <ul>
-            <li><%= @recipe.reviews[0].title %></li>
+          </section>
+        <section class="card shadow-sm mb-4">
+
+          <div class="card-header text-white" style="background-color: #F2C94C;">
+            <h2 class="h5 mb-0">Reviews</h2>
+          </div>
+          <ul class="list-unstyled">
+            <% @recipe.reviews.each do |review| %>
+              <li class="">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= review.title %></h5>
+                    <p class="card-text"><%= review.comment %></p>
+                    <div class="d-flex justify-content-end">
+
+                      <% review.rate.times do %>
+                        <p>⭐</p>
+                      <% end %>
+                    </div>
+
+                  </div>
+
+
+
+                </div>
+              </li>
+            <% end %>
           </ul>
+        </section>
 
 
         </div>

@@ -208,6 +208,53 @@ Message.create!(
   content: "Great! Based on those three ingredients, here are five distinct recipe ideas. I'll save them to your cookbook for you!"
 )
 # --- END: CHAT AND MESSAGE CREATION ---
+# db/seeds.rb (Continued from your existing file...)
+
+# ... (Existing code ends with "Seed data successfully created!")
+
+# --- 5. Create Reviews ---
+puts "Creating Reviews..."
+
+# Helper method to create 3 reviews for a given recipe
+def create_recipe_reviews(recipe, user)
+  puts "  -> Creating reviews for: #{recipe.title}"
+
+  # Review 1: High Rating
+  Review.create!(
+    title: "Absolutely Loved It!",
+    comment: "This recipe was simple, delicious, and the instructions were very easy to follow. Will definitely make again!",
+    rate: 5,
+    recipe: recipe,
+    # Assuming your Reviews table might also eventually link to a User,
+    # though the provided schema doesn't show a user_id.
+    # If it did, you would add: user: user
+  )
+
+  # Review 2: Medium Rating
+  Review.create!(
+    title: "Good, but needed tweaks.",
+    comment: "A solid base recipe. I added a bit more seasoning/butter to enhance the flavor, but overall a success.",
+    rate: 3,
+    recipe: recipe
+  )
+
+  # Review 3: Low/Average Rating
+  Review.create!(
+    title: "A bit bland.",
+    comment: "It was missing a little something. Maybe the recipe level was too low for my taste.",
+    rate: 2,
+    recipe: recipe
+  )
+end
+
+# Create reviews for all five recipes
+create_recipe_reviews(recipe_1, user)
+create_recipe_reviews(recipe_2, user)
+create_recipe_reviews(recipe_3, user)
+create_recipe_reviews(recipe_4, user)
+create_recipe_reviews(recipe_5, user)
+
+puts "Created #{Review.count} total reviews."
 
 
 puts "Seed data successfully created!"
