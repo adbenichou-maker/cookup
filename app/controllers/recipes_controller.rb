@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+
   def index
     @recipes = Recipe.all
   end
@@ -26,6 +27,7 @@ class RecipesController < ApplicationController
     if params[:time].present?
       @recipes = @recipes.where("cooking_time <= ?", params[:time])
     end
+    @steps = @recipe.steps
   end
 
   def create
