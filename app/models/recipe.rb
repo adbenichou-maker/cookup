@@ -6,5 +6,5 @@ class Recipe < ApplicationRecord
   has_many :steps, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
-  validates :title,:content, presence: true
+  validates :title,:description, :ingredients, :recipe_level, presence: true
 end
