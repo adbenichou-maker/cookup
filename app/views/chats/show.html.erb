@@ -1,0 +1,66 @@
+<div class="chat-container"
+     data-controller="autoscroll">
+
+  <!-- Scrollable messages area -->
+  <div id="messages"
+      style="flex: 1; overflow-y: auto; padding: 20px;"
+       data-autoscroll-target="messages"
+       style="flex: 1; overflow-y: auto; padding: 20px;">
+
+    <% @chat.messages.each do |message| %>
+
+      <% if message.role == "user" %>
+        <!-- USER MESSAGE -->
+        <div class="message-row justify-content-end">
+          <div class="chat-bubble chat-user">
+            <%= message.content %>
+          </div>
+        </div>
+
+      <% else %>
+        <!-- ASSISTANT MESSAGE -->
+        <div class="message-row justify-content-start">
+          <div class="chat-bubble chat-assistant">
+            <%= raw(render_markdown(message.content)) %>
+
+            <div style="margin-top: 10px;">
+            <%= link_to "Save Recipe", new_message_recipe_path(message), class: 'my-button' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+  <!-- Input bar fixed at bottom -->
+  <div id="chat-input-bar"
+      style="border-top: 1px solid #e5e7eb; padding: 12px; background: white;">
+
+    <%= simple_form_for [@chat, @message],
+      html: {
+        class: "chat-form d-flex",
+        data: {
+          controller: "sendbutton",
+          action: "submit->sendbutton#submit"
+        }
+      } do |f| %>
+      <div class="chat-input-wrapper flex-grow-1" style="margin-right: 10px;">
+        <%= f.input_field :content,
+              placeholder: "Type your ingredients or question...",
+              class: "chat-input",
+              style: "width: 100%;" %>
+      </div>
+
+      <%= f.button :submit,
+        "Send",
+        class: "chat-submit-btn",
+        data: { sendbutton_target: "button" } %>
+
+
+    <% end %>
+
+  </div>
+
+</div>
