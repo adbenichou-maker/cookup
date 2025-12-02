@@ -1,0 +1,93 @@
+.home-container {
+  padding: 20px;
+  padding-bottom: 100px;
+  background-color: $background;
+  color: $dark;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-picture-placeholder {
+  width: 60px;
+  height: 60px;
+  background: $accent-yellow;
+  border-radius: 50%;
+}
+
+/* Level */
+.level-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.small-circle {
+  width: 20px;
+  height: 20px;
+  background: $accent-yellow;
+  border-radius: 50%;
+}
+
+/* Cards */
+.feature-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.feature-card {
+  width: 30%;
+  background: $card-bg;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: $dark;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.08);
+}
+
+.circle-icon {
+  width: 60px;
+  height: 60px;
+  background: $accent-brown;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+}
+
+/* AI Cook */
+.ai-cook-card {
+  display: block;
+  background: $accent-green;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 30px;
+  text-decoration: none;
+  color: white;
+}
+
+/* Recipe Suggestions */
+.content-card {
+  display: flex;
+  gap: 20px;
+  background: $card-bg;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: $dark;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.08);
+}
+
+.content-image-placeholder {
+  width: 80px;
+  height: 80px;
+  background: $accent-green;
+  border-radius: 12px;
+}
