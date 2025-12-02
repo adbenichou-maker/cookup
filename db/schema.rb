@@ -10,9 +10,79 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_01_143331) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_02_110146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chats", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "role"
+    t.text "content"
+    t.bigint "chat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.jsonb "ingredients"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "recipe_level", default: 0
+    t.bigint "message_id"
+    t.bigint "user_id"
+    t.index ["message_id"], name: "index_recipes_on_message_id"
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.text "comment"
+    t.integer "rate"
+    t.bigint "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "video"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "skill_level", default: 0
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "recipe_id", null: false
+    t.bigint "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_steps_on_recipe_id"
+    t.index ["skill_id"], name: "index_steps_on_skill_id"
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.boolean "completed"
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +92,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_143331) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chats", "users"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "recipes", "messages"
+  add_foreign_key "recipes", "users"
+  add_foreign_key "reviews", "recipes"
+  add_foreign_key "steps", "recipes"
+  add_foreign_key "steps", "skills"
+  add_foreign_key "user_skills", "skills"
+  add_foreign_key "user_skills", "users"
 end
