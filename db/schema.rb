@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_02_110146) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_02_141237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_02_110146) do
     t.index ["skill_id"], name: "index_steps_on_skill_id"
   end
 
+  create_table "user_recipes", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "user_id", null: false
+    t.bigint "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_user_recipes_on_recipe_id"
+    t.index ["user_id"], name: "index_user_recipes_on_user_id"
+  end
+
   create_table "user_skills", force: :cascade do |t|
     t.boolean "completed"
     t.bigint "user_id", null: false
@@ -104,6 +114,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_02_110146) do
   add_foreign_key "reviews", "recipes"
   add_foreign_key "steps", "recipes"
   add_foreign_key "steps", "skills"
+  add_foreign_key "user_recipes", "recipes"
+  add_foreign_key "user_recipes", "users"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
 end
