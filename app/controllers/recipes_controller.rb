@@ -28,4 +28,7 @@ class RecipesController < ApplicationController
     end
   end
 
+  def create
+  end
+
 end

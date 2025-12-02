@@ -162,4 +162,52 @@ Step.create!(title: "Serve", content: "Taste and adjust seasoning. Serve over yo
 
 
 puts "Created #{Recipe.count} recipes with #{Step.count} steps."
+
+def generate_markdown_content(data)
+  markdown = "# #{data[:title]}\n\n"
+  markdown += "**Description:** #{data[:description]}\n\n"
+  markdown += "**Cooking Time:** #{data[:cooking_time]} minutes\n\n"
+
+  markdown += "## Ingredients\n\n"
+
+  data[:ingredients].each do |name, amount|
+    markdown += "- **#{name.to_s.humanize}:** #{amount}\n"
+  end
+
+  markdown += "\n## Instructions\n\n"
+
+  data[:steps].each_with_index do |step, index|
+    markdown += "#{index + 1}. #{step}\n"
+  end
+
+  markdown
+end
+
+
+# --- START: CHAT AND MESSAGE CREATION ---
+puts "Creating one initial Chat and Message..."
+# Create the chat thread
+chat = Chat.create!(user: user, title: "Botifara Ideas")
+
+# Create the user's initial message that prompts the AI to suggest recipes
+# NOTE: Removed 'user: user' and replaced with 'role: "user"' to match the schema
+first_message = Message.create!(
+  chat: chat,
+  role: 'user',
+  content: "I have carrots, beetroot, and botifarra. What can I cook? I need 5 ideas."
+)
+
+# The ID of this message will be linked to all 5 recipes
+message_id_for_recipes = first_message.id
+
+# AI response to continue the thread
+# NOTE: Removed 'user: nil' and replaced with 'role: "ai"'
+Message.create!(
+  chat: chat,
+  role: 'ai',
+  content: "Great! Based on those three ingredients, here are five distinct recipe ideas. I'll save them to your cookbook for you!"
+)
+# --- END: CHAT AND MESSAGE CREATION ---
+
+
 puts "Seed data successfully created!"
