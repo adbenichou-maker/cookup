@@ -17,25 +17,45 @@
 
     <%= form_with url: recipes_search_path, method: :get, local: true do |f| %>
 
-      <h4>Difficulty</h4>
-      <%= f.select :level, [["Easy", 1], ["Medium", 2], ["Hard", 3]], include_blank: true %>
+        <h4>Difficulty</h4>
 
-    <h4>Rating</h4>
+      <div data-controller="difficultySlider" class="difficulty-wrapper">
 
-    <div data-controller="rating" class="rating-filter">
-      <div class="stars" data-rating-target="stars">
-        <% 5.times do |i| %>
-          <span class="star"
-                data-action="click->rating#select"
-                data-rating-value="<%= i + 1 %>">
-            ☆
-          </span>
-        <% end %>
+        <input
+          type="range"
+          min="0"
+          max="2"
+          step="1"
+          value="<%= params[:level] || 0 %>"
+          class="difficulty-slider"
+          data-action="input->difficultySlider#update"
+          data-difficultySlider-target="slider"
+        >
+
+        <div class="difficulty-label" data-difficultySlider-target="label">
+          Beginner
+        </div>
+
+        <%= f.hidden_field :level, value: params[:level], data: { difficultySlider_target: "input" } %>
+
       </div>
 
-      <!-- Hidden field that stores selected rating -->
-      <%= f.hidden_field :rating, value: params[:rating], data: { rating_target: "input" } %>
-    </div>
+
+      <h4>Rating</h4>
+
+      <div data-controller="rating" class="rating-filter">
+        <div class="stars" data-rating-target="stars">
+          <% 5.times do |i| %>
+            <span class="star"
+                  data-action="click->rating#select"
+                  data-rating-value="<%= i + 1 %>">
+              ☆
+            </span>
+          <% end %>
+        </div>
+
+        <%= f.hidden_field :rating, value: params[:rating], data: { rating_target: "input" } %>
+      </div>
 
       <%= f.submit "Apply Filters", class: "search-submit-btn" %>
     <% end %>
