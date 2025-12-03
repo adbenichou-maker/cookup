@@ -1,4 +1,5 @@
 class ChatsController < ApplicationController
+before_action :set_chat, only: [:show]
 
   def index
     @chats = Chat.all.order(updated_at: :desc)
