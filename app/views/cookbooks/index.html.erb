@@ -1,0 +1,38 @@
+<h1>Your Cookbook</h1>
+
+<% if @recipes.any? %>
+  <% @recipes.each do |recipe| %>
+
+    <div class="recipe-card">
+
+      <%= link_to recipe_path(recipe), class: "recipe-main" do %>
+
+        <div class="recipe-image-placeholder"></div>
+
+        <div class="recipe-text">
+          <h3><%= recipe.title %></h3>
+          <p><%= truncate(recipe.description, length: 100) %></p>
+
+          <div class="rating">
+            <% full_stars = recipe.average_rating.floor %>
+            <% empty_stars = 5 - full_stars %>
+
+            <% full_stars.times do %> ★ <% end %>
+            <% empty_stars.times do %> ☆ <% end %>
+
+            <small>(<%= recipe.reviews.count %> reviews)</small>
+          </div>
+        </div>
+
+      <% end %>
+
+      <div class="recipe-add-btn">
+        <%= render "favorites/favorite_button", recipe: recipe %>
+      </div>
+
+    </div>
+
+  <% end %>
+<% else %>
+  <p>You haven't saved any recipes yet.</p>
+<% end %>

@@ -5,6 +5,9 @@ class Recipe < ApplicationRecord
   belongs_to :user_recipes, optional: true
   has_many :steps, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :saved_by_users, through: :favorites, source: :user
+
 
   validates :title,:description, :ingredients, :recipe_level, presence: true
 
