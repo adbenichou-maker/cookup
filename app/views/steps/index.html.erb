@@ -1,8 +1,9 @@
+
 <div class="container-fluid p-3" style="background-color: #F7EEDB;">
 
   <header class="text-center mb-4">
     <h1 class="display-5 fw-bold mb-2" style="color: #4A4A4A;">
-      <%= @recipe.title %>
+    Recipe Steps
     </h1>
     <% if @recipe.description.present? %>
       <p class="text-muted" style="color: #4A4A4A !important;"><%= @recipe.description %></p>
@@ -85,3 +86,9 @@
     </div>
   </div>
 </div>
+
+
+
+<% @steps.each do |step| %>
+  <%= step.title %>
+<% end %>
