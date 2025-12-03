@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  enum :recipe_level, [:beginner, :intermediate, :expert ]
+  enum :recipe_level, [:beginner, :intermediate, :expert ], _prefix: true
   belongs_to :message, optional: true
   belongs_to :user, optional: true
   belongs_to :user_recipes, optional: true
