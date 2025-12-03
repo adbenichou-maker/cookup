@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "/dashboard", to: "pages#dashboard"
-  get "/recipes/search", to: "recipes#search"
+  get "/recipes/search", to: "recipes#search", as: :recipes_search
 
   resources :recipes, only: [:index, :show, :create] do
     member do

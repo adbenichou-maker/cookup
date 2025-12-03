@@ -1,0 +1,141 @@
+@import "config/colors";
+
+.search-page-container {
+  padding: 20px;
+  background: $background;
+  min-height: 100vh;
+  color: $dark;
+}
+
+/* Back */
+.back-link {
+  color: $dark;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Title */
+.search-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Search Bar */
+.search-bar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.search-form {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  background: $card-bg;
+  border: 2px solid $dark;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  font-size: 18px;
+  background: transparent;
+  outline: none;
+}
+
+.menu-icon {
+  font-size: 24px;
+  padding-left: 10px;
+}
+
+/* Recipe Card */
+.recipe-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: $card-bg;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: $dark;
+}
+
+.recipe-image-placeholder {
+  width: 90px;
+  height: 90px;
+  background: $accent-brown;
+  border-radius: 15px;
+}
+
+.recipe-text h3 {
+  margin: 0;
+}
+
+.recipe-text p {
+  margin: 5px 0;
+  color: $dark;
+}
+
+.rating {
+  font-size: 14px;
+  color: $accent-green;
+}
+
+.recipe-add-btn {
+  width: 40px;
+  height: 40px;
+  background: $accent-green;
+  color: white;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+
+.search-submit-btn {
+  background: $accent-green;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn {
+  background: $accent-green;
+  border: none;
+  color: white;
+  padding: 8px 8px;
+  border-radius: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover{
+  background: $accent-yellow;
+}
+
+.search-submit-btn:hover {
+  background: $accent-yellow;
+}
+
+
+.filter-panel {
+  background: $card-bg;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
