@@ -13,35 +13,35 @@ puts "Creating Skills..."
 skill_knife = Skill.create!(
   title: "Basic Knife Skills",
   description: "Learn the proper grip and basic cuts like chop, dice, and mince.",
-  video: "https://example.com/videos/knife_skills",
+  video: "dice-chop-mince.mp4",
   skill_level: 0 # beginner
 )
 
 skill_sauce = Skill.create!(
   title: "Making Béchamel Sauce",
   description: "Master the classic French white sauce by creating a roux.",
-  video: "https://example.com/videos/bechamel",
+  video: "bechamel.mp4",
   skill_level: 1 # intermediate
 )
 
 skill_bread = Skill.create!(
   title: "Kneading and Proofing Dough",
   description: "Develop the gluten structure in bread dough for a perfect rise.",
-  video: "https://example.com/videos/kneading",
+  video: "dough-preparation.mp4",
   skill_level: 2 # expert
 )
 
 skill_temp = Skill.create!(
   title: "Checking Meat Internal Temperature",
   description: "Use a thermometer to ensure meat is cooked to safe and desired doneness.",
-  video: "https://example.com/videos/meat_temp",
+  video: "meat-temperature.mp4",
   skill_level: 0 # beginner
 )
 
 skill_whisk = Skill.create!(
   title: "Emulsifying Vinaigrette",
   description: "Combine oil and vinegar to create a stable, creamy dressing.",
-  video: "https://example.com/videos/emulsify",
+  video: "emulsified-vinaigrette.mp4",
   skill_level: 1 # intermediate
 )
 
@@ -49,7 +49,7 @@ skill_whisk = Skill.create!(
 skill_onion_dice = Skill.create!(
     title: "Dicing an Onion",
     description: "Learn the professional technique for uniformly dicing an onion quickly and safely.",
-    video: "https://example.com/videos/dicing_onion",
+    video: "dice-onion.mp4",
     skill_level: 0 # beginner
 )
 
