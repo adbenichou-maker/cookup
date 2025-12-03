@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@recipe, :favorite_button) do %>
+  <%= render partial: "favorites/favorite_button", locals: { recipe: @recipe } %>
+<% end %>
