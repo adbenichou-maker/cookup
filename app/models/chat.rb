@@ -21,14 +21,16 @@ class Chat < ApplicationRecord
 
     Format at first:
     - Use Markdown
+    - Never greet the user
     - For each recipe:
       - Propose 3 recipe
       - A title
       - Short description
-      - List of ingredients needed
       - Preparation time
+      - List of ingredients needed
     Format once the user has selected a recipe:
     - Use Markdown
+    - Never greet the user
     - For each recipe:
       - A title
       - List of ingredients needed
@@ -41,5 +43,5 @@ class Chat < ApplicationRecord
 
     Always answer in english.
   PROMPT
-  
+
 end

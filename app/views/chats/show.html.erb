@@ -6,6 +6,7 @@
   height: 100vh;
   background: #f5f6f8;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  padding-bottom: 2cm;
 }
 
 /* Messages feed */
@@ -110,6 +111,7 @@
   background: #005be0;
   transform: translateY(-1px);
 }
+
 </style>
 
 <div class="chat-container" data-controller="autoscroll">
@@ -130,6 +132,9 @@
           <div class="chat-bubble chat-assistant">
             <%= raw(render_markdown(message.content)) %>
           </div>
+          <div style="margin-top: 10px;">
+            <%= link_to "Save Recipe", message_recipes_path(message), data: { turbo_method: "post" }, class: 'my-button' %>
+          </div>
         </div>
       <% end %>
 
@@ -137,21 +142,28 @@
 
   </div>
 
-  <div id="chat-input-bar">
     <%= simple_form_for [@chat, @message],
         html: { class: "chat-form",
                 data: { controller:"sendbutton", action: "submit->sendbutton#submit" } } do |f| %>
 
-      <div class="chat-input-wrapper">
-        <%= f.input_field :content,
-              placeholder: "Type your ingredients or question...",
-              class: "chat-input" %>
-      </div>
+    <div style="display: flex; gap: 10px; margin-top: 20px; margin-right: 20px; flex-wrap: wrap; justify-content: flex-end;">
 
-      <%= f.button :submit, "Send",
-          class: "chat-submit-btn",
-          data: { sendbutton_target: "button" } %>
+      <%= f.button :submit, "Select Option 1", class: "chat-submit-btn",
+            value: "Select Option 1", name: "message[content]" %>
+
+      <%= f.button :submit, "Select Option 2", class: "chat-submit-btn",
+            value: "Select Option 2", name: "message[content]" %>
+
+      <%= f.button :submit, "Select Option 3", class: "chat-submit-btn",
+            value: "Select Option 3", name: "message[content]" %>
+
+     <%= button_tag "Give me 3 more recipes",
+      type: 'submit',
+      name: 'message[content]',
+      value: "Give me 3 more recipes only displaying the title, description, preperation time and ingredients",
+      class: "chat-submit-btn" %>
+
+    </div>
     <% end %>
-  </div>
 
 </div>
