@@ -53,6 +53,9 @@ gem "sassc-rails"
 gem "ruby_llm", "~> 1.2.0"
 gem "dotenv-rails"
 
+gem "pg_search"
+
+
 
 group :development, :test do
   gem "dotenv-rails"
