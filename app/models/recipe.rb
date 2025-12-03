@@ -7,4 +7,12 @@ class Recipe < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
   validates :title,:description, :ingredients, :recipe_level, presence: true
+
+
+  include PgSearch::Model
+  pg_search_scope :search_by_title_and_more,
+    against: [ :title, :description, :ingredients ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end

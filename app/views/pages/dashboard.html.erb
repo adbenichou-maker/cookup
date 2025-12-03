@@ -1,0 +1,58 @@
+<div class="home-container">
+
+  <!-- Welcome -->
+  <div class="home-header">
+    <div>
+      <h1>Hi <%= current_user.username || current_user.email.split("@").first %>!</h1>
+      <h2>What are we cooking?</h2>
+    </div>
+
+    <!-- Profile Logout (Temp) -->
+    <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+      <div class="profile-picture-placeholder"></div>
+    <% end %>
+  </div>
+
+  <!-- Progressbar (Inser here) -->
+
+  <div>
+    <p class="level-text">Level 1</p>
+  </div>
+
+  <!-- Cards -->
+  <div class="feature-cards">
+
+    <%= link_to "#", class: "feature-card" do %>
+      <div class="circle-icon"></div>
+      <p>Skills</p>
+    <% end %>
+
+    <%= link_to recipes_search_path, class: "feature-card" do %>
+      <div class="circle-icon"></div>
+      <p>Recipes</p>
+    <% end %>
+
+    <%= link_to "#", class: "feature-card" do %>
+      <div class="circle-icon"></div>
+      <p>Cookbook</p>
+    <% end %>
+
+  </div>
+
+  <!-- AI Cook -->
+  <%= link_to "#", class: "ai-cook-card" do %>
+    AI Cook
+  <% end %>
+
+  <!-- Recipe sug -->
+  <% @recipes.each do |recipe| %>
+    <%= link_to recipe_path(recipe), class: "content-card" do %>
+      <div class="content-image-placeholder"></div>
+      <div>
+        <h3><%= recipe.title %></h3>
+        <p><%= truncate(recipe.description, length: 80) %></p>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
