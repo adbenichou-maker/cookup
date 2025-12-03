@@ -29,4 +29,8 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:create, :destroy]
   get "/cookbook", to: "cookbooks#index", as: :cookbook
+
+  get "/profile", to: "users#profile"
+  patch "/profile", to: "users#update"
+
 end

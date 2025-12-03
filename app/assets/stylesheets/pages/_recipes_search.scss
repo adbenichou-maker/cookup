@@ -130,12 +130,27 @@
 
 
 .filter-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
   background: $card-bg;
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 20px;
+  padding: 0 15px;
+  border-radius: 12px;
 }
 
-.hidden {
-  display: none;
+/* Hidden state — no space, no visibility */
+.filter-panel.hidden {
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* When open */
+.filter-panel:not(.hidden) {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  opacity: 1;
+  pointer-events: auto;
 }
