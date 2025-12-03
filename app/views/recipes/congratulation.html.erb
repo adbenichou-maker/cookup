@@ -1,0 +1,55 @@
+<div class="container-fluid p-4" style="background-color: #F7EEDB; min-height: 100vh;">
+
+  <% recipe_index = @recipe.recipe_level_before_type_cast %>
+  <% total_levels = 3 %>
+  <% progress_percent = ((recipe_index + 1).to_f / total_levels.to_f * 100).round %>
+
+  <header class="text-center mb-5 pt-3">
+    <h1 class="fw-bolder mb-2" style="color: #4A4A4A;" >
+      CONGRATULATIONS
+    </h1>
+    <p class="lead fw-normal" style="color: #4A4A4A;">
+      You finished **<%= @recipe.title %>**!
+    </p>
+  </header>
+
+  <section class="mb-5 p-3">
+    <h2 class="h5 fw-bold mb-3 text-center" style="color: #C9815B;">
+    </h2>
+    <div class="progress rounded-pill" role="progressbar"
+        aria-label="<%= @recipe.recipe_level.humanize %> Level Progress"
+        aria-valuenow="<%= progress_percent %>"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="height: 30px;">
+
+      <div class="progress-bar rounded-pill fw-bold text-shadow"
+          style="width: <%= progress_percent %>%; background-color: #8BAA7B;">
+
+      </div>
+    </div>
+  </section>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10">
+
+      <div class="d-grid mb-4">
+        <%= link_to "⭐️ ADD A REVIEW", recipe_path(@recipe),
+          class: "btn btn-lg fw-bold shadow-lg p-3 rounded-pill",
+          style: "color: #4A4A4A; border-color: #4A4A4A;" %>
+      </div>
+
+      <div class="d-grid gap-3 mb-5">
+
+        <%= link_to "📚 SAVE TO COOKBOOK", recipe_path(@recipe),
+          class: "btn btn-lg fw-bold p-3 rounded-pill",
+          style: "color: #4A4A4A; border: 2px solid #4A4A4A;" %>
+
+        <%= link_to "🏠 GO HOME", dashboard_path, # Changed path to root_path, assuming this is your homepage
+          class: "btn btn-lg fw-bold p-3 rounded-pill",
+          style: " color: #4A4A4A; border: 2px solid #4A4A4A;" %>
+      </div>
+    </div>
+  </div>
+
+</div>

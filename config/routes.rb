@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :recipes, only: [:index, :show, :create] do
     member do
       get :completed
+      get :congratulation
     end
     resources :steps, only: [:index]
     resources :reviews, only: [:new, :create]

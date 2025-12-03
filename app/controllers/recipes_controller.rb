@@ -37,4 +37,8 @@ class RecipesController < ApplicationController
   def create
   end
 
+  def congratulation
+    @recipe = Recipe.find(params[:id])
+  end
+
 end

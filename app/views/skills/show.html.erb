@@ -40,10 +40,20 @@
       </section>
 
       <div class="d-grid mb-5">
-        <%= link_to "Back to Cooking Steps", recipe_steps_path(params[:recipe_id]),
-          class: "btn btn-lg fw-bold text-white shadow-lg",
-          style: "background-color: #C9815B; border-color: #C9815B;" %>
-      </div>
+
+        <% if params[:recipe_id].present? %>
+          <%= link_to "Back to Cooking Steps", recipe_steps_path(params[:recipe_id]),
+            class: "btn btn-lg fw-bold text-white shadow-lg",
+            style: "background-color: #C9815B; border-color: #C9815B;" %>
+        </div>
+        <% else %>
+          <%= link_to "Back to Skills", skills_path(params[:recipe_id]),
+            class: "btn btn-lg fw-bold text-white shadow-lg",
+            style: "background-color: #C9815B; border-color: #C9815B;" %>
+
+        <% end %>
+
+
 
     </div>
   </div>
