@@ -1,3 +1,60 @@
+<div class="container-fluid p-3" style="background-color: #F7EEDB;">
+
+  <header class="text-center mb-4">
+    <h1 class="display-5 fw-bold mb-2" style="color: #4A4A4A;">
+      <%= @skill.title %>
+    </h1>
+
+    <div class="d-inline-flex align-items-center p-2 rounded-pill shadow-sm"
+        style="background-color: #F2C94C; color: #4A4A4A;">
+      <i class="bi bi-award-fill me-2" style="color: #C9815B;"></i>
+      <span class="fw-bold">
+        Skill Level: <%= @skill.skill_level.humanize %>
+      </span>
+    </div>
+  </header>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+
+      <section class="card shadow-lg mb-4 border-0" style="border-radius: 12px; overflow: hidden;">
+        <div class="ratio ratio-16x9">
+          <%= video_tag @skill.video,
+                controls: true,
+                autoplay: false,
+                class: "w-100",
+                style: "background-color: #4A4A4A;" %>
+        </div>
+      </section>
+
+      <section class="card shadow-sm mb-4 border-start border-4"
+              style="border-color: #8BAA7B !important; background-color: rgba(255, 255, 255, 0.7);">
+        <div class="card-body">
+          <h2 class="h5 fw-bold mb-3" style="color: #C9815B;">
+            What You Will Learn
+          </h2>
+          <p class="card-text lead" style="color: #4A4A4A;">
+            <%= @skill.description %>
+          </p>
+        </div>
+      </section>
+
+      <div class="d-grid mb-5">
+
+        <% if params[:recipe_id].present? %>
+          <%= link_to "Back to Cooking Steps", recipe_steps_path(params[:recipe_id]),
+            class: "btn btn-lg fw-bold text-white shadow-lg",
+            style: "background-color: #C9815B; border-color: #C9815B;" %>
+        </div>
+        <% else %>
+          <%= link_to "Back to Skills", skills_path(params[:recipe_id]),
+            class: "btn btn-lg fw-bold text-white shadow-lg",
+            style: "background-color: #C9815B; border-color: #C9815B;" %>
+
+        <% end %>
 
 
-<h1><%=  @skill.title %></h1>
+
+    </div>
+  </div>
+</div>

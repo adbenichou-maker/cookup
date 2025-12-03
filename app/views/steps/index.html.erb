@@ -3,92 +3,65 @@
 
   <header class="text-center mb-4">
     <h1 class="display-5 fw-bold mb-2" style="color: #4A4A4A;">
-    Recipe Steps
+      <%= @recipe.title %> Steps
     </h1>
-    <% if @recipe.description.present? %>
-      <p class="text-muted" style="color: #4A4A4A !important;"><%= @recipe.description %></p>
-    <% end %>
+    <p class="text-muted" style="color: #C9815B !important;">Follow these instructions to complete the dish.</p>
   </header>
 
   <div class="row">
     <div class="col-12">
 
       <section class="card shadow-sm mb-4">
-        <div class="card-header text-white" style="background-color: #8BAA7B;">
-          <h2 class="h5 mb-0">🛒 Ingredients</h2>
-        </div>
         <ul class="list-group list-group-flush">
-          <% @recipe.ingredients.each do |name, quantity| %>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="fw-bold" style="color: #4A4A4A;"><%= name.to_s.humanize %></span>
-              <span class="badge rounded-pill p-2" style="background-color: #C9815B; color: #F7EEDB;"><%= quantity %></span>
+          <% @recipe.steps.each_with_index do |step, index| %>
+
+            <li class="list-group-item p-4" style="border-left: 5px solid #8BAA7B;">
+
+              <div class="d-flex align-items-center mb-2">
+                <span class="badge rounded-pill me-3 p-2 fw-bold text-white"
+                      style="background-color: #8BAA7B;">
+                  <%= index + 1 %>
+                </span>
+
+                <h3 class="h5 fw-bold mb-0" style="color: #4A4A4A;">
+                  <%= step.title %>
+                </h3>
+              </div>
+
+              <p class="mb-0 ms-4" style="color: #4A4A4A; border-left: 1px dashed #C9815B; padding-left: 1rem;">
+                <%= step.content %>
+              </p>
+
+              <% if step.skill.present? %>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+
+                  <h3 class="h6 fw-bold mb-0" style="color: #4A4A4A;">
+                    Skill:
+                  </h3>
+                  <%= link_to skill_path(step.skill, recipe_id: @recipe.id), style: "text-decoration: none;" do %>
+                    <div class="d-flex align-items-center mt-3 ms-4 p-2 rounded" style="background-color: #F2C94C; border: 1px solid #C9815B;">
+                        <i class="bi bi-tools me-2" style="color: #4A4A4A;"></i>
+                        <small class="fw-bold" style="color: #C9815B;">
+                          <%= step.skill.title %>
+                        </small>
+                    </div>
+                  <% end %>
+                <% end %>
+                </li>
+              </ul>
+
             </li>
           <% end %>
         </ul>
       </section>
 
-      <%
-        # Pre-filter steps that actually have a skill.
-        @skills_for_recipe = @recipe.steps.select { |step| step.skill.present? }.map(&:skill).uniq
-      %>
-
-      <% if @skills_for_recipe.any? %>
-        <section class="card shadow-sm mb-4">
-          <div class="card-header text-white" style="background-color: #C9815B;">
-            <h2 class="h5 mb-0">🧑‍🍳 Key Techniques & Skills</h2>
-          </div>
-          <div class="card-body" style="background-color: #F7EEDB;">
-            <ul class="list-unstyled d-flex flex-wrap gap-2">
-              <% @skills_for_recipe.each do |skill| %>
-                <%= link_to skill_path(skill), style: "text-decoration: none;" do %>
-                  <li class="p-2 border rounded" style="background-color: #F2C94C; border-color: #C9815B !important;">
-                    <p class="mb-0 fw-bold" style="color: #4A4A4A; font-size: 0.9em;">
-                      <i class="bi bi-star-fill me-1" style="color: #8BAA7B;"></i>
-                      <%= skill.title %>
-                    </p>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
-          </div>
-        </section>
-      <% end %>
-
-      <section class="card shadow-sm mb-4">
-        <div class="card-header text-white" style="background-color: #F2C94C;">
-          <h2 class="h5 mb-0">⭐ Reviews</h2>
-        </div>
-        <div class="card-body" style="background-color: #F7EEDB;">
-          <ul class="list-unstyled">
-            <% @recipe.reviews.each do |review| %>
-              <li class="mb-3">
-                <div class="card border-0 shadow-sm">
-                  <div class="card-body p-3">
-                    <h5 class="card-title fw-bold" style="color: #4A4A4A;"><%= review.title %></h5>
-                    <p class="card-text mb-2" style="color: #4A4A4A;"><%= review.comment %></p>
-                    <div class="d-flex justify-content-end" style="color: #8BAA7B;">
-                      <%= "⭐" * review.rate %>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </section>
-
       <div class="d-grid mb-5">
-        <%= link_to "START COOKING", recipe_steps_path(@recipe),
+        <%= link_to "FINISHED",  congratulation_recipe_path(@recipe),
           class: "btn btn-lg fw-bold text-white shadow-lg",
-          style: "background-color: #8BAA7B; border-color: #8BAA7B;" %>
+          style: "background-color: #C9815B; border-color: #C9815B;" %>
       </div>
 
     </div>
   </div>
 </div>
-
-
-
-<% @steps.each do |step| %>
-  <%= step.title %>
-<% end %>
