@@ -39,7 +39,7 @@
           <div class="card-body" style="background-color: #F7EEDB;">
             <ul class="list-unstyled d-flex flex-wrap gap-2">
               <% @skills_for_recipe.each do |skill| %>
-                <%= link_to skill_path(skill), style: "text-decoration: none;" do %>
+                <%= link_to skill_path(skill, recipe_id: @recipe.id), style: "text-decoration: none;" do %>
                   <li class="p-2 border rounded" style="background-color: #F2C94C; border-color: #C9815B !important;">
                     <p class="mb-0 fw-bold" style="color: #4A4A4A; font-size: 0.9em;">
                       <i class="bi bi-star-fill me-1" style="color: #8BAA7B;"></i>
