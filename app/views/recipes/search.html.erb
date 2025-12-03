@@ -20,8 +20,22 @@
       <h4>Difficulty</h4>
       <%= f.select :level, [["Easy", 1], ["Medium", 2], ["Hard", 3]], include_blank: true %>
 
-      <h4>Max Time</h4>
-      <%= f.number_field :time, placeholder: "Minutes" %>
+    <h4>Rating</h4>
+
+    <div data-controller="rating" class="rating-filter">
+      <div class="stars" data-rating-target="stars">
+        <% 5.times do |i| %>
+          <span class="star"
+                data-action="click->rating#select"
+                data-rating-value="<%= i + 1 %>">
+            ☆
+          </span>
+        <% end %>
+      </div>
+
+      <!-- Hidden field that stores selected rating -->
+      <%= f.hidden_field :rating, value: params[:rating], data: { rating_target: "input" } %>
+    </div>
 
       <%= f.submit "Apply Filters", class: "search-submit-btn" %>
     <% end %>
@@ -38,9 +52,20 @@
         <p><%= recipe.description %></p>
 
         <div class="rating">
-          ★★★★★ <!-- Temp -->
-          <small><%= recipe.reviews.count %> Reviews</small>
+          <% full_stars = recipe.average_rating.floor %>
+          <% empty_stars = 5 - full_stars %>
+
+          <% full_stars.times do %>
+            ★
+          <% end %>
+
+          <% empty_stars.times do %>
+            ☆
+          <% end %>
+
+          <small>(<%= recipe.reviews.count %> reviews)</small>
         </div>
+
       </div>
 
       <div class="recipe-add-btn">+</div>

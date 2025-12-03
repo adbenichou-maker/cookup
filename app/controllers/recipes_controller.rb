@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
 
     # Search text
     if @query.present?
-      @recipe = Recipe.search_by_title_and_more(@query)
+      @recipes = Recipe.search_by_title_and_more(@query)
     end
 
     # Filter: difficulty level
@@ -23,10 +23,14 @@ class RecipesController < ApplicationController
       @recipes = @recipes.where(recipe_level: params[:level])
     end
 
-    # Filter: time
-    if params[:time].present?
-      @recipes = @recipes.where("cooking_time <= ?", params[:time])
+    # Filter by rating
+    if params[:rating].present?
+      @recipes = @recipes
+        .left_joins(:reviews)
+        .group("recipes.id")
+        .having("AVG(reviews.rate) >= ?", params[:rating])
     end
+
     # @steps = @recipe.steps
   end
 

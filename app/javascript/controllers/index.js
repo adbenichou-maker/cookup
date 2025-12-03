@@ -5,3 +5,6 @@ eagerLoadControllersFrom("controllers", application)
 
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
+
+import RatingController from "./rating_controller"
+application.register("rating", RatingController)

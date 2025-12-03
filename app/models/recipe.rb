@@ -8,6 +8,11 @@ class Recipe < ApplicationRecord
 
   validates :title,:description, :ingredients, :recipe_level, presence: true
 
+  def average_rating
+    return 0 if reviews.empty?
+    reviews.average(:rate).to_f.round(1)
+  end
+
 
   include PgSearch::Model
   pg_search_scope :search_by_title_and_more,

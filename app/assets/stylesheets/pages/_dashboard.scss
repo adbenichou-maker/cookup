@@ -91,3 +91,19 @@
   background: $accent-green;
   border-radius: 12px;
 }
+
+.rating-filter .stars {
+  display: flex;
+  gap: 6px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.rating-filter .star {
+  color: $accent-green;
+  transition: transform 0.2s ease;
+}
+
+.rating-filter .star:hover {
+  transform: scale(1.2);
+}
