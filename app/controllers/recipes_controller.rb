@@ -15,19 +15,25 @@ class RecipesController < ApplicationController
 
     # Search text
     if @query.present?
-      @recipes = @recipes.where("title ILIKE ?", "%#{@query}%")
+      sql_query = "title ILIKE :query OR description ILIKE :query"
+      @recipes = @recipes.where(sql_query, query: "%#{@query}%")
     end
 
     # Filter: difficulty level
-    if params[:level].present?
-      @recipes = @recipes.where(recipe_level: params[:level])
+    if @query.present?
+      sql_query = "
+        title ILIKE :query
+        OR description ILIKE :query
+        OR ingredients::text ILIKE :query
+      "
+      @recipes = @recipes.where(sql_query, query: "%#{@query}%")
     end
 
     # Filter: time
     if params[:time].present?
       @recipes = @recipes.where("cooking_time <= ?", params[:time])
     end
-    @steps = @recipe.steps
+    # @steps = @recipe.steps
   end
 
   def create
