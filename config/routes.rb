@@ -27,4 +27,6 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  resources :favorites, only: [:create, :destroy]
+  get "/cookbook", to: "cookbooks#index", as: :cookbook
 end

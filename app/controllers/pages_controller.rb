@@ -7,5 +7,6 @@ class PagesController < ApplicationController
   def dashboard
     @user = current_user
     @recipes = @user.recipes
+    @saved_recipes = @user.favorites .includes(:recipe) .map(&:recipe) .sample(3)
   end
 end
