@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
 
     # Search text
     if @query.present?
-      @recipe = Recipe.search_by_title_and_more(@query)
+      @recipes = Recipe.search_by_title_and_more(@query)
     end
 
     # Filter: difficulty level
