@@ -27,13 +27,13 @@ class Chat < ApplicationRecord
       - A title
       - Short description
       - Preparation time
-      - List of ingredients needed
+      - List of ingredients needed and quantity ONLY
     Format once the user has selected a recipe:
     - Use Markdown
     - Never greet the user
     - For each recipe:
       - A title
-      - List of ingredients needed
+      - List of ingredients needed and quantity ONLY
       - Step-by-step instructions
       - Cooking tips when relevant
 

@@ -13,7 +13,6 @@ class Recipe < ApplicationRecord
     reviews.average(:rate).to_f.round(1)
   end
 
-
   include PgSearch::Model
   pg_search_scope :search_by_title_and_more,
     against: [ :title, :description, :ingredients ],

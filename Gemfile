@@ -56,6 +56,7 @@ gem "kramdown"
 gem "rouge"
 gem "kramdown-parser-gfm"
 gem "pg_search"
+gem "ruby_llm-schema"
 
 
 

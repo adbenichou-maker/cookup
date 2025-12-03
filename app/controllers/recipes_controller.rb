@@ -38,19 +38,54 @@ class RecipesController < ApplicationController
     @message = Message.find(params[:message_id])
 
     chat = RubyLLM.chat
-    response = chat.with_schema(Recipe::RecipeSchema).ask(@message.content)
+    recipe_prompt = <<~PROMPT
+      You are to output ONLY a JSON object. No explanations. No surrounding text.
+      Here is my recipe data: #{@message.content}
 
+      Produce a JSON object that follows EXACTLY this structure:
+      {
+        "title": string,
+        "description": string,
+        "ingredients": {
+          "<ingredient_name>": "<quantity_as_string>"
+        },
+        "recipe_level": integer (0 for beginner, 1 for intermediate, 2 for expert),
+        "steps": [
+          {
+            "title": string,
+            "content": string
+          }
+        ]
+      }
+
+      Rules:
+      - Output ONLY valid JSON.
+      - Do NOT add comments, descriptions, markdown, or extra keys.
+      - Do NOT wrap the JSON in code fences.
+      - Do NOT explain your answer.
+      - Ensure all values match the recipe data provided.
+    PROMPT
+
+    response = chat.ask(recipe_prompt)
+    # The response is automatically parsed from JSON
+    recipe_data = JSON.parse(response.content)
+    @recipe = Recipe.new(recipe_data)
     # The response is automatically parsed from JSON
 
-    @recipe = Recipe.new(response.content)
-    raise
-
-    @recipe.message = @message
-
-    @recipe.content = @message.content
+    @recipe.user_id = current_user.id
+    @recipe.message_id = @message.id
 
     @recipe.save
 
+    recipe_data["steps"].each do |step_data|
+      step = Step.new(
+        title: step_data["title"],
+        content: step_data["content"],
+        recipe: @recipe
+      )
+      step.save
+    end
+    
     if @recipe.save
       chat = @message.chat
       redirect_to chat_path(chat), notice: "Saved Recipe!"
