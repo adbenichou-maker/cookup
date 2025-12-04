@@ -25,7 +25,7 @@ skill_sauce = Skill.create!(
 
 skill_bread = Skill.create!(
   title: "Kneading and Proofing Dough",
-  description: "Develop the gluten structure in bread dough for a perfect rise.",
+  description: "Develop the gluten structure for a perfect rise.",
   video: "dough-preparation.mp4",
   skill_level: 2
 )
@@ -46,12 +46,13 @@ skill_whisk = Skill.create!(
 
 skill_onion_dice = Skill.create!(
   title: "Dicing an Onion",
-  description: "Learn the correct knife technique for dicing an onion.",
+  description: "Learn proper professional onion dicing technique.",
   video: "dice-onion.mp4",
   skill_level: 0
 )
 
 puts "Created #{Skill.count} skills."
+
 
 # ---------------------------
 # USER
@@ -66,12 +67,14 @@ user = User.create!(
 
 puts "Created User: #{user.email}"
 
+
 # ---------------------------
-# RECIPES + STEPS
+# RECIPES + STEPS (12 total)
 # ---------------------------
+
 puts "Creating Recipes and Steps..."
 
-# ========== RECIPE 1 ==========
+# ========= RECIPE 1 =========
 recipe_1 = Recipe.create!(
   title: "Fluffy Scrambled Eggs",
   description: "A quick and easy classic, perfect for breakfast.",
@@ -84,11 +87,12 @@ recipe_1 = Recipe.create!(
   recipe_level: 0
 )
 
-Step.create!(title: "Crack Eggs", content: "Whisk eggs, milk, salt, and pepper.", recipe: recipe_1)
-Step.create!(title: "Melt Butter", content: "Melt butter on medium heat.", recipe: recipe_1)
-Step.create!(title: "Cook Eggs", content: "Stir until soft curds form.", recipe: recipe_1)
+Step.create!(title: "Crack Eggs",   content: "Whisk eggs, milk, salt, and pepper.", recipe: recipe_1)
+Step.create!(title: "Melt Butter",  content: "Melt butter on medium heat.",         recipe: recipe_1)
+Step.create!(title: "Cook Eggs",    content: "Stir until soft curds form.",         recipe: recipe_1)
 
-# ========== RECIPE 2 ==========
+
+# ========= RECIPE 2 =========
 recipe_2 = Recipe.create!(
   title: "Roasted Tomato Soup",
   description: "A comforting soup with deep roasted flavor.",
@@ -102,11 +106,12 @@ recipe_2 = Recipe.create!(
 )
 
 Step.create!(title: "Prep Veggies", content: "Chop vegetables and toss with oil.", recipe: recipe_2, skill: skill_onion_dice)
-Step.create!(title: "Roast", content: "Roast for 30 minutes at 200°C.", recipe: recipe_2)
-Step.create!(title: "Simmer", content: "Add broth and simmer 10 minutes.", recipe: recipe_2)
-Step.create!(title: "Blend", content: "Blend until smooth.", recipe: recipe_2)
+Step.create!(title: "Roast Veggies", content: "Roast 30 minutes at 200°C.",       recipe: recipe_2)
+Step.create!(title: "Simmer Soup",   content: "Add broth and simmer 10 minutes.", recipe: recipe_2)
+Step.create!(title: "Blend Soup",    content: "Blend until smooth.",              recipe: recipe_2)
 
-# ========== RECIPE 3 ==========
+
+# ========= RECIPE 3 =========
 recipe_3 = Recipe.create!(
   title: "Creamy Chicken Alfredo",
   description: "Fettuccine pasta in a rich cream sauce.",
@@ -120,11 +125,12 @@ recipe_3 = Recipe.create!(
 )
 
 Step.create!(title: "Cook Chicken", content: "Cook chicken to safe temperature.", recipe: recipe_3, skill: skill_temp)
-Step.create!(title: "Cook Pasta", content: "Boil pasta until al dente.", recipe: recipe_3)
-Step.create!(title: "Make Sauce", content: "Combine butter, cream, cheese.", recipe: recipe_3, skill: skill_sauce)
-Step.create!(title: "Combine", content: "Mix pasta and sauce.", recipe: recipe_3)
+Step.create!(title: "Cook Pasta", content: "Boil pasta until al dente.",          recipe: recipe_3)
+Step.create!(title: "Make Sauce", content: "Combine cream, butter, cheese.",      recipe: recipe_3, skill: skill_sauce)
+Step.create!(title: "Combine All", content: "Mix pasta with sauce.",              recipe: recipe_3)
 
-# ========== RECIPE 4 ==========
+
+# ========= RECIPE 4 =========
 recipe_4 = Recipe.create!(
   title: "Rustic Sourdough Loaf",
   description: "A crusty, tangy bread requiring patience.",
@@ -137,12 +143,13 @@ recipe_4 = Recipe.create!(
   recipe_level: 2
 )
 
-Step.create!(title: "Mix Dough", content: "Combine ingredients.", recipe: recipe_4)
-Step.create!(title: "Knead Dough", content: "Knead until windowpane test passes.", recipe: recipe_4, skill: skill_bread)
-Step.create!(title: "Proof", content: "Shape and proof overnight.", recipe: recipe_4)
-Step.create!(title: "Bake", content: "Bake in Dutch oven.", recipe: recipe_4)
+Step.create!(title: "Mix Dough",     content: "Combine starter, flour, water.", recipe: recipe_4)
+Step.create!(title: "Knead Dough",    content: "Knead until elastic.",          recipe: recipe_4, skill: skill_bread)
+Step.create!(title: "Proof Overnight", content: "Rest overnight.",               recipe: recipe_4)
+Step.create!(title: "Bake Bread",     content: "Bake in Dutch oven.",           recipe: recipe_4)
 
-# ========== RECIPE 5 ==========
+
+# ========= RECIPE 5 =========
 recipe_5 = Recipe.create!(
   title: "Fresh Lemon Vinaigrette",
   description: "A bright, zesty salad dressing.",
@@ -155,15 +162,138 @@ recipe_5 = Recipe.create!(
   recipe_level: 1
 )
 
-Step.create!(title: "Combine Ingredients", content: "Mix lemon, mustard, salt, pepper.", recipe: recipe_5)
-Step.create!(title: "Emulsify", content: "Slowly whisk in oil.", recipe: recipe_5, skill: skill_whisk)
-Step.create!(title: "Serve", content: "Adjust seasoning.", recipe: recipe_5)
+Step.create!(title: "Combine Base", content: "Mix lemon, mustard, salt, pepper.", recipe: recipe_5)
+Step.create!(title: "Whisk In Oil", content: "Emulsify the dressing.",            recipe: recipe_5, skill: skill_whisk)
+Step.create!(title: "Serve",        content: "Adjust seasoning.",                 recipe: recipe_5)
+
+
+# ========= RECIPE 6 =========
+recipe_6 = Recipe.create!(
+  title: "Spicy Chickpea Curry",
+  description: "A warming curry packed with bold spices.",
+  ingredients: {
+    "chickpeas": "400 g",
+    "onion": "1",
+    "garlic": "3 cloves",
+    "ginger": "1 tbsp",
+    "coconut_milk": "200 ml"
+  },
+  recipe_level: 1
+)
+
+Step.create!(title: "Dice Aromatics", content: "Prep onion, garlic, ginger.", recipe: recipe_6, skill: skill_onion_dice)
+Step.create!(title: "Cook Base",      content: "Sauté aromatics.",            recipe: recipe_6)
+Step.create!(title: "Simmer Curry",   content: "Add chickpeas, coconut milk.",recipe: recipe_6)
+
+
+# ========= RECIPE 7 =========
+recipe_7 = Recipe.create!(
+  title: "Crispy Pan-Fried Salmon",
+  description: "A simple salmon dish with a perfect crust.",
+  ingredients: {
+    "salmon": "2 fillets",
+    "lemon": "1",
+    "oil": "1 tbsp"
+  },
+  recipe_level: 1
+)
+
+Step.create!(title: "Season Salmon", content: "Season well.",               recipe: recipe_7)
+Step.create!(title: "Sear Fish",     content: "Cook skin side down.",      recipe: recipe_7)
+Step.create!(title: "Finish",        content: "Add lemon.",                 recipe: recipe_7)
+
+
+# ========= RECIPE 8 =========
+recipe_8 = Recipe.create!(
+  title: "Garlic Butter Shrimp Pasta",
+  description: "A quick 15-minute pasta loaded with garlic.",
+  ingredients: {
+    "spaghetti": "200 g",
+    "shrimp":    "250 g",
+    "garlic":    "4 cloves"
+  },
+  recipe_level: 0
+)
+
+Step.create!(title: "Boil Pasta", content: "Cook spaghetti.",             recipe: recipe_8)
+Step.create!(title: "Cook Shrimp", content: "Sauté shrimp.",               recipe: recipe_8)
+Step.create!(title: "Combine",      content: "Mix everything together.",   recipe: recipe_8)
+
+
+# ========= RECIPE 9 =========
+recipe_9 = Recipe.create!(
+  title: "Vegetable Stir-Fry",
+  description: "A vibrant stir-fry with savory sauce.",
+  ingredients: {
+    "broccoli": "200 g",
+    "carrots":  "2",
+    "bell_pepper": "1"
+  },
+  recipe_level: 0
+)
+
+Step.create!(title: "Prep Veg", content: "Chop all vegetables.", recipe: recipe_9, skill: skill_knife)
+Step.create!(title: "Stir Fry", content: "Cook quickly on high heat.", recipe: recipe_9)
+Step.create!(title: "Add Sauce", content: "Add soy glaze.", recipe: recipe_9)
+
+
+# ========= RECIPE 10 =========
+recipe_10 = Recipe.create!(
+  title: "Slow-Cooked Beef Stew",
+  description: "A rich stew simmered for hours.",
+  ingredients: {
+    "beef": "500 g",
+    "potatoes": "3",
+    "carrots": "2"
+  },
+  recipe_level: 2
+)
+
+Step.create!(title: "Brown Beef",        content: "Sear beef.", recipe: recipe_10)
+Step.create!(title: "Prep Vegetables",   content: "Cut everything.", recipe: recipe_10, skill: skill_knife)
+Step.create!(title: "Slow Cook",         content: "Cook 3 hours.", recipe: recipe_10)
+
+
+# ========= RECIPE 11 =========
+recipe_11 = Recipe.create!(
+  title: "Avocado Toast Deluxe",
+  description: "Creamy avocado toast with chili flakes.",
+  ingredients: {
+    "bread": "2 slices",
+    "avocado": "1"
+  },
+  recipe_level: 0
+)
+
+Step.create!(title: "Toast Bread", content: "Toast slices.", recipe: recipe_11)
+Step.create!(title: "Mash Avocado", content: "Mash until creamy.", recipe: recipe_11)
+Step.create!(title: "Assemble", content: "Layer everything.", recipe: recipe_11)
+
+
+# ========= RECIPE 12 =========
+recipe_12 = Recipe.create!(
+  title: "Homemade Pancakes",
+  description: "Fluffy pancakes perfect for weekends.",
+  ingredients: {
+    "flour": "200 g",
+    "milk": "250 ml",
+    "egg":  "1"
+  },
+  recipe_level: 0
+)
+
+Step.create!(title: "Mix Batter", content: "Whisk ingredients.", recipe: recipe_12)
+Step.create!(title: "Heat Pan",   content: "Melt butter.",       recipe: recipe_12)
+Step.create!(title: "Cook Cakes", content: "Flip when bubbly.",  recipe: recipe_12)
+
 
 puts "Created #{Recipe.count} recipes with #{Step.count} steps."
 
-# ---------------------------
-# CREATE RANDOM REVIEWS
-# ---------------------------
+
+# ---------------------------------------
+# RANDOM REVIEWS (3–7 each)
+# ---------------------------------------
+
 puts "Creating Reviews..."
 
 REVIEW_TITLES = [
@@ -178,19 +308,17 @@ REVIEW_COMMENTS = [
   "The instructions were super clear.",
   "My family loved it!",
   "Not my favorite, but decent.",
-  "I added more seasoning and it was perfect.",
+  "Could use more spice.",
   "Would tweak a few things next time.",
   "Super easy to follow.",
   "Tasted great but took longer than expected.",
-  "Really fun to make.",
+  "Really fun to make!",
   "Could use more flavor.",
   "The sauce was amazing!"
 ]
 
 def create_recipe_reviews(recipe)
-  puts "  -> Creating reviews for: #{recipe.title}"
-
-  rand(2..7).times do
+  rand(3..7).times do
     Review.create!(
       title: REVIEW_TITLES.sample,
       comment: REVIEW_COMMENTS.sample,
@@ -200,15 +328,39 @@ def create_recipe_reviews(recipe)
   end
 end
 
-[recipe_1, recipe_2, recipe_3, recipe_4, recipe_5].each do |rec|
+[recipe_1, recipe_2, recipe_3, recipe_4, recipe_5,
+ recipe_6, recipe_7, recipe_8, recipe_9, recipe_10,
+ recipe_11, recipe_12].each do |rec|
   create_recipe_reviews(rec)
+end
+
+# Force recipe_9 to be low rated
+3.times do
+  Review.create!(
+    title: "Terrible",
+    comment: "Really bland and disappointing.",
+    rate: 1,
+    recipe: recipe_9
+  )
+end
+
+# Force recipe_12 to be highly rated
+3.times do
+  Review.create!(
+    title: "Best ever!",
+    comment: "Perfect pancakes every time!",
+    rate: 5,
+    recipe: recipe_12
+  )
 end
 
 puts "Created #{Review.count} total reviews."
 
+
 # ---------------------------
 # CHAT + MESSAGES
 # ---------------------------
+
 puts "Creating Chat and Messages..."
 
 chat = Chat.create!(user: user, title: "Botifara Ideas")

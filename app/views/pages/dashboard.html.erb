@@ -18,7 +18,7 @@
   <!-- Progress Bar -->
   <div class="profile-section">
     <p class="level-text">
-      Level <%= current_user.level %> — <%= current_user.xp %>/100 XP
+      Level <%= current_user.level %> — <%= current_user.xp %>/<%= current_user.xp_required_for_current_level %> XP
     </p>
 
     <div class="progress-wrapper">

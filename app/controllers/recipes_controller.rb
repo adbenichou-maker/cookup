@@ -49,6 +49,7 @@ class RecipesController < ApplicationController
       when "expert" then 30
       end
 
+    # Old behaviour: award XP when visiting this action
     current_user.add_xp(xp_amount)
 
     @new_xp_percent = current_user.progress_percentage
@@ -56,4 +57,5 @@ class RecipesController < ApplicationController
 
     @leveled_up = @new_level > @old_level
   end
+
 end

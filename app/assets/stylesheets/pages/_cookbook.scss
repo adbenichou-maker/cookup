@@ -1,0 +1,50 @@
+/* ========================================= */
+/*  COOKBOOK PAGE                            */
+/* ========================================= */
+
+/* Page Title */
+.cookbook-title,
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #4A4A4A;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Image Placeholder */
+.recipe-image-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: #E8DEC4;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Text Content */
+.recipe-text h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #4A4A4A;
+}
+
+.recipe-text p {
+  margin: 5px 0 10px;
+  color: #6b6b6b;
+  font-size: 14px;
+}
+
+/* Rating Stars */
+.rating {
+  color: #C9815B;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating small {
+  color: #6b6b6b;
+  font-size: 12px;
+}
