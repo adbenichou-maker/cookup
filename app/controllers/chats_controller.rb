@@ -44,7 +44,7 @@ before_action :set_chat, only: [:show]
       user_message = Message.create!(
         chat: @chat,
         role: "user",
-        content: user_prompt
+        content: user_prompt,
       )
 
       @ruby_llm_chat = RubyLLM.chat
@@ -58,7 +58,8 @@ before_action :set_chat, only: [:show]
       Message.create!(
         chat: @chat,
         role: "assistant",
-        content: response.content
+        content: response.content,
+        # message_type: "multichoice"
       )
 
       # 6. Rediriger (UNE SEULE FOIS)

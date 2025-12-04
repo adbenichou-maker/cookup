@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// data-controller="xp-bar"
 export default class extends Controller {
   static targets = ["fill"]
   static values = {
@@ -9,12 +8,12 @@ export default class extends Controller {
   }
 
   connect() {
-    // Start at old XP
+    // Start at old percent
     this.fillTarget.style.width = `${this.oldValue}%`
 
-    // After short delay → animate to new XP
-    setTimeout(() => {
+    // Animate to new percent
+    requestAnimationFrame(() => {
       this.fillTarget.style.width = `${this.newValue}%`
-    }, 200)
+    })
   }
 }
