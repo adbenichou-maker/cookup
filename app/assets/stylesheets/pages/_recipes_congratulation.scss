@@ -13,3 +13,20 @@
   border-color: #8BAA7B;
   color: #8BAA7B;
 }
+
+
+/* JS Progressbar */
+.progress-wrapper {
+  background: #E8DEC4;
+  border-radius: 20px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: #8BAA7B;
+  height: 100%;
+  width: 0%;
+  border-radius: 20px;
+  transition: width 1.5s ease-out;
+}

@@ -9,17 +9,25 @@
       class: "logout-btn" %>
 
   <!-- Profile image -->
-  <div class="profile-avatar"></div>
-
   <h2 class="profile-name">Hi <%= @user.username.capitalize %>!</h2>
 
-  <!-- Progressbar placeholder -->
+  <!-- Progressbar -->
   <div class="profile-section">
-    <h3>Level 1</h3>
-    <div class="progress-bar">
-      <div class="progress-fill" style="width: 70%;"></div>
+
+    <h3 class="profile-level-text">
+      Level <%= current_user.level %> — <%= current_user.xp %>/100 XP
+    </h3>
+
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill"
+            style="width: <%= current_user.progress_percentage %>%;">
+        </div>
+      </div>
     </div>
+
   </div>
+
 
   <!-- Badges placeholder -->
   <h3 class="badge-title">Your Badges</h3>
