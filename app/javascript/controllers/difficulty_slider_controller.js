@@ -5,6 +5,7 @@ export default class extends Controller {
 
   connect() {
     this.update() // set initial label
+
   }
 
   update() {

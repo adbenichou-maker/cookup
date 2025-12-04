@@ -12,5 +12,19 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
+  def add_xp(amount)
+    self.xp += amount
+
+    while self.xp >= 100
+      self.xp -= 100
+      self.level += 1
+    end
+
+    save!
+  end
+
+  def progress_percentage
+    xp
+  end
 
 end

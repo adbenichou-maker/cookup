@@ -26,7 +26,7 @@
           min="0"
           max="2"
           step="1"
-          value="<%= params[:level] || 0 %>"
+          value="<%= params[:level]%>"
           class="difficulty-slider"
           data-action="input->difficultySlider#update"
           data-difficultySlider-target="slider"
@@ -75,7 +75,7 @@
           <p><%= recipe.description %></p>
 
           <div class="rating">
-            <% full_stars = recipe.average_rating.floor %>
+            <% full_stars = recipe.average_rating.round %>
             <% empty_stars = 5 - full_stars %>
 
             <% full_stars.times { %> ★ <% } %>
