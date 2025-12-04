@@ -1,5 +1,4 @@
 <div class="container-fluid p-4" style="background-color: #F7EEDB; min-height: 100vh;">
-
   <header class="text-center mb-5 pt-3">
     <h1 class="display-5 fw-bold" style="color: #4A4A4A;">
       Reviewing <%= @recipe.title %> 🍲
@@ -8,14 +7,9 @@
       Share your experience and rate this recipe.
     </p>
   </header>
-
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
-
-      <%# Form submission automatically handles POST to /recipes/:recipe_id/reviews %>
       <%= form_with model: [@recipe, @review], local: true, class: "card p-4 rounded-4 shadow-lg" do |f| %>
-
-        <%# Display errors if save failed %>
         <% if @review.errors.any? %>
           <div id="error_explanation" class="alert alert-danger rounded-3 fw-bold">
             <h4 class="alert-heading h6">Please fix the following errors:</h4>
@@ -41,19 +35,14 @@
           <label class="form-label fw-bold d-block mb-3" for="review_rate_stars">Rate the Recipe</label>
           <div class="rating d-flex flex-row-reverse justify-content-center" id="review_rate_stars">
 
-            <%# Hidden input is implicitly handled by the radio buttons %>
-
             <% 5.downto(1) do |i| %>
-              <%# 1. Radio Button: The actual form input that holds the value %>
               <%= f.radio_button :rate, i,
                   id: "rate-#{i}",
                   class: "d-none rating-input" %>
-
-              <%# 2. Label: The star the user sees and clicks. Styled with CSS. %>
               <label for="rate-<%= i %>" class="star-label me-1"
                     data-value="<%= i %>"
                     style="color: #F2C94C; font-size: 2.5rem; cursor: pointer; transition: color 0.2s;">
-                &#9733; <%# HTML entity for a star %>
+                &#9733;
               </label>
             <% end %>
           </div>

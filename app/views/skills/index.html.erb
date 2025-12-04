@@ -1,9 +1,7 @@
 
 <div class="container-fluid p-3" style="background-color: #F7EEDB; min-height: 100vh;">
 
-  <%# ========================================================================= %>
-  <%# 1. SKILL LEVEL SELECTION (Initial View: /skills) %>
-  <%# ========================================================================= %>
+
   <% if @skill_levels %>
     <header class="text-center mb-5 pt-3">
       <h1 class="display-4 fw-bold mb-3" style="color: #4A4A4A;">
@@ -13,8 +11,6 @@
         Select your current skill level to see suggested techniques.
       </p>
     </header>
-
-    <%# *** FIX APPLIED HERE: Added mb-5 to the row *** %>
     <div class="row justify-content-center mb-5">
       <% @skill_levels.each do |level| %>
         <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-4">
@@ -27,7 +23,7 @@
               style: "background-color: transparent; text-decoration: none;" do %>
 
             <div class="card rounded-4 border-0 text-center p-3"
-                 style="background-color: <%= card_bg %>; color: <%= text_color %>;">
+                style="background-color: <%= card_bg %>; color: <%= text_color %>;">
               <div class="card-body">
                 <h2 class="h3 card-title fw-bolder mb-0">
                   <%= level.humanize %>
