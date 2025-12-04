@@ -4,16 +4,22 @@ export default class extends Controller {
   static targets = ["messages"]
 
   connect() {
-    this.scrollToBottom()
+    this.scrollToLatest()
   }
 
-  // When Turbo receives new messages, scroll again
   messagesTargetChanged() {
-    this.scrollToBottom()
+    this.scrollToLatest()
   }
 
-  scrollToBottom() {
-    const el = this.messagesTarget
-    el.scrollTop = el.scrollHeight    // Always scroll to latest message
+  scrollToLatest() {
+    const container = this.messagesTarget
+    const messages = container.children
+
+    if (messages.length === 0) return
+
+    const lastMessage = messages[messages.length - 1]
+
+    // Scroll so that the last message appears at the TOP of the container
+    container.scrollTop = lastMessage.offsetTop
   }
 }
