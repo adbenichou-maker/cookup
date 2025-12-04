@@ -1,0 +1,72 @@
+<div class="container-fluid p-4" style="background-color: #F7EEDB; min-height: 100vh;">
+
+  <header class="text-center mb-5 pt-3">
+    <h1 class="display-5 fw-bold" style="color: #4A4A4A;">
+      Reviewing <%= @recipe.title %> 🍲
+    </h1>
+    <p class="lead" style="color: #C9815B;">
+      Share your experience and rate this recipe.
+    </p>
+  </header>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <%# Form submission automatically handles POST to /recipes/:recipe_id/reviews %>
+      <%= form_with model: [@recipe, @review], local: true, class: "card p-4 rounded-4 shadow-lg" do |f| %>
+
+        <%# Display errors if save failed %>
+        <% if @review.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger rounded-3 fw-bold">
+            <h4 class="alert-heading h6">Please fix the following errors:</h4>
+            <ul>
+              <% @review.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= f.label :title, "Review Title", class: "form-label fw-bold" %>
+          <%= f.text_field :title, class: "form-control rounded-pill", placeholder: "Quick, tasty, and easy!" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :comment, "Your Detailed Comments", class: "form-label fw-bold" %>
+          <%= f.text_area :comment, rows: 5, class: "form-control rounded-3", placeholder: "The steps were clear and the result was fantastic!" %>
+        </div>
+
+        <div class="mb-4 text-center">
+          <label class="form-label fw-bold d-block mb-3" for="review_rate_stars">Rate the Recipe</label>
+          <div class="rating d-flex flex-row-reverse justify-content-center" id="review_rate_stars">
+
+            <%# Hidden input is implicitly handled by the radio buttons %>
+
+            <% 5.downto(1) do |i| %>
+              <%# 1. Radio Button: The actual form input that holds the value %>
+              <%= f.radio_button :rate, i,
+                  id: "rate-#{i}",
+                  class: "d-none rating-input" %>
+
+              <%# 2. Label: The star the user sees and clicks. Styled with CSS. %>
+              <label for="rate-<%= i %>" class="star-label me-1"
+                    data-value="<%= i %>"
+                    style="color: #F2C94C; font-size: 2.5rem; cursor: pointer; transition: color 0.2s;">
+                &#9733; <%# HTML entity for a star %>
+              </label>
+            <% end %>
+          </div>
+          <small class="text-muted d-block mt-2">Click a star to set your rating (1 is lowest, 5 is highest).</small>
+        </div>
+
+        <div class="d-grid mt-4">
+          <%= f.submit "Submit Review ⭐️",
+            class: "btn btn-lg fw-bold text-white rounded-pill shadow-sm",
+            style: "background-color: #8BAA7B; border-color: #8BAA7B;" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

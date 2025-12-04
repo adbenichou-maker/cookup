@@ -1,0 +1,56 @@
+/* app/assets/stylesheets/reviews.scss */
+
+$warm-yellow: #F2C94C;
+
+.rating {
+  /* This is the container: d-flex flex-row-reverse justify-content-center */
+
+  .rating-input {
+    /* Hide the radio button itself */
+    display: none;
+  }
+
+  .star-label {
+    /* Base style for all stars (unfilled) */
+    color: lightgray !important;
+    transition: color 0.2s;
+    font-size: 2.5rem; /* Set font size here instead of inline style */
+    cursor: pointer;
+  }
+
+  /* ----------------------------------------------------------- */
+  /* --- HOVER AND CHECKED LOGIC --- */
+  /* Uses the General Sibling Selector (~) and flex-direction: row-reverse */
+  /* ----------------------------------------------------------- */
+
+  /* 1. Universal Hover Effect: When hovering anywhere inside .rating, all stars become gold */
+  &:hover .star-label {
+    color: $warm-yellow !important;
+  }
+
+  /* 2. Reverse Hover Effect: Stars left of the hovered star (lower rating) revert to gold */
+  .star-label:hover ~ .star-label {
+    color: $warm-yellow !important;
+  }
+
+  /* 3. Checked State: Fill the currently checked star AND all stars to its right (which are lower rated) */
+  .rating-input:checked {
+    /* Use the parent selector to target siblings of the checked input */
+
+    /* Target the checked input's label sibling */
+    & + .star-label,
+    /* Target the checked input's general star-label siblings */
+    & ~ .star-label {
+      color: $warm-yellow !important;
+    }
+  }
+
+  /* 4. Persistence Fix: Ensure selected stars stay gold when hovering over a higher-rated star */
+  /* This ensures the selected rating persists when the mouse leaves the input group */
+  .rating-input:checked:not(:hover) {
+    & + .star-label,
+    & ~ .star-label {
+      color: $warm-yellow !important;
+    }
+  }
+}
