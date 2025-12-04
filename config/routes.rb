@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "pages#dashboard"
   get "/recipes/search", to: "recipes#search", as: :recipes_search
 
-  resources :recipes, only: [:index, :show, :create] do
+  resources :recipes, only: [:index, :show] do
     member do
       get :completed
       get :congratulation
@@ -26,6 +26,10 @@ Rails.application.routes.draw do
 
   resources :chats, only: [:index, :new, :show, :create] do
     resources :messages, only: [:create]
+  end
+
+  resources :messages do
+    resources :recipes, only: [:create]
   end
 
   resources :favorites, only: [:create, :destroy]
