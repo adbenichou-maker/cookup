@@ -42,4 +42,13 @@ class MessagesController < ApplicationController
     end
   end
 
+  respond_to do |format|
+    format.turbo_stream do
+      render turbo_stream: [
+        turbo_stream.append("messages", partial: "messages/message", locals: { message: @message }),
+        turbo_stream.invoke("chatTyping#hideTyping")
+      ]
+    end
+  end
+
 end

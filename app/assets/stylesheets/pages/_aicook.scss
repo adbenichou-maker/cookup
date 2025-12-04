@@ -1,0 +1,256 @@
+/* Container styling */
+.ai-form-container {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: 650px;
+  margin: 30px auto;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Title */
+.ai-form-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4A4A4A;
+  border-bottom: 2px solid #E0D5C0;
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Description */
+.ai-form-container p {
+  color: #7A7A7A;
+  font-size: 1.05rem;
+}
+
+/* Inputs */
+.ai-form-container .input {
+  background: #F5F1E7;
+  border: 1px solid #D8D2C0;
+  border-radius: 12px !important;
+  padding: 10px 14px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.ai-form-container .input:focus {
+  background: #fff;
+  border-color: #8BAA7B;
+  box-shadow: 0 0 6px rgba(139, 170, 123, 0.4);
+}
+
+/* Labels */
+.ai-form-container label {
+  font-weight: 600;
+  color: #4A4A4A;
+}
+
+/* Textarea */
+.ai-form-container textarea {
+  resize: none;
+}
+
+/* Submit button */
+.ai-form-container .btn-primary {
+  background-color: #8BAA7B !important;
+  border-color: #8BAA7B !important;
+  padding: 14px 18px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 30px;
+  width: 100%;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.ai-form-container .btn-primary:hover {
+  background-color: #789567 !important;
+  transform: translateY(-2px);
+}
+
+.ai-form-container .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* Main container */
+.chat-container {
+  background: #F7EEDB;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+/* Scrollable message area */
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px 40px 16px !important; /* FIXED -- reduce bottom gap */
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.message-row {
+  display: flex;
+  width: 100%;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+}
+
+/* USER bubble */
+.chat-user {
+  margin-left: auto;
+  background: #8BAA7B;
+  color: #FFFFFF;
+  border-bottom-right-radius: 4px;
+}
+
+/* ASSISTANT bubble */
+.chat-assistant {
+  margin-right: auto;
+  background: #FFFFFF;
+  color: #4A4A4A;
+  border-bottom-left-radius: 4px;
+}
+
+/* Save Recipe */
+.my-button {
+  display: inline-block;
+  background: #8BAA7B;
+  color: #fff !important;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border-radius: 12px;
+  margin-left: 6px;
+  margin-top: -10px;
+  text-decoration: none;
+  transition: 0.15s ease-in-out;
+
+  &:hover {
+    background: #789668;
+  }
+}
+
+
+.chat-form {
+  padding: 14px;
+  background: #F7EEDB;
+  border-top: 2px solid #E2D8C3;
+  margin-bottom: 60px;
+}
+
+/* Buttons inside chat */
+.chat-submit-btn {
+  background: #FFFFFF;
+  color: #4A4A4A;
+  padding: 10px 14px;
+  border-radius: 30px;
+  border: 2px solid #4A4A4A;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+
+  /* Fix text cutting */
+  white-space: normal;
+  line-height: 1.3;
+  min-height: 48px;
+
+  flex: 1 1 auto;
+  margin-bottom: 10px;
+  transition: 0.2s;
+
+  &:hover {
+    background: #EFE8D7;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .chat-bubble {
+    max-width: 60%;
+  }
+
+  #messages {
+    padding: 20px 80px 150px 80px !important;
+  }
+
+  .chat-submit-btn {
+    font-size: 1rem;
+    padding: 14px 24px;
+  }
+}
+
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background: #C9C0A9;
+  border-radius: 10px;
+}
+
+#messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+
+/* JS */
+.typing-indicator {
+  display: flex;
+  gap: 6px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border-radius: 16px;
+  width: fit-content;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.typing-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #8BAA7B;
+  border-radius: 50%;
+  animation: typingBounce 0.9s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+}
