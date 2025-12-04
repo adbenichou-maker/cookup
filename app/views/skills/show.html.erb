@@ -41,19 +41,23 @@
 
       <div class="d-grid mb-5">
 
-        <% if params[:recipe_id].present? %>
-          <%= link_to "Back to Cooking Steps", recipe_steps_path(params[:recipe_id]),
-            class: "btn btn-lg fw-bold text-white shadow-lg",
-            style: "background-color: #C9815B; border-color: #C9815B;" %>
-        </div>
-        <% else %>
-          <%= link_to "Back to Skills", skills_path(params[:recipe_id]),
-            class: "btn btn-lg fw-bold text-white shadow-lg",
-            style: "background-color: #C9815B; border-color: #C9815B;" %>
 
+
+
+        <% if user_signed_in? && !current_user.user_skills.exists?(skill_id: @skill.id) %>
+          <div class="d-grid mt-4">
+            <%= button_to "Mark as Learned 🧑‍🍳",
+                skill_user_skills_path(@skill),
+                method: :post,
+                form: { data: { turbo_confirm: "Are you sure you mastered this skill?" } },
+                class: "btn btn-lg fw-bold text-white shadow-lg",
+                style: "background-color: #8BAA7B; border-color: #8BAA7B;" %>
+          </div>
+        <% elsif user_signed_in? %>
+          <div class="alert alert-success mt-4">
+            You've already mastered this skill!
+          </div>
         <% end %>
-
-
 
     </div>
   </div>
