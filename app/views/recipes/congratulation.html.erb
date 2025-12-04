@@ -13,22 +13,24 @@
     </p>
   </header>
 
-  <section class="mb-5 p-3">
-    <h2 class="h5 fw-bold mb-3 text-center" style="color: #C9815B;">
-    </h2>
-    <div class="progress rounded-pill" role="progressbar"
-        aria-label="<%= @recipe.recipe_level.humanize %> Level Progress"
-        aria-valuenow="<%= progress_percent %>"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        style="height: 30px;">
+  <section class="text-center mb-5"
+          data-controller="xp-bar"
+          data-xp-bar-old-value="<%= @old_xp_percent %>"
+          data-xp-bar-new-value="<%= @new_xp_percent %>">
 
-      <div class="progress-bar rounded-pill fw-bold text-shadow"
-          style="width: <%= progress_percent %>%; background-color: #8BAA7B;">
+    <p class="fw-bold" style="color: #4A4A4A;">
+      Level <%= current_user.level %> — <%= current_user.xp %>/100 XP
+    </p>
 
+    <div class="progress-wrapper mx-auto" style="max-width: 350px;">
+      <div class="progress-bar-fill"
+          data-xp-bar-target="fill"
+          style="width: <%= @old_xp_percent %>%;">
       </div>
     </div>
   </section>
+
+
 
   <div class="row justify-content-center">
     <div class="col-12 col-md-10">
@@ -51,5 +53,9 @@
       </div>
     </div>
   </div>
+
+  <% if @leveled_up %>
+    <div data-controller="confetti"></div>
+  <% end %>
 
 </div>

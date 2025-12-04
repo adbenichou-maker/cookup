@@ -8,5 +8,8 @@ class PagesController < ApplicationController
     @user = current_user
     @recipes = @user.recipes
     @saved_recipes = @user.favorites .includes(:recipe) .map(&:recipe) .sample(3)
+    @level = current_user.level
+    @xp = current_user.xp
+    @progress = current_user.progress_percentage
   end
 end
