@@ -7,6 +7,8 @@ class Recipe < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
   validates :title,:description, :ingredients, :recipe_level, presence: true
+  accepts_nested_attributes_for :steps, allow_destroy: true
+
 
   def average_rating
     return 0 if reviews.empty?

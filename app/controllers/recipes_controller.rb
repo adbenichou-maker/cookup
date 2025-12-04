@@ -50,7 +50,7 @@ class RecipesController < ApplicationController
           "<ingredient_name>": "<quantity_as_string>"
         },
         "recipe_level": integer (0 for beginner, 1 for intermediate, 2 for expert),
-        "steps": [
+        "steps_attributes": [
           {
             "title": string,
             "content": string
@@ -59,6 +59,9 @@ class RecipesController < ApplicationController
       }
 
       Rules:
+      - Include everything in a overall JSON object.
+      - Ensure the JSON is valid.
+      - Use the exact keys as specified.
       - Output ONLY valid JSON.
       - Do NOT add comments, descriptions, markdown, or extra keys.
       - Do NOT wrap the JSON in code fences.
@@ -71,21 +74,20 @@ class RecipesController < ApplicationController
     recipe_data = JSON.parse(response.content)
     @recipe = Recipe.new(recipe_data)
     # The response is automatically parsed from JSON
-
     @recipe.user_id = current_user.id
     @recipe.message_id = @message.id
 
-    @recipe.save
+    # @recipe.save
 
-    recipe_data["steps"].each do |step_data|
-      step = Step.new(
-        title: step_data["title"],
-        content: step_data["content"],
-        recipe: @recipe
-      )
-      step.save
-    end
-    
+    # recipe_data["steps"].each do |step_data|
+    #   step = Step.new(
+    #     title: step_data["title"],
+    #     content: step_data["content"],
+    #     recipe: @recipe
+    #   )
+    #   step.save
+    # end
+
     if @recipe.save
       chat = @message.chat
       redirect_to chat_path(chat), notice: "Saved Recipe!"
