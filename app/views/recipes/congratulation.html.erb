@@ -1,0 +1,61 @@
+<div class="container-fluid p-4" style="background-color: #F7EEDB; min-height: 100vh;">
+
+  <% recipe_index = @recipe.recipe_level_before_type_cast %>
+  <% total_levels = 3 %>
+  <% progress_percent = ((recipe_index + 1).to_f / total_levels.to_f * 100).round %>
+
+  <header class="text-center mb-5 pt-3">
+    <h1 class="fw-bolder mb-2" style="color: #4A4A4A;" >
+      CONGRATULATIONS
+    </h1>
+    <p class="lead fw-normal" style="color: #4A4A4A;">
+      You finished **<%= @recipe.title %>**!
+    </p>
+  </header>
+
+  <section class="text-center mb-5"
+          data-controller="xp-bar"
+          data-xp-bar-old-value="<%= @old_xp_percent %>"
+          data-xp-bar-new-value="<%= @new_xp_percent %>">
+
+    <p class="fw-bold" style="color: #4A4A4A;">
+      Level <%= current_user.level %> — <%= current_user.xp %>/100 XP
+    </p>
+
+    <div class="progress-wrapper mx-auto" style="max-width: 350px;">
+      <div class="progress-bar-fill"
+          data-xp-bar-target="fill"
+          style="width: <%= @old_xp_percent %>%;">
+      </div>
+    </div>
+  </section>
+
+
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10">
+
+      <div class="d-grid mb-4">
+        <%= link_to "⭐️ ADD A REVIEW",  new_recipe_review_path(@recipe),
+          class: "btn btn-lg fw-bold shadow-lg p-3 rounded-pill",
+          style: "color: #4A4A4A; border-color: #4A4A4A;" %>
+      </div>
+
+      <div class="d-grid gap-3 mb-5">
+
+        <div class="cookbook-action-wrapper">
+          <%= render partial: "favorites/favorite_button", locals: { recipe: @recipe } %>
+        </div>
+
+        <%= link_to "🏠 GO HOME", dashboard_path, # Changed path to root_path, assuming this is your homepage
+          class: "btn btn-lg fw-bold p-3 rounded-pill",
+          style: " color: #4A4A4A; border: 2px solid #4A4A4A;" %>
+      </div>
+    </div>
+  </div>
+
+  <% if @leveled_up %>
+    <div data-controller="confetti"></div>
+  <% end %>
+
+</div>

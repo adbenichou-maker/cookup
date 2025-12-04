@@ -1,0 +1,64 @@
+<div class="profile-container">
+
+  <!-- Back button -->
+  <%= link_to "Back", dashboard_path, class: "profile-back" %>
+
+  <!-- Logout -->
+  <%= link_to "Log out", destroy_user_session_path,
+      data: { turbo_method: :delete },
+      class: "logout-btn" %>
+
+  <!-- Profile image -->
+  <h2 class="profile-name">Hi <%= @user.username.capitalize %>!</h2>
+
+  <!-- Progressbar -->
+  <div class="profile-section">
+
+    <h3 class="profile-level-text">
+      Level <%= current_user.level %> — <%= current_user.xp %>/100 XP
+    </h3>
+
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill"
+            style="width: <%= current_user.progress_percentage %>%;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Badges placeholder -->
+  <h3 class="badge-title">Your Badges</h3>
+
+  <div class="badge-grid">
+    <% 6.times do %>
+      <div class="badge-item"></div>
+    <% end %>
+  </div>
+
+  <!-- Profile edit form -->
+  <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
+
+    <%= f.text_field :username, placeholder: "Username", class: "input-field" %>
+
+    <%= f.email_field :email, placeholder: "Email", class: "input-field" %>
+
+    <%= f.password_field :current_password,
+          placeholder: "Current Password (required)",
+          class: "input-field" %>
+
+    <%= f.password_field :password,
+          placeholder: "New Password",
+          class: "input-field" %>
+
+    <%= f.password_field :password_confirmation,
+          placeholder: "Confirm New Password",
+          class: "input-field" %>
+
+    <%= f.submit "Change Password", class: "update-btn" %>
+
+  <% end %>
+
+</div>

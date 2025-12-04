@@ -8,32 +8,47 @@
     </div>
 
     <!-- Profile Logout (Temp) -->
-    <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-      <div class="profile-picture-placeholder"></div>
+    <%= link_to profile_path do %>
+      <div>
+        <img src="https://icon-library.com/images/3e51b7003375fb7e9e9c233a7f52c79e.png" alt="profile picture image", class="profile-picture-placeholder">
+      </div>
     <% end %>
   </div>
 
-  <!-- Progressbar (Inser here) -->
+  <!-- Progress Bar -->
+  <div class="profile-section">
+    <p class="level-text">
+      Level <%= current_user.level %> — <%= current_user.xp %>/100 XP
+    </p>
 
-  <div>
-    <p class="level-text">Level 1</p>
+    <div class="progress-wrapper">
+      <div class="progress-bar-fill" style="width: <%= current_user.progress_percentage %>%;">
+      </div>
+    </div>
   </div>
+
 
   <!-- Cards -->
   <div class="feature-cards">
 
-    <%= link_to "#", class: "feature-card" do %>
-      <div class="circle-icon"></div>
+    <%= link_to skills_path, class: "feature-card" do %>
+      <div class="circle-icon">
+        <i class="fa-solid fa-kitchen-set overlay-icon"></i>
+      </div>
       <p>Skills</p>
     <% end %>
 
     <%= link_to recipes_search_path, class: "feature-card" do %>
-      <div class="circle-icon"></div>
+      <div class="circle-icon">
+        <i class="fa-solid fa-utensils overlay-icon"></i>
+      </div>
       <p>Recipes</p>
     <% end %>
 
-    <%= link_to "#", class: "feature-card" do %>
-      <div class="circle-icon"></div>
+    <%= link_to "/cookbook", class: "feature-card" do %>
+      <div class="circle-icon">
+        <i class="fa-solid fa-book overlay-icon"></i>
+      </div>
       <p>Cookbook</p>
     <% end %>
 
@@ -45,14 +60,19 @@
   <% end %>
 
   <!-- Recipe sug -->
-  <% @recipes.each do |recipe| %>
-    <%= link_to recipe_path(recipe), class: "content-card" do %>
-      <div class="content-image-placeholder"></div>
-      <div>
-        <h3><%= recipe.title %></h3>
-        <p><%= truncate(recipe.description, length: 80) %></p>
-      </div>
+  <% if @saved_recipes.any? %>
+    <% @saved_recipes.each do |recipe| %>
+      <%= link_to recipe_path(recipe), class: "content-card" do %>
+        <div class="content-image-placeholder"></div>
+
+        <div>
+          <h3><%= recipe.title %></h3>
+          <p><%= truncate(recipe.description, length: 80) %></p>
+        </div>
+      <% end %>
     <% end %>
+  <% else %>
+    <p>You haven’t saved any recipes yet.</p>
   <% end %>
 
 </div>

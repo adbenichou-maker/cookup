@@ -11,9 +11,17 @@
 
 .bottom-nav-items {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  gap: 4em;
 }
+
+@media (min-width: 768px) {
+  .bottom-nav-items {
+    gap: 16rem;
+  }
+}
+
 
 .bottom-nav-link i {
   font-size: 24px;
@@ -27,6 +35,8 @@
 }
 
 .home-icon {
-  width: 40px;
-  height: 40px;
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }

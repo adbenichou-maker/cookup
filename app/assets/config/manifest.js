@@ -4,3 +4,9 @@
 //= link_tree ../../../vendor/javascript .js
 //= link popper.js
 //= link bootstrap.min.js
+//= link meat-temperature.mp4
+//= link dice-chop-mince.mp4
+//= link dice-onion.mp4
+//= link bechamel.mp4
+//= link emulsified-vinaigrette.mp4
+//=link dough-preparation.mp4

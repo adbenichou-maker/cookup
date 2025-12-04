@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :recipes, only: [:index, :show] do
     member do
       get :completed
+      get :congratulation
     end
     resources :steps, only: [:index]
     resources :reviews, only: [:new, :create]
@@ -30,5 +31,11 @@ Rails.application.routes.draw do
   resources :messages do
     resources :recipes, only: [:create]
   end
+
+  resources :favorites, only: [:create, :destroy]
+  get "/cookbook", to: "cookbooks#index", as: :cookbook
+
+  get "/profile", to: "users#profile"
+  patch "/profile", to: "users#update"
 
 end

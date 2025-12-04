@@ -1,0 +1,128 @@
+.profile-container {
+  background-color: $background;
+  padding: 20px;
+  padding-bottom: 150px;
+  color: $dark;
+}
+
+.profile-back {
+  color: $dark;
+  text-decoration: none;
+}
+
+.logout-btn {
+  float: right;
+  background: $accent-green;
+  padding: 8px 14px;
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: $background;
+  color: $accent-green;
+  font-weight: 700;
+  border: 2px solid $accent-green;
+}
+
+.profile-name {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 30px;
+}
+
+.profile-section h3 {
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: $accent-green;
+  border-radius: 8px;
+}
+
+/* BADGES */
+.badge-title {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 20px 0 40px 0;
+}
+
+.badge-item {
+  width: 80px;
+  height: 80px;
+  background: rgba(128, 128, 128, 0.143);
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 2px solid $accent-brown;
+}
+
+/* FORM */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid $dark;
+  background: $card-bg;
+}
+
+.update-btn {
+  width: 100%;
+  background: $accent-green;
+  padding: 12px;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+
+/* Progressbar */
+.profile-section {
+  margin: 20px 0;
+}
+
+.profile-level-text {
+  font-size: medium;
+  font-weight: 600;
+  color: $accent-green;
+  margin-bottom: 10px;
+}
+
+.progress-wrapper {
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background: #dcd8cd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: $accent-green;
+  border-radius: 10px;
+  transition: width 0.9s ease;
+}

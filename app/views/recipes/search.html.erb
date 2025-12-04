@@ -26,7 +26,7 @@
           min="0"
           max="2"
           step="1"
-          value="<%= params[:level] || 0 %>"
+          value="<%= params[:level]%>"
           class="difficulty-slider"
           data-action="input->difficultySlider#update"
           data-difficultySlider-target="slider"
@@ -64,32 +64,33 @@
 
   <!-- Results or saved recipes -->
   <% @recipes.each do |recipe| %>
-    <%= link_to recipe_path(recipe), class: "recipe-card" do %>
-      <div class="recipe-image-placeholder"></div>
+    <div class="recipe-card">
 
-      <div class="recipe-text">
-        <h3><%= recipe.title %></h3>
-        <p><%= recipe.description %></p>
+      <!-- Only this part is clickable -->
+      <%= link_to recipe_path(recipe), class: "recipe-main" do %>
+        <div class="recipe-image-placeholder"></div>
 
-        <div class="rating">
-          <% full_stars = recipe.average_rating.floor %>
-          <% empty_stars = 5 - full_stars %>
+        <div class="recipe-text">
+          <h3><%= recipe.title %></h3>
+          <p><%= recipe.description %></p>
 
-          <% full_stars.times do %>
-            ★
-          <% end %>
+          <div class="rating">
+            <% full_stars = recipe.average_rating.round %>
+            <% empty_stars = 5 - full_stars %>
 
-          <% empty_stars.times do %>
-            ☆
-          <% end %>
+            <% full_stars.times { %> ★ <% } %>
+            <% empty_stars.times { %> ☆ <% } %>
 
-          <small>(<%= recipe.reviews.count %> reviews)</small>
+            <small>(<%= recipe.reviews.count %> reviews)</small>
+          </div>
         </div>
+      <% end %>
 
+      <!-- Favorite button OUTSIDE the link -->
+      <div class="recipe-add-btn">
+        <%= render "favorites/favorite_button", recipe: recipe %>
       </div>
 
-      <div class="recipe-add-btn">+</div>
-    <% end %>
+    </div>
   <% end %>
-
 </div>
