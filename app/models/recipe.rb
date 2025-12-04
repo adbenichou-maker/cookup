@@ -8,7 +8,6 @@ class Recipe < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :saved_by_users, through: :favorites, source: :user
 
-
   validates :title,:description, :ingredients, :recipe_level, presence: true
   accepts_nested_attributes_for :steps, allow_destroy: true
 

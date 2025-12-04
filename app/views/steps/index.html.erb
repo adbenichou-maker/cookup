@@ -1,6 +1,6 @@
-
 <div class="container-fluid p-3" style="background-color: #F7EEDB;">
-
+  <!-- Back button -->
+  <%= link_to "Back", recipe_path(@recipe), class: "profile-back" %>
   <header class="text-center mb-4">
     <h1 class="display-5 fw-bold mb-2" style="color: #4A4A4A;">
       <%= @recipe.title %> Steps

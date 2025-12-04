@@ -3,22 +3,33 @@
 <div id="<%= dom_id(recipe, :favorite_button) %>">
   <% if current_user %>
     <% if favorite %>
+
       <%= button_to favorite_path(favorite),
           method: :delete,
           class: "favorite-btn saved",
           form: { data: { turbo: true }, class: "favorite-form" } do %>
         ✔
       <% end %>
+
     <% else %>
+
       <%= form_with url: favorites_path,
           method: :post,
           data: { turbo: true },
-          html: { class: "favorite-form" } do %>
+          html: { class: "favorite-form" } do |f| %>
+
         <%= hidden_field_tag :recipe_id, recipe.id %>
-        <%= submit_tag "+", class: "favorite-btn" %>
+
+        <%= f.button type: "submit", class: "favorite-btn unsaved" do %>
+          +
+        <% end %>
+
       <% end %>
+
     <% end %>
   <% else %>
-    <%= link_to "+", new_user_session_path, class: "favorite-btn" %>
+
+    <%= link_to "+", new_user_session_path, class: "favorite-btn unsaved" %>
+
   <% end %>
 </div>

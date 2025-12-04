@@ -116,6 +116,7 @@ class RecipesController < ApplicationController
       when "expert" then 30
       end
 
+    # Old behaviour: award XP when visiting this action
     current_user.add_xp(xp_amount)
 
     @new_xp_percent = current_user.progress_percentage
@@ -130,6 +131,5 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:title, :description, :ingredients, :recipe_level, :message_id, :user_id)
     # Ajoutez tous les attributs de Recipe qui peuvent être modifiés par le formulaire
   end
-
 
 end

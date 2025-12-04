@@ -1,4 +1,4 @@
-<div class="container-fluid p-4" style="background-color: #F7EEDB; min-height: 100vh;">
+<div class="container-fluid p-4 congrats-page" style="background-color: #F7EEDB; min-height: 100vh;">
 
   <% recipe_index = @recipe.recipe_level_before_type_cast %>
   <% total_levels = 3 %>
@@ -9,7 +9,7 @@
       CONGRATULATIONS
     </h1>
     <p class="lead fw-normal" style="color: #4A4A4A;">
-      You finished **<%= @recipe.title %>**!
+      You finished <%= @recipe.title %>!
     </p>
   </header>
 
@@ -19,7 +19,7 @@
           data-xp-bar-new-value="<%= @new_xp_percent %>">
 
     <p class="fw-bold" style="color: #4A4A4A;">
-      Level <%= current_user.level %> — <%= current_user.xp %>/100 XP
+      Level <%= current_user.level %> — <%= current_user.xp %>/<%= current_user.xp_required_for_current_level %> XP
     </p>
 
     <div class="progress-wrapper mx-auto" style="max-width: 350px;">

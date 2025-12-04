@@ -10,23 +10,38 @@ class User < ApplicationRecord
   has_many :saved_recipes, through: :favorites, source: :recipe
 
 
+
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
+
+  def xp_required_for_current_level
+    (100 * (1.15 ** (level - 1))).round
+  end
+
+  # Add XP and handle leveling up
   def add_xp(amount)
+    self.xp ||= 0
+    self.level ||= 1
+
     self.xp += amount
 
-    while self.xp >= 100
-      self.xp -= 100
+    required = xp_required_for_current_level
+
+    while xp >= required
+      self.xp -= required
       self.level += 1
+      required = xp_required_for_current_level
     end
 
     save!
   end
 
+  # Progress bar percentage
   def progress_percentage
-    xp
+    required = xp_required_for_current_level
+    ((xp.to_f / required) * 100).clamp(0, 100).round
   end
 
 end
