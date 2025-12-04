@@ -27,6 +27,7 @@ class Chat < ApplicationRecord
       - A title
       - Short description
       - Preparation time
+      - Level of difficulty
       - List of ingredients needed and quantity ONLY
     Format once the user has selected a recipe:
     - Use Markdown
