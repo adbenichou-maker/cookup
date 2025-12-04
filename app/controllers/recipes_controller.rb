@@ -102,12 +102,6 @@ class RecipesController < ApplicationController
   #   redirect_to recipes_path, notice: "#{@recipe.title} was successfully deleted."
   # end
 
-  private
-
-  def recipe_params
-    params.require(:recipe).permit(:title, :description, :ingredients, :recipe_level, :message_id, :user_id)
-    # Ajoutez tous les attributs de Recipe qui peuvent être modifiés par le formulaire
-  end
 
   def congratulation
     @recipe = Recipe.find(params[:id])
@@ -129,4 +123,13 @@ class RecipesController < ApplicationController
 
     @leveled_up = @new_level > @old_level
   end
+
+  private
+
+  def recipe_params
+    params.require(:recipe).permit(:title, :description, :ingredients, :recipe_level, :message_id, :user_id)
+    # Ajoutez tous les attributs de Recipe qui peuvent être modifiés par le formulaire
+  end
+
+
 end
