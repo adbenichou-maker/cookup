@@ -101,7 +101,7 @@
                           <h6 class="card-title fw-bold mb-1" style="color: #4A4A4A;"><%= review.title %></h6>
 
                           <small class="text-muted d-block mb-2">
-                            By <%= review.user.present? ? review.user.email : 'Unknown User' %>
+                            By <%= review.user.present? ? review.user.username : 'Unknown User' %>
                           </small>
 
                           <p class="card-text mb-2" style="color: #4A4A4A;"><%= review.comment %></p>

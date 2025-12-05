@@ -18,7 +18,7 @@
   <!-- Progress Bar -->
   <div class="profile-section">
     <div class="profile-level-text">
-      <div>
+      <div style="font-weight: 900; font-size: large;">
         Level <%= current_user.level %>
       </div>
 
@@ -42,29 +42,31 @@
       <div class="circle-icon">
         <i class="fa-solid fa-kitchen-set overlay-icon"></i>
       </div>
-      <p>Skills</p>
+      <p>Chef Skills</p>
     <% end %>
 
     <%= link_to recipes_search_path, class: "feature-card" do %>
       <div class="circle-icon">
-        <i class="fa-solid fa-utensils overlay-icon"></i>
-      </div>
-      <p>Recipes</p>
-    <% end %>
-
-    <%= link_to "/cookbook", class: "feature-card" do %>
-      <div class="circle-icon">
         <i class="fa-solid fa-book overlay-icon"></i>
       </div>
-      <p>saved</p>
+      <p>All Recipes</p>
+    <% end %>
+
+    <%= link_to new_chat_path, class: "feature-card" do %>
+      <div class="circle-icon">
+        <i class="fa-solid fa-comments overlay-icon"></i>
+      </div>
+      <p style="margin-bottom: 0px" >AI</p>
+      <p>Cook</p>
     <% end %>
 
   </div>
 
-  <!-- AI Cook -->
-  <%= link_to new_chat_path, class: "ai-cook-card" do %>
-    AI Cook
-  <% end %>
+  <!-- Saved Recipes -->
+
+    <%= link_to "/cookbook", class: "saved" do %>
+      Saved Recipes
+    <% end %>
 
   <!-- Recipe sug -->
   <% if @saved_recipes.any? %>

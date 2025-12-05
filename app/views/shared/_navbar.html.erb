@@ -1,20 +1,16 @@
 <nav class="bottom-navbar">
   <div class="bottom-nav-items">
 
+    <%= link_to "/cookbook", class: "bottom-nav-link" do %>
+      <i class="fa-solid fa-heart"></i>
+    <% end %>
+
+    <%= link_to dashboard_path, class: "bottom-nav-link" do %>
+      <i class="fa-solid fa-house"></i>
+    <% end %>
 
     <%= link_to "/profile", class: "bottom-nav-link" do %>
       <i class="fa-solid fa-user"></i>
-    <% end %>
-
-
-    <%= link_to dashboard_path, class: "bottom-nav-home" do %>
-      <%= image_tag "logo_cookup.png",
-                    class: "home-icon" %>
-    <% end %>
-
-
-    <%= link_to "/cookbook", class: "bottom-nav-link" do %>
-      <i class="fa-solid fa-book"></i>
     <% end %>
 
   </div>
