@@ -1,2 +1,165 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%#
+# Landing Page - Displayed if the user is NOT logged in.
+# Maintains the clean, mobile-friendly style of the post-login page.
+%>
+
+<div class="home-container">
+
+  <!-- Header and Brand Logo -->
+  <div class="home-header" style="justify-content: center; text-align: center;">
+    <div>
+      <br>
+      <%# Using a simple text placeholder for the brand name. %>
+      <h1 class="text-3xl font-bold" style="color: #6D4C3D; margin-bottom: 5px;">CookUp</h1>
+      <br>
+      <h2 class="text-lg font-medium" style="color: #9A7B5F;">Because great cooking starts with what you’ve got</h2>
+    </div>
+  </div>
+
+  <!-- Value Proposition Section (Replaces Progress Bar) -->
+  <div class="profile-section" style="text-align: center; padding: 20px 0;">
+    <h3 class="text-xl font-semibold mb-3" style="color: #6D4C3D;">
+      Learn to cook like a pro, no fancy school, no fancy fridge.
+    </h3>
+    <br>
+    <p class="text-sm" style="color: #8D6E63;">
+      Use our AI to create custom recipes, manage your cooking skills, and explore new flavors.
+    </p>
+  </div>
+
+  <!-- Action Buttons (Log In / Sign Up) -->
+
+  <div class="action-buttons-wrapper">
+    <%# Primary Button: Sign Up %>
+    <%= link_to "Get Started (Sign Up)", new_user_registration_path, class: "button-primary" %>
+
+    <%# Secondary Link: Log In %>
+    <%= link_to "Already have an account? Log In", new_user_session_path, class: "button-secondary" %>
+  </div>
+
+</div>
+
+<style>
+  /* Base Container (iPhone friendly) */
+  .home-container {
+    padding: 20px;
+    padding-bottom: 4em; /* Nouvelle exigence: Arrêt 4em au-dessus du bas */
+    max-width: 450px; /* Typical max width for mobile/app feel */
+    margin: 0 auto;
+    background-color: #F5F5DC; /* Pale background color */
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  /* Header */
+  .home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+  /* Feature Cards */
+  .feature-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+
+  .feature-card {
+    text-align: center;
+    text-decoration: none;
+    color: #6D4C3D;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #EDE8D7;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .circle-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #D2B48C;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 5px;
+    font-size: 1.5rem;
+  }
+
+  /* Content Cards (Recipe Simulator) */
+  .content-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #EDE8D7;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .content-image-placeholder {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    background-color: #D2B48C;
+    border-radius: 8px;
+  }
+
+  .content-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .content-card p {
+    font-size: 0.8rem;
+    color: #8D6E63;
+    margin: 0;
+  }
+
+  /* Action Buttons */
+  .action-buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .button-primary {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    background-color: #6D4C3D;
+    color: white;
+    font-weight: bold;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+
+  .button-primary:hover {
+    background-color: #5D4037;
+  }
+
+  .button-secondary {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    color: #6D4C3D;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #6D4C3D;
+    border-radius: 12px;
+    transition: background-color 0.3s;
+  }
+
+  .button-secondary:hover {
+    background-color: #EDE8D7;
+  }
+
+</style>
