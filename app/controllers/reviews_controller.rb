@@ -8,22 +8,27 @@ class ReviewsController < ApplicationController
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
-
-    # Create the review with strong parameters and associate it with the recipe
     @review = @recipe.reviews.new(review_params)
+    @review.user = current_user
 
     if @review.save
-      flash[:notice] = "Thank you for your review! We've recorded your rating."
-
-      # 👇 CHANGE MADE HERE 👇
-      # Redirect to the custom congratulation route, which requires the recipe object/ID
-      redirect_to congratulation_recipe_path(@recipe)
-
+      flash[:notice] = "Thank you for your review!"
+      redirect_to recipe_path(@recipe)
     else
-      flash.now[:alert] = "Could not save review. Please check the fields below."
-      render :new, status: :unprocessable_entity
+      render 'recipes/show', status: :unprocessable_entity
     end
   end
+
+  def destroy
+    @recipe = Recipe.find(params[:recipe_id])
+    @review = @recipe.reviews.find(params[:id])
+    @review.destroy
+
+    redirect_to recipe_path(@recipe), status: :see_other
+
+
+  end
+
 
   private
 

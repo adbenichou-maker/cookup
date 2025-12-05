@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       get :congratulation
     end
     resources :steps, only: [:index]
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:new, :create, :destroy]
     resources :user_recipes, only: [:create]
   end
 

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :recipes
   has_many :favorites, dependent: :destroy
   has_many :saved_recipes, through: :favorites, source: :recipe
+  has_many :reviews, dependent: :destroy
 
 
 
