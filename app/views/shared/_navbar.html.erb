@@ -7,14 +7,13 @@
     <% end %>
 
 
-    <%= link_to dashboard_path, class: "bottom-nav-home" do %>
-      <%= image_tag "logo_cookup.png",
-                    class: "home-icon" %>
+    <%= link_to dashboard_path, class: "bottom-nav-link" do %>
+      <i class="fa-solid fa-house"></i>
     <% end %>
 
 
     <%= link_to "/cookbook", class: "bottom-nav-link" do %>
-      <i class="fa-solid fa-book"></i>
+      <i class="fa-solid fa-heart"></i>
     <% end %>
 
   </div>
