@@ -9,14 +9,20 @@
       class: "logout-btn" %>
 
   <!-- Profile image -->
-  <h2 class="profile-name">Hi <%= @user.username.capitalize %>!</h2>
+  <h2 class="profile-name"> Progress 📊 </h2>
 
   <!-- Progressbar -->
   <div class="profile-section">
 
-    <h3 class="profile-level-text">
-      Level <%= current_user.level %>
-    </h3>
+    <div class="profile-level-text">
+      <div>
+        Level <%= current_user.level %>
+      </div>
+
+      <div>
+        <%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP
+      </div>
+    </div>
 
     <div class="progress-wrapper">
       <div class="progress-bar">
@@ -30,7 +36,7 @@
 
 
   <!-- Badges placeholder -->
-  <h3 class="badge-title">Your Badges</h3>
+  <h3 class="badge-title">Badges 🎖️</h3>
 
   <div class="badge-grid">
     <% 6.times do %>

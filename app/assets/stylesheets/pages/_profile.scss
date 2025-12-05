@@ -102,10 +102,12 @@
 }
 
 .profile-level-text {
-  font-size: medium;
-  font-weight: 600;
-  color: $accent-green;
+  font-size: small;
+  font-weight: 300;
+  color: grey;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .progress-wrapper {
