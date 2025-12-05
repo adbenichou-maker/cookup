@@ -1,7 +1,8 @@
 <div class="container-fluid p-3" style="background-color: #F7EEDB; min-height: 100vh;">
   <!-- Back button -->
-  <%= link_to "Back", dashboard_path, class: "profile-back" %>
-
+  <%= link_to dashboard_path, class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
 
   <% if @skill_levels %>
     <header class="text-center mb-5 pt-3">

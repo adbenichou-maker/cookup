@@ -5,6 +5,9 @@
   <% progress_percent = ((recipe_index + 1).to_f / total_levels.to_f * 100).round %>
 
   <div class="d-flex justify-content-start mb-4">
+    <%= link_to recipe_path(params[:id]), class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
   </div>
     <header class="text-center mb-5 pt-3">
     <h1 class="fw-bolder mb-2" style="color: #4A4A4A;" >

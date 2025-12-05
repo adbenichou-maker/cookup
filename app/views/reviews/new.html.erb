@@ -1,4 +1,7 @@
 <div class="container-fluid p-4" style="background-color: #F7EEDB; min-height: 100vh;">
+  <%= link_to congratulation_recipe_path(params[:recipe_id]), class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
   <header class="text-center mb-5 pt-3">
     <h1 class="display-5 fw-bold" style="color: #4A4A4A;">
       Reviewing <%= @recipe.title %> 🍲

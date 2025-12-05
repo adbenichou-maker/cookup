@@ -1,7 +1,9 @@
 <div class="profile-container">
 
   <!-- Back button -->
-  <%= link_to "Back", dashboard_path, class: "profile-back" %>
+  <%= link_to dashboard_path, class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+  <% end %>
 
   <!-- Logout -->
   <%= link_to "Log out", destroy_user_session_path,
