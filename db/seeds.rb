@@ -60,9 +60,9 @@ puts "Created #{Skill.count} skills."
 puts "Creating User..."
 
 user = User.create!(
-  email: "tester@test.com",
+  email: "santi@lewagon.com",
   password: "password",
-  username: "test_user"
+  username: "Santi"
 )
 
 puts "Created User: #{user.email}"

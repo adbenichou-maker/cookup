@@ -3,23 +3,30 @@
   <!-- Welcome -->
   <div class="home-header">
     <div>
-      <h1>Hi <%= current_user.username || current_user.email.split("@").first %>!</h1>
+      <h1 style="text-align: left; margin-bottom: 10px"> Hi <%= current_user.username || current_user.email.split("@").first %>,</h1>
       <h2>What are we cooking?</h2>
     </div>
 
     <!-- Profile Logout (Temp) -->
     <%= link_to profile_path do %>
       <div>
-        <img src="https://icon-library.com/images/3e51b7003375fb7e9e9c233a7f52c79e.png" alt="profile picture image", class="profile-picture-placeholder">
+        <%= image_tag "santi.png", alt: "profile picture image", class: "profile-picture-placeholder" %>
       </div>
     <% end %>
   </div>
 
   <!-- Progress Bar -->
   <div class="profile-section">
-    <p class="level-text">
-      Level <%= current_user.level %> — <%= current_user.xp %>/<%= current_user.xp_required_for_current_level %> XP
-    </p>
+    <div class="profile-level-text">
+      <div>
+        Level <%= current_user.level %>
+      </div>
+
+      <div>
+        <%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP
+      </div>
+    </div>
+
 
     <div class="progress-wrapper">
       <div class="progress-bar-fill" style="width: <%= current_user.progress_percentage %>%;">
