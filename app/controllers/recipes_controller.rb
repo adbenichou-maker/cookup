@@ -89,6 +89,8 @@ class RecipesController < ApplicationController
 
     if @recipe.save
       chat = @message.chat
+      favorites = Favorite.new(user: current_user, recipe: @recipe)
+      favorites.save
       redirect_to chat_path(chat), notice: "Saved Recipe!"
     else
       @message = @recipe.message

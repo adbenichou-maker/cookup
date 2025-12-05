@@ -1,20 +1,18 @@
-<div class="container mx-auto px-4 py-8 max-w-2xl bg-white shadow-xl rounded-xl">
-  <h1 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-3">What's Cooking?</h1>
-  <p class="text-gray-600 mb-8">Tell your AI Chef about the dish you want to create.</p>
+<div class="ai-form-container">
+
+  <h1>What's Cooking?</h1>
+  <p>Tell your AI Chef about the dish you want to create.</p>
 
   <%= simple_form_for @chat, url: chats_path, method: :post do |f| %>
-
 
     <%= f.simple_fields_for :recipe_requirements, @recipe_requirements do |req| %>
 
       <div class="space-y-6">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
           <%= req.input :ingredients,
-              label: "Key Ingredients (e.g., Salmon, Asparagus, Lemon)",
-              required: true,
-              input_html: { class: 'rounded-lg' } %>
+              label: "Key Ingredients",
+              input_html: { class: "input" } %>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -22,36 +20,35 @@
               collection: ['Beginner', 'Intermediate', 'Advanced'],
               label: "Your Cooking Skill Level",
               prompt: "Select skill level",
-              input_html: { class: 'rounded-lg' } %>
-
+              input_html: { class: "input" } %>
 
           <%= req.input :meal_type,
               collection: ['Breakfast', 'Lunch', 'Dinner', 'Dessert'],
               label: "Meal Type",
               prompt: "Select meal type",
-              input_html: { class: 'rounded-lg' } %>
+              input_html: { class: "input" } %>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <%= req.input :meal_prep_time,
-              collection: [
-              [10, 10], [15, 15], [20, 20], [30, 30], [45, 45],
-              ["1hr +", 60]
-            ],
+              collection: [[10,10],[15,15],[20,20],[30,30],[45,45],["1hr +",60]],
               label: "Preparation Time",
               prompt: "Select preparation time",
-              input_html: { class: 'rounded-lg' } %>
+              input_html: { class: "input" } %>
         </div>
+
         <%= req.input :restrictions,
             as: :text,
-            label: "Dietary Restrictions or Special Notes (e.g., Gluten-Free, Low-Carb)",
-            input_html: { rows: 4, class: 'rounded-lg' } %>
+            label: "Dietary Restrictions or Notes",
+            input_html: { rows: 4, class: "input" } %>
 
       </div>
     <% end %>
 
-    <div class="m-5">
+    <div class="mt-6">
       <%= f.submit 'Generate Recipes!', class: 'btn btn-primary' %>
     </div>
+
   <% end %>
+
 </div>
