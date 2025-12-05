@@ -10,61 +10,102 @@
       data: { turbo_method: :delete },
       class: "logout-btn" %>
 
-  <!-- Profile image -->
+  <!-- Header -->
   <h2 class="profile-name"> Progress 📊 </h2>
 
   <!-- Progressbar -->
   <div class="profile-section">
 
     <div class="profile-level-text">
-      <div>
-        Level <%= current_user.level %>
-      </div>
-
-      <div>
-        <%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP
-      </div>
+      <div>Level <%= current_user.level %></div>
+      <div><%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP</div>
     </div>
 
     <div class="progress-wrapper">
       <div class="progress-bar">
-        <div class="progress-fill"
-            style="width: <%= current_user.progress_percentage %>%;">
+        <div class="progress-fill" style="width: <%= current_user.progress_percentage %>%;">
         </div>
       </div>
     </div>
-
   </div>
 
-
-  <!-- Badges placeholder -->
+  <!-- BADGES -->
   <h3 class="badge-title">Badges 🎖️</h3>
 
-  <div class="badge-grid">
-    <% 6.times do %>
-      <div class="badge-item"></div>
-    <% end %>
+  <div class="badge-wrapper-unique" data-controller="badge">
+
+    <div class="badge-grid-unique">
+
+      <% badge_categories = {
+        "Beginner Recipes"      => ["recipe_beginner", "👨‍🍳"],
+        "Intermediate Recipes"  => ["recipe_intermediate", "🍳"],
+        "Expert Recipes"        => ["recipe_expert", "🔥"],
+        "Saved Recipes"         => ["saved_recipes", "📖"],
+        "Skills Completed"      => ["skills_completed", "🧠"],
+        "Consistency"           => ["streak", "📅"]
+      } %>
+
+      <% badge_categories.each do |label, data| %>
+        <% key, emoji = data %>
+
+        <% badge = Badge.find_by(rule_key: key) %>
+        <% ub = current_user.user_badges.joins(:badge).find_by(badges: { rule_key: key }) %>
+        <% level = ub&.level.to_i %>
+
+        <div class="
+            badge-unique-box
+            <%= 'badge-unlocked' if level > 0 %>
+            <%= 'badge-bronze' if level == 1 %>
+            <%= 'badge-silver' if level == 2 %>
+            <%= 'badge-gold' if level == 3 %>
+            <%= 'badge-platinum' if level == 4 %>"
+
+            data-action="click->badge#open"
+            data-badge-name="<%= label %>"
+            data-badge-description="<%= badge&.description || 'No description yet.' %>"
+            data-badge-level="<%= level %>"
+            data-badge-emoji="<%= emoji %>">
+
+          <% if level > 0 %>
+            <div class="badge-unique-image"><%= emoji %></div>
+          <% else %>
+            <div class="badge-unique-placeholder"></div>
+          <% end %>
+
+        </div>
+      <% end %>
+
+    </div>
+
+
+    <!-- OVERLAY -->
+    <div class="badge-overlay hidden"
+        data-badge-target="overlay"
+        data-action="click->badge#closeOverlayBackground">
+
+      <div class="badge-overlay-content"
+          data-action="click->badge#stopPropagation">
+
+        <div class="badge-emoji-display" data-badge-target="emoji"></div>
+
+        <h2 data-badge-target="name"></h2>
+        <p class="badge-rank" data-badge-target="rank"></p>
+        <p data-badge-target="description"></p>
+
+        <button class="badge-close" data-action="click->badge#close">Close</button>
+      </div>
+    </div>
+
   </div>
 
   <!-- Profile edit form -->
   <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
 
     <%= f.text_field :username, placeholder: "Username", class: "input-field" %>
-
     <%= f.email_field :email, placeholder: "Email", class: "input-field" %>
-
-    <%= f.password_field :current_password,
-          placeholder: "Current Password (required)",
-          class: "input-field" %>
-
-    <%= f.password_field :password,
-          placeholder: "New Password",
-          class: "input-field" %>
-
-    <%= f.password_field :password_confirmation,
-          placeholder: "Confirm New Password",
-          class: "input-field" %>
-
+    <%= f.password_field :current_password, placeholder: "Current Password (required)", class: "input-field" %>
+    <%= f.password_field :password, placeholder: "New Password", class: "input-field" %>
+    <%= f.password_field :password_confirmation, placeholder: "Confirm New Password", class: "input-field" %>
     <%= f.submit "Change Password", class: "update-btn" %>
 
   <% end %>

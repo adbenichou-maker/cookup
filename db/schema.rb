@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_05_135718) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_05_153906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "badges", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "icon"
+    t.string "rule_key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rule_key"], name: "index_badges_on_rule_key", unique: true
+  end
 
   create_table "chats", force: :cascade do |t|
     t.string "title"
@@ -86,6 +96,28 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_05_135718) do
     t.index ["skill_id"], name: "index_steps_on_skill_id"
   end
 
+  create_table "user_badges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "awarded_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "level"
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["user_id", "badge_id"], name: "index_user_badges_on_user_id_and_badge_id", unique: true
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
+  end
+
+  create_table "user_recipe_completions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_user_recipe_completions_on_recipe_id"
+    t.index ["user_id", "recipe_id"], name: "index_user_recipe_completions_on_user_id_and_recipe_id"
+    t.index ["user_id"], name: "index_user_recipe_completions_on_user_id"
+  end
+
   create_table "user_recipes", force: :cascade do |t|
     t.text "comment"
     t.bigint "user_id", null: false
@@ -131,6 +163,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_05_135718) do
   add_foreign_key "reviews", "users"
   add_foreign_key "steps", "recipes"
   add_foreign_key "steps", "skills"
+  add_foreign_key "user_badges", "badges"
+  add_foreign_key "user_badges", "users"
+  add_foreign_key "user_recipe_completions", "recipes"
+  add_foreign_key "user_recipe_completions", "users"
   add_foreign_key "user_recipes", "recipes"
   add_foreign_key "user_recipes", "users"
   add_foreign_key "user_skills", "skills"

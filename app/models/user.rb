@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :saved_recipes, through: :favorites, source: :recipe
   has_many :reviews, dependent: :destroy
+  has_many :user_badges, dependent: :destroy
+  has_many :badges, through: :user_badges
+
 
 
 

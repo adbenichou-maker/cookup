@@ -3,28 +3,19 @@ class FavoritesController < ApplicationController
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
-    @favorite = current_user.favorites.build(recipe: @recipe)
+    @favorite = Favorite.new(user: current_user, recipe: @recipe)
 
-    respond_to do |format|
-      if @favorite.save
-        format.html { redirect_back fallback_location: cookbook_path, notice: "Saved to cookbook" }
-        format.turbo_stream
-      else
-        format.html { redirect_back fallback_location: cookbook_path, alert: "Could not save" }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id_for(@recipe, "favorite_button"), partial: "favorites/favorite_button", locals: { recipe: @recipe }) }
-      end
+    if @favorite.save
+      BadgeAwarder.new(current_user).check_all!
+      redirect_back fallback_location: recipe_path(@recipe), notice: "Recipe saved!"
+    else
+      redirect_back fallback_location: recipe_path(@recipe), alert: "Already saved."
     end
   end
 
   def destroy
-    @favorite = current_user.favorites.find(params[:id])
-    @recipe   = @favorite.recipe
+    @favorite = Favorite.find(params[:id])
     @favorite.destroy
-
-    respond_to do |format|
-      format.html { redirect_back fallback_location: cookbook_path }
-      format.turbo_stream
-    end
+    redirect_back fallback_location: cookbook_path, notice: "Recipe removed."
   end
-
 end
