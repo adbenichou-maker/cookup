@@ -1,7 +1,10 @@
 <div class="search-page-container" data-controller="filter">
   <!-- Title -->
   <!-- Back button -->
-  <%= link_to "Back", dashboard_path, class: "profile-back" %>
+  <%= link_to dashboard_path, class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+  <% end %>
+
   <h1 class="search-title">Saved Recipes</h1>
 
   <!-- Search Bar -->

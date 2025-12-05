@@ -4,7 +4,12 @@
   <% total_levels = 3 %>
   <% progress_percent = ((recipe_index + 1).to_f / total_levels.to_f * 100).round %>
 
-  <header class="text-center mb-5 pt-3">
+  <div class="d-flex justify-content-start mb-4">
+    <%= link_to recipe_path(params[:id]), class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+  </div>
+    <header class="text-center mb-5 pt-3">
     <h1 class="fw-bolder mb-2" style="color: #4A4A4A;" >
       CONGRATULATIONS
     </h1>
@@ -31,12 +36,11 @@
   </section>
 
 
-
   <div class="row justify-content-center">
     <div class="col-12 col-md-10">
 
       <div class="d-grid mb-4">
-        <%= link_to "⭐️ ADD A REVIEW",  new_recipe_review_path(@recipe),
+        <%= link_to "⭐️ ADD A REVIEW", new_recipe_review_path(@recipe),
           class: "btn btn-lg fw-bold shadow-lg p-3 rounded-pill",
           style: "color: #4A4A4A; border-color: #4A4A4A;" %>
       </div>
@@ -47,7 +51,7 @@
           <%= render partial: "favorites/favorite_button", locals: { recipe: @recipe } %>
         </div>
 
-        <%= link_to "🏠 GO HOME", dashboard_path, # Changed path to root_path, assuming this is your homepage
+        <%= link_to "🏠 GO HOME", dashboard_path,
           class: "btn btn-lg fw-bold p-3 rounded-pill",
           style: " color: #4A4A4A; border: 2px solid #4A4A4A;" %>
       </div>

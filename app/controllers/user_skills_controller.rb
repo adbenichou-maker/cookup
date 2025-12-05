@@ -6,7 +6,7 @@ class UserSkillsController < ApplicationController
 
     if @user_skill.save
       flash[:notice] = "Skill '#{@skill.title}' added to your learned skills!"
-      redirect_to skills_path
+      redirect_to skill_path(@skill)
       current_user.add_xp(30)
     else
       flash[:alert] = @user_skill.errors.full_messages.to_sentence

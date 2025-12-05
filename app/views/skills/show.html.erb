@@ -1,5 +1,15 @@
 <div class="container-fluid p-3" style="background-color: #F7EEDB;">
-
+  <% if params[:recipe_id].present? %>
+    <%# Case 1: Came from Recipe Show Page %>
+    <%= link_to recipe_path(params[:recipe_id]), class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+<% end %>
+  <% else %>
+    <%# Case 2: Came from Skills Index/Levels Page %>
+    <%= link_to skills_path, class: "profile-back" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+  <% end %>
   <header class="text-center mb-4">
     <h1 class="display-5 fw-bold mb-2" style="color: #4A4A4A;">
       <%= @skill.title %>
@@ -17,16 +27,18 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
 
+      <%# Skill Video Section %>
       <section class="card shadow-lg mb-4 border-0" style="border-radius: 12px; overflow: hidden;">
         <div class="ratio ratio-16x9">
           <%= video_tag @skill.video,
-                controls: true,
-                autoplay: false,
-                class: "w-100",
-                style: "background-color: #4A4A4A;" %>
+              controls: true,
+              autoplay: false,
+              class: "w-100",
+              style: "background-color: #4A4A4A;" %>
         </div>
       </section>
 
+      <%# Skill Description Section %>
       <section class="card shadow-sm mb-4 border-start border-4"
               style="border-color: #8BAA7B !important; background-color: rgba(255, 255, 255, 0.7);">
         <div class="card-body">
@@ -39,25 +51,31 @@
         </div>
       </section>
 
-      <div class="d-grid mb-5">
+      <%# Action Block: Mark as Learned Button or Mastered Message %>
+      <% if user_signed_in? %>
+        <div class="d-grid mb-5">
+          <% if !current_user.user_skills.exists?(skill_id: @skill.id) %>
 
-
-
-
-        <% if user_signed_in? && !current_user.user_skills.exists?(skill_id: @skill.id) %>
-          <div class="d-grid mt-4">
+            <%# Show button if not learned %>
             <%= button_to "Mark as Learned 🧑‍🍳",
                 skill_user_skills_path(@skill),
                 method: :post,
                 form: { data: { turbo_confirm: "Are you sure you mastered this skill?" } },
                 class: "btn btn-lg fw-bold text-white shadow-lg",
                 style: "background-color: #8BAA7B; border-color: #8BAA7B;" %>
+
+          <% else %>
+
+            <%# Show mastered text if learned, styled with accent colors %>
+            <div class="text-center p-3 mb-3 border border-3 rounded-5 shadow-sm"
+              style="border-color: #8BAA7B !important; background-color: rgba(255, 255, 255, 0.7); color: #4A4A4A;">
+            <i class="bi bi-check-circle-fill me-2" style="color: #8BAA7B;"></i>
+            <span class="fw-bold">You've already mastered this skill ✅</span>
           </div>
-        <% elsif user_signed_in? %>
-          <div class="alert alert-success mt-4">
-            You've already mastered this skill!
-          </div>
-        <% end %>
+
+          <% end %>
+        </div>
+      <% end %>
 
     </div>
   </div>
