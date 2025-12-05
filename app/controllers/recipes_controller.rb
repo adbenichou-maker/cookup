@@ -108,6 +108,11 @@ class RecipesController < ApplicationController
   def congratulation
     @recipe = Recipe.find(params[:id])
 
+    # record completion (avoid duplicates)
+    if user_signed_in?
+      UserRecipeCompletion.find_or_create_by(user: current_user, recipe: @recipe)
+    end
+
     @old_level = current_user.level
     @old_xp_percent = current_user.progress_percentage
 
@@ -118,14 +123,17 @@ class RecipesController < ApplicationController
       when "expert" then 30
       end
 
-    # Old behaviour: award XP when visiting this action
     current_user.add_xp(xp_amount)
+
+    # Check and award badges after completion and xp
+    BadgeAwarder.new(current_user).check_all! if user_signed_in?
 
     @new_xp_percent = current_user.progress_percentage
     @new_level = current_user.level
 
     @leveled_up = @new_level > @old_level
   end
+
 
   private
 

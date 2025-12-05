@@ -1,10 +1,11 @@
 <div class="search-page-container" data-controller="filter">
 
-  <!-- Title -->
   <!-- Back button -->
   <%= link_to dashboard_path, class: "profile-back" do %>
     <i class="fa-solid fa-arrow-left"></i>
-    <% end %>
+  <% end %>
+
+  <!-- Title -->
   <h1 class="search-title">What do you want to cook?</h1>
 
   <!-- Search Bar -->
@@ -17,12 +18,13 @@
     <button data-action="click->filter#toggle" class="filter-btn">Filters</button>
   </div>
 
-  <!-- Filter -->
+  <!-- Filter Panel -->
   <div data-filter-target="panel" class="filter-panel hidden">
 
     <%= form_with url: recipes_search_path, method: :get, local: true do |f| %>
 
-        <h4>Difficulty</h4>
+      <!-- Difficulty Filter -->
+      <h4>Difficulty</h4>
 
       <div data-controller="difficultySlider" class="difficulty-wrapper">
 
@@ -31,7 +33,7 @@
           min="0"
           max="2"
           step="1"
-          value="<%= params[:level]%>"
+          value="<%= params[:level] %>"
           class="difficulty-slider"
           data-action="input->difficultySlider#update"
           data-difficultySlider-target="slider"
@@ -42,18 +44,17 @@
         </div>
 
         <%= f.hidden_field :level, value: params[:level], data: { difficultySlider_target: "input" } %>
-
       </div>
 
-
+      <!-- Rating Filter -->
       <h4>Rating</h4>
 
       <div data-controller="rating" class="rating-filter">
         <div class="stars" data-rating-target="stars">
           <% 5.times do |i| %>
             <span class="star"
-                  data-action="click->rating#select"
-                  data-rating-value="<%= i + 1 %>">
+              data-action="click->rating#select"
+              data-rating-value="<%= i + 1 %>">
               ☆
             </span>
           <% end %>
@@ -64,14 +65,16 @@
 
       <%= f.submit "Apply Filters", class: "search-submit-btn" %>
     <% end %>
+
   </div>
 
 
-  <!-- Results or saved recipes -->
+
+  <!-- Results -->
   <% @recipes.each do |recipe| %>
     <div class="recipe-card">
 
-      <!-- Only this part is clickable -->
+      <!-- Clickable recipe section -->
       <%= link_to recipe_path(recipe), class: "recipe-main" do %>
         <div class="recipe-image-placeholder"></div>
 
@@ -91,11 +94,12 @@
         </div>
       <% end %>
 
-      <!-- Favorite button OUTSIDE the link -->
-      <div class="recipe-add-btn">
+      <!-- Favorite Button (Turbo Frame prevents scroll jump) -->
+      <turbo-frame id="favorite_button_<%= recipe.id %>">
         <%= render "favorites/favorite_button", recipe: recipe %>
-      </div>
+      </turbo-frame>
 
     </div>
   <% end %>
+
 </div>
