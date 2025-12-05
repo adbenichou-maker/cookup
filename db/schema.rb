@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_04_153824) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_05_135718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_04_153824) do
     t.integer "recipe_level", default: 0
     t.bigint "message_id"
     t.bigint "user_id"
+    t.integer "meal_prep_time"
     t.index ["message_id"], name: "index_recipes_on_message_id"
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
