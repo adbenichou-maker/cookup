@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   end
 
   resources :favorites, only: [:create, :destroy]
-  get "/cookbook", to: "cookbooks#index", as: :cookbook
+  get "/cookbook", to: "cookbooks#search", as: :cookbook
 
   get "/profile", to: "users#profile"
   patch "/profile", to: "users#update"

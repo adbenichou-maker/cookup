@@ -1,0 +1,98 @@
+<div class="search-page-container" data-controller="filter">
+  <!-- Title -->
+  <!-- Back button -->
+  <%= link_to "Back", dashboard_path, class: "profile-back" %>
+  <h1 class="search-title">Saved Recipes</h1>
+
+  <!-- Search Bar -->
+  <div class="search-bar-wrapper">
+    <%= form_with url: "/cookbook", method: :get, local: true, class: "search-form" do |f| %>
+      <%= f.text_field :query, placeholder: "Search", class: "search-input", value: @query %>
+      <%= f.submit "Search", class: "search-submit-btn" %>
+    <% end %>
+
+    <button data-action="click->filter#toggle" class="filter-btn">Filters</button>
+  </div>
+
+  <!-- Filter -->
+  <div data-filter-target="panel" class="filter-panel hidden">
+
+    <%= form_with url: "/cookbook", method: :get, local: true do |f| %>
+
+        <h4>Difficulty</h4>
+
+      <div data-controller="difficultySlider" class="difficulty-wrapper">
+
+        <input
+          type="range"
+          min="0"
+          max="2"
+          step="1"
+          value="<%= params[:level]%>"
+          class="difficulty-slider"
+          data-action="input->difficultySlider#update"
+          data-difficultySlider-target="slider"
+        >
+
+        <div class="difficulty-label" data-difficultySlider-target="label">
+          Beginner
+        </div>
+
+        <%= f.hidden_field :level, value: params[:level], data: { difficultySlider_target: "input" } %>
+
+      </div>
+
+
+      <h4>Rating</h4>
+
+      <div data-controller="rating" class="rating-filter">
+        <div class="stars" data-rating-target="stars">
+          <% 5.times do |i| %>
+            <span class="star"
+                  data-action="click->rating#select"
+                  data-rating-value="<%= i + 1 %>">
+              ☆
+            </span>
+          <% end %>
+        </div>
+
+        <%= f.hidden_field :rating, value: params[:rating], data: { rating_target: "input" } %>
+      </div>
+
+      <%= f.submit "Apply Filters", class: "search-submit-btn" %>
+    <% end %>
+  </div>
+
+
+  <!-- Results or saved recipes -->
+  <% @saved_recipes.each do |recipe| %>
+    <div class="recipe-card">
+
+      <!-- Only this part is clickable -->
+      <%= link_to recipe_path(recipe), class: "recipe-main" do %>
+        <div class="recipe-image-placeholder"></div>
+
+        <div class="recipe-text">
+          <h3><%= recipe.title %></h3>
+          <p><%= recipe.description %></p>
+
+          <div class="rating">
+            <% full_stars = recipe.average_rating.round %>
+            <% empty_stars = 5 - full_stars %>
+
+            <% full_stars.times { %> ★ <% } %>
+            <% empty_stars.times { %> ☆ <% } %>
+
+            <small>(<%= recipe.reviews.count %> reviews)</small>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Favorite button OUTSIDE the link -->
+      <div class="recipe-add-btn">
+        <%= render "favorites/favorite_button", recipe: recipe %>
+      </div>
+
+    </div>
+  <% end %>
+</div>
