@@ -418,3 +418,38 @@ Message.create!(
 )
 
 puts "Seed data successfully created!"
+
+Badge.destroy_all
+
+Badge.create!([
+  {
+    name: "Beginner Recipes",
+    rule_key: "recipe_beginner",
+    description: "Earned by completing Beginner-level recipes."
+  },
+  {
+    name: "Intermediate Recipes",
+    rule_key: "recipe_intermediate",
+    description: "Earned by mastering Intermediate-level recipes."
+  },
+  {
+    name: "Expert Recipes",
+    rule_key: "recipe_expert",
+    description: "Awarded for finishing challenging Expert-level recipes."
+  },
+  {
+    name: "Saved Recipes",
+    rule_key: "saved_recipes",
+    description: "Earned by saving many recipes to your cookbook."
+  },
+  {
+    name: "Skills Completed",
+    rule_key: "skills_completed",
+    description: "Unlocked by learning different cooking skills."
+  },
+  {
+    name: "Consistency",
+    rule_key: "streak",
+    description: "Earned by being consistently active day after day."
+  }
+])
