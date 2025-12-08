@@ -1,88 +1,89 @@
 <div class="ai-form-container">
-  <a class="btn btn-accent-green" href="#" data-bs-toggle="offcanvas" data-bs-target="#chatsOffcanvas" aria-controls="chatsOffcanvas">
-    <i class="fa-solid fa-bars me-2"></i>Chats
-  </a>
-
-  <h1 class="text-charcoal mt-4">What's Cooking?</h1>
-  <p class="text-charcoal opacity-75">Tell your AI Chef about the dish you want to create.</p>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <%= link_to dashboard_path, class: "profile-back" do %>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+    <a class="btn btn-secondary btn-sm" href="#" data-bs-toggle="offcanvas" data-bs-target="#chatsOffcanvas" aria-controls="chatsOffcanvas">
+      <i class="fa-solid fa-bars me-2"></i>Chats
+    </a>
+  </div>
+  <h1 class="mt-4">What's Cooking?</h1>
+  <p class="opacity-75">Tell your AI Chef about the dish you want to create.</p>
 
   <%= simple_form_for @chat, url: chats_path, method: :post do |f| %>
 
     <%= f.simple_fields_for :recipe_requirements, @recipe_requirements do |req| %>
+      <% meal_types = ['Breakfast', 'Lunch', 'Dinner', 'Dessert'] %>
+      <% skill_levels = ['Beginner', 'Intermediate', 'Advanced'] %>
+      <% prep_time = [[10,10],[15,15],[20,20],[30,30],[45,45],["1hr +",60]] %>
 
       <div class="space-y-6">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <%= req.input :ingredients,
-              label: "Key Ingredients",
-              input_html: { class: "form-control" },
-              placeholder: "e.g., chicken, basil, tomatoes" %>
-        </div>
-        <div class="mb-4">
-          <label class="form-label text-charcoal">Your Cooking Skill Level</label>
-
-          <div class="btn-group w-100" role="group" aria-label="Skill level selection">
-            <input type="radio" class="btn-check" name="chat[recipe_requirements][skill_level]" id="skill_beginner" value="Beginner" autocomplete="off" <%= 'checked' if @recipe_requirements[:skill_level] == 'Beginner' %>>
-            <label class="btn btn-outline-soft-brown flex-grow-1" for="skill_beginner">Beginner</label>
-
-            <%# Skill Level 2: Intermediate %>
-            <input type="radio" class="btn-check" name="chat[recipe_requirements][skill_level]" id="skill_intermediate" value="Intermediate" autocomplete="off" <%= 'checked' if @recipe_requirements[:skill_level] == 'Intermediate' %>>
-            <label class="btn btn-outline-soft-brown flex-grow-1" for="skill_intermediate">Intermediate</label>
-
-            <%# Skill Level 3: Advanced %>
-            <input type="radio" class="btn-check" name="chat[recipe_requirements][skill_level]" id="skill_advanced" value="Advanced" autocomplete="off" <%= 'checked' if @recipe_requirements[:skill_level] == 'Advanced' %>>
-            <label class="btn btn-outline-soft-brown flex-grow-1" for="skill_advanced">Advanced</label>
-          </div>
+            label: "Key Ingredients",
+            input_html: { class: "form-control input" },
+            placeholder: "e.g., chicken, basil, tomatoes" %>
         </div>
 
         <div class="mb-4">
-          <label class="form-label text-charcoal">Meal Type</label>
-
-          <div class="btn-group d-flex flex-wrap" role="group" aria-label="Meal type selection">
-
-            <input type="radio" class="btn-check" name="chat[recipe_requirements][meal_type]" id="meal_breakfast" value="Breakfast" autocomplete="off" <%= 'checked' if @recipe_requirements[:meal_type] == 'Breakfast' %>>
-            <label class="btn btn-outline-soft-brown w-25" for="meal_breakfast">Breakfast</label>
-
-            <%# Meal Type 2: Lunch %>
-            <input type="radio" class="btn-check" name="chat[recipe_requirements][meal_type]" id="meal_lunch" value="Lunch" autocomplete="off" <%= 'checked' if @recipe_requirements[:meal_type] == 'Lunch' %>>
-            <label class="btn btn-outline-soft-brown w-25" for="meal_lunch">Lunch</label>
-
-            <%# Meal Type 3: Dinner %>
-            <input type="radio" class="btn-check" name="chat[recipe_requirements][meal_type]" id="meal_dinner" value="Dinner" autocomplete="off" <%= 'checked' if @recipe_requirements[:meal_type] == 'Dinner' %>>
-            <label class="btn btn-outline-soft-brown w-25" for="meal_dinner">Dinner</label>
-
-            <%# Meal Type 4: Dessert %>
-            <input type="radio" class="btn-check" name="chat[recipe_requirements][meal_type]" id="meal_dessert" value="Dessert" autocomplete="off" <%= 'checked' if @recipe_requirements[:meal_type] == 'Dessert' %>>
-            <label class="btn btn-outline-soft-brown w-25" for="meal_dessert">Dessert</label>
+          <label class="form-label">Your Cooking Skill Level</label>
+          <div class="d-flex w-100" aria-label="Skill level selection">
+            <% skill_levels.each do |level| %>
+              <% level_id = "skill_#{level.downcase}" %>
+              <input type="radio"
+                    class="btn-check"
+                    name="chat[recipe_requirements][skill_level]"
+                    id="<%= level_id %>"
+                    value="<%= level %>"
+                    autocomplete="off"
+                    <%= 'checked' if @recipe_requirements[:skill_level] == level %>>
+              <label class="btn btn-outline-primary flex-grow-1" for="<%= level_id %>"><%= level %></label>
+            <% end %>
+          </div>
+        <div class="mb-4">
+          <label class="form-label">Meal Type</label>
+          <div class="d-flex flex-wrap w-100" role="group" aria-label="Meal type selection">
+            <% meal_types.each do |type| %>
+              <% type_id = "meal_#{type.downcase}" %>
+              <input type="radio"
+                    class="btn-check"
+                    name="chat[recipe_requirements][meal_type]"
+                    id="<%= type_id %>"
+                    value="<%= type %>"
+                    autocomplete="off"
+                    <%= 'checked' if @recipe_requirements[:meal_type] == type %>>
+              <label class="btn btn-outline-primary w-50 w-md-25" for="<%= type_id %>"><%= type %></label>
+            <% end %>
           </div>
         </div>
+          <%# Removed grid/cols/gap classes, added form-row class %>
+          <div class="mb-4">
 
-        <%# --- Preparation Time Dropdown --- %>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <%= req.input :meal_prep_time,
-              collection: [[10,10],[15,15],[20,20],[30,30],[45,45],["1hr +",60]],
-              label: "Preparation Time",
-              prompt: "Select preparation time",
-              input_html: { class: "form-select" } %>
-        </div>
-
-        <%# --- Dietary Restrictions Textarea --- %>
+              <label class="form-label">Preparation Time</label>
+            <div class="form-row">
+              <% prep_time.each do |label, value| %>
+                <input type="radio"
+                                class="btn-check"
+                                name="chat[recipe_requirements][meal_prep_time]"
+                                id="<%= value %>"
+                                value="<%= label %>"
+                                autocomplete="off"
+                                <%= 'checked' if @recipe_requirements[:meal_prep_time] == label %>>
+                          <label class="btn btn-outline-primary w-10 w-md-12" for="<%= value %>"><%= label %></label>
+                        <% end %>
+            </div>
+          </div>
         <%= req.input :restrictions,
             as: :text,
             label: "Dietary Restrictions or Notes",
-            input_html: { rows: 4, class: "form-control" } %>
-
+            input_html: { rows: 4, class: "form-control input" } %>
       </div>
     <% end %>
-
-    <div class="mt-6">
-      <%# Submit button styled with Accent Green %>
-      <%= f.submit 'Generate Recipes!', class: 'btn btn-accent-green' %>
+    <div class="mt-6 mb-5">
+      <%= f.submit 'Generate Recipes!', class: 'btn btn-primary w-100' %>
     </div>
-
   <% end %>
-
 </div>
 
-<%# Renders the Offcanvas Sidebar for chat history %>
 <%= render 'shared/offcanvas' if user_signed_in? %>

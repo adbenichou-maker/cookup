@@ -2,11 +2,19 @@
 .ai-form-container {
   background: #ffffff;
   border-radius: 20px;
-  padding: 2.5rem 2rem;
+  padding: 2rem 1rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   max-width: 650px;
-  margin: 30px auto;
+  margin: 5px auto;
   animation: fadeIn 0.4s ease-in-out;
+}
+
+.form-row {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
 /* Title */
@@ -52,6 +60,18 @@
   resize: none;
 }
 
+.form-select.input {
+  background-color: #F5F1E7 !important;
+  border: 1px solid #D8D2C0 !important;
+  padding: 10px 14px !important;
+}
+
+.form-select.input:focus {
+  border-color: $accent-green !important;
+  // box-shadow: 0 0 6px rgba(map-get($theme-colors, "primary"), 0.4) !important;
+  box-shadow: 0 0 6px rgba(139, 170, 123, 0.4) !important;
+}
+
 /* Submit button */
 .ai-form-container .btn-primary {
   background-color: #8BAA7B !important;
@@ -59,19 +79,55 @@
   padding: 14px 18px;
   font-size: 1.15rem;
   font-weight: 700;
-  border-radius: 30px;
+  border-radius: 12px;
   width: 100%;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.ai-form-container .btn-secondary {
+  background-color: #8BAA7B !important;
+  border-color: #8BAA7B !important;
+  padding: 14px 18px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 12px;
+  // width: 100%;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.ai-form-container .btn-outline-primary {
+  // background-color: #8BAA7B !important;
+  border-color: #8BAA7B !important;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  // width: 100%;
+
+// color: white !important;
   transition: transform 0.15s ease, background-color 0.2s ease;
 }
 
 .ai-form-container .btn-primary:hover {
   background-color: #789567 !important;
   transform: translateY(-2px);
+
 }
 
 .ai-form-container .btn-primary:active {
   transform: translateY(0);
 }
+
+.ai-form-container .btn-outline-primary:hover {
+  background-color: #789567 !important;
+  transform: translateY(-2px);
+  color: white !important;
+}
+
+.ai-form-container .btn-outline-primary:active {
+  transform: translateY(0);
+}
+
 
 /* Fade animation */
 @keyframes fadeIn {

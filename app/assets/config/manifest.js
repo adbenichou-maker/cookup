@@ -10,7 +10,7 @@
 //= link bechamel.mp4
 //= link emulsified-vinaigrette.mp4
 //= link dough-preparation.mp4
-//= link cutting-brunoise.mp4
+//= link cutting_brunoise.mp4
 //= link cutting-julienne.mp4
 //= link braising-technique.mp4
 //= link cooking-risotto.mp4
