@@ -10,12 +10,12 @@
 
   <!-- Search Bar -->
   <div class="search-bar-wrapper">
-    <%= form_with url: recipes_search_path, method: :get, local: true, class: "search-form" do |f| %>
+    <%= form_with url: recipes_search_path, method: :get, local: true, class: "search-form", id: "search-form" do |f| %>
       <%= f.text_field :query, placeholder: "Search", class: "search-input", value: @query %>
-      <%= f.submit "Search", class: "search-submit-btn" %>
+      <button type="button" data-action="click->filter#toggle" class="filter-btn">Filters</button>
     <% end %>
 
-    <button data-action="click->filter#toggle" class="filter-btn">Filters</button>
+    <button type="submit" form="search-form" class="search-submit-btn">Search</button>
   </div>
 
   <!-- Filter Panel -->

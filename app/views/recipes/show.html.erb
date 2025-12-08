@@ -1,11 +1,15 @@
 <div class="container-fluid p-3" style="background-color: #F7EEDB;">
-  <%= link_to recipes_search_path, class: "profile-back" do %>
-    <i class="fa-solid fa-arrow-left"></i>
-    <% end %>
-
-  <header class="mb-4 pt-3">
+  <header class="mb-4">
     <div class="d-flex justify-content-between align-items-start">
 
+      <!-- Back button on the left -->
+      <div style="width: 40px;">
+        <%= link_to recipes_search_path, class: "profile-back" do %>
+          <i class="fa-solid fa-arrow-left"></i>
+        <% end %>
+      </div>
+
+      <!-- Centered title -->
       <div class="text-center flex-grow-1 mx-3">
         <h1 class="display-5 fw-bold mb-0" style="color: #4A4A4A;">
           <%= @recipe.title %>
@@ -15,8 +19,8 @@
         <% end %>
       </div>
 
-      <%# Placeholder for right alignment (adjust padding/margin as needed) %>
-      <div style="width: 100px;"></div>
+      <!-- Placeholder for right alignment to balance the back button -->
+      <div style="width: 40px;"></div>
 
     </div>
     <hr style="border-color: #8BAA7B;">
