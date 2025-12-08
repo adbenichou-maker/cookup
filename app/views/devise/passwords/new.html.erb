@@ -1,18 +1,49 @@
-<h2>Forgot your password?</h2>
+<% content_for :hide_navbar, true %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+<div class="auth-container">
+  <!-- Header -->
+  <div class="auth-header">
+    <%= link_to new_user_session_path, class: "auth-back-link" do %>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+    <h1 class="auth-brand">CookUp</h1>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
+  <!-- Welcome Section -->
+  <div class="auth-welcome">
+    <div class="auth-icon yellow">
+      <i class="fa-solid fa-key"></i>
+    </div>
+    <h2 class="auth-title">Forgot Password?</h2>
+    <p class="auth-subtitle">No worries, we'll send you reset instructions</p>
   </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+  <!-- Form Card -->
+  <div class="auth-card">
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification message: "Please fix the errors below:" %>
+
+      <div class="auth-form">
+        <div class="auth-input-group">
+          <label class="auth-label">Email</label>
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      label: false,
+                      placeholder: "Enter your email address",
+                      input_html: { autocomplete: "email", class: "auth-input" } %>
+        </div>
+
+        <%= f.button :submit, "Send Reset Instructions", class: "auth-submit" do %>
+          <span>Send Reset Instructions</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Footer Link -->
+  <div class="auth-footer">
+    <p>Remember your password? <%= link_to "Sign In", new_user_session_path, class: "auth-link" %></p>
+  </div>
+</div>
