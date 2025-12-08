@@ -7,7 +7,7 @@
 
       <%= button_to favorite_path(favorite),
           method: :delete,
-          class: "favorite-btn saved",
+          class: "favorite-btn saved" ,
           form: { data: { turbo: !refresh_on_remove }, class: "favorite-form" } do %>
         <i class="fa-solid fa-heart"></i>
       <% end %>
