@@ -81,8 +81,17 @@
   width: 90px;
   height: 90px;
   flex-shrink: 0;
-  background: $accent-brown;
+  background: $background;
   border-radius: 15px;
+
+  /* Center the FontAwesome icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Icon appearance */
+  font-size: 28px;
+  color: $accent-brown;
 }
 
 .recipe-text {
