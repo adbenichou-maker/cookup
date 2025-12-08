@@ -15,20 +15,23 @@
 
   <!-- Progressbar -->
   <div class="profile-section">
-
     <div class="profile-level-text">
-      <div>Level <%= current_user.level %></div>
-      <div><%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP</div>
+      <div style="font-weight: 900; font-size: large;">
+        Level <%= current_user.level %>
+      </div>
+
+      <div>
+        <%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP
+      </div>
     </div>
 
+
     <div class="progress-wrapper">
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: <%= current_user.progress_percentage %>%;">
-        </div>
+      <div class="progress-bar-fill" style="width: <%= current_user.progress_percentage %>%;">
       </div>
     </div>
   </div>
-
+  
   <!-- BADGES -->
   <h3 class="badge-title">Badges 🎖️</h3>
 
@@ -69,7 +72,7 @@
           <% if level > 0 %>
             <div class="badge-unique-image"><%= emoji %></div>
           <% else %>
-            <div class="badge-unique-placeholder"></div>
+            <div class="badge-unique-image badge-locked"><%= emoji %></div>
           <% end %>
 
         </div>
