@@ -160,7 +160,11 @@
   white-space: nowrap;
 }
 
-.filter-btn:hover{
+.filter-btn:hover {
+  background: $accent-yellow;
+}
+
+.filter-btn.active {
   background: $accent-yellow;
 }
 
@@ -191,6 +195,7 @@
 .filter-panel:not(.hidden) {
   padding-top: 15px;
   padding-bottom: 15px;
+  margin-bottom: 20px;
   opacity: 1;
   pointer-events: auto;
 }

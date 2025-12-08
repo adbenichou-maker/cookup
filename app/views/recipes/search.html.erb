@@ -12,7 +12,7 @@
   <div class="search-bar-wrapper">
     <%= form_with url: recipes_search_path, method: :get, local: true, class: "search-form", id: "search-form" do |f| %>
       <%= f.text_field :query, placeholder: "Search", class: "search-input", value: @query %>
-      <button type="button" data-action="click->filter#toggle" class="filter-btn">Filters</button>
+      <button type="button" data-action="click->filter#toggle" data-filter-target="button" class="filter-btn"><i class="fa-solid fa-filter"></i></button>
     <% end %>
 
     <button type="submit" form="search-form" class="search-submit-btn">Search</button>
