@@ -45,8 +45,11 @@
 
       <!-- SAVE / REMOVE BUTTON -->
       <div class="congrats-btn-wrapper">
-        <%= render partial: "favorites/favorite_button", locals: { recipe: @recipe } %>
+        <div class="congrats-fav-wrapper">
+          <%= render partial: "favorites/favorite_button", locals: { recipe: @recipe } %>
+        </div>
       </div>
+
 
       <!-- GO HOME BUTTON -->
       <div class="congrats-btn-wrapper">
