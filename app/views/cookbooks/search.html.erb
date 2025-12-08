@@ -5,7 +5,7 @@
     <i class="fa-solid fa-arrow-left"></i>
   <% end %>
 
-  <h1 class="search-title">❤️ Favorites</h1>
+  <h1 class="search-title">Favorites</h1>
 
   <!-- Search Bar -->
   <div class="search-bar-wrapper">
@@ -73,7 +73,7 @@
 
       <!-- Only this part is clickable -->
       <%= link_to recipe_path(recipe), class: "recipe-main" do %>
-        <div class="recipe-image-placeholder"></div>
+        <div class="recipe-image-placeholder fa-solid fa-utensils"></div>
 
         <div class="recipe-text">
           <h3><%= recipe.title %></h3>

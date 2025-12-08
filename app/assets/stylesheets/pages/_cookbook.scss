@@ -19,6 +19,15 @@ h1 {
   background-color: #E8DEC4;
   border-radius: 12px;
   flex-shrink: 0;
+
+  /* Center the FontAwesome icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Icon appearance */
+  font-size: 28px;
+  color: #C9815B;
 }
 
 /* Text Content */
