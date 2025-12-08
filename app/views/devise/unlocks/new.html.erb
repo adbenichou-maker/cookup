@@ -1,19 +1,50 @@
-<h2>Resend unlock instructions</h2>
+<% content_for :hide_navbar, true %>
 
-<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.full_error :unlock_token %>
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+<div class="auth-container">
+  <!-- Header -->
+  <div class="auth-header">
+    <%= link_to new_user_session_path, class: "auth-back-link" do %>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+    <h1 class="auth-brand">CookUp</h1>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Resend unlock instructions" %>
+  <!-- Welcome Section -->
+  <div class="auth-welcome">
+    <div class="auth-icon purple">
+      <i class="fa-solid fa-lock-open"></i>
+    </div>
+    <h2 class="auth-title">Unlock Account</h2>
+    <p class="auth-subtitle">Resend unlock instructions to your email</p>
   </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+  <!-- Form Card -->
+  <div class="auth-card">
+    <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification message: "Please fix the errors below:" %>
+      <%= f.full_error :unlock_token %>
+
+      <div class="auth-form">
+        <div class="auth-input-group">
+          <label class="auth-label">Email</label>
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      label: false,
+                      placeholder: "Enter your email address",
+                      input_html: { autocomplete: "email", class: "auth-input" } %>
+        </div>
+
+        <%= f.button :submit, "Resend Unlock Instructions", class: "auth-submit" do %>
+          <span>Resend Unlock Instructions</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Footer Link -->
+  <div class="auth-footer">
+    <p>Account already unlocked? <%= link_to "Sign In", new_user_session_path, class: "auth-link" %></p>
+  </div>
+</div>

@@ -71,6 +71,21 @@
     box-shadow: 0 4px 16px rgba($accent-green, 0.3);
   }
 
+  &.yellow {
+    background: linear-gradient(135deg, $yellow, darken($yellow, 8%));
+    box-shadow: 0 4px 16px rgba($yellow, 0.3);
+  }
+
+  &.blue {
+    background: linear-gradient(135deg, $blue, darken($blue, 8%));
+    box-shadow: 0 4px 16px rgba($blue, 0.3);
+  }
+
+  &.purple {
+    background: linear-gradient(135deg, #9B59B6, darken(#9B59B6, 8%));
+    box-shadow: 0 4px 16px rgba(#9B59B6, 0.3);
+  }
+
   i {
     font-size: 28px;
     color: white;
@@ -285,6 +300,92 @@
     color: $red;
     font-size: 12px;
     margin-top: 4px;
+  }
+}
+
+/* Danger Zone */
+.auth-danger-zone {
+  background: rgba($red, 0.03);
+  border: 2px solid rgba($red, 0.15);
+}
+
+.auth-danger-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: darken($red, 10%);
+  margin: 0 0 12px 0;
+
+  i {
+    font-size: 18px;
+  }
+}
+
+.auth-danger-text {
+  font-size: 14px;
+  color: rgba($dark, 0.7);
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.auth-danger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 24px;
+  background: transparent;
+  color: darken($red, 10%);
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid rgba($red, 0.3);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: $red;
+    border-color: $red;
+    color: white;
+  }
+}
+
+/* Auth Links (shared partial) */
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba($dark, 0.08);
+
+  .auth-link {
+    display: block;
+    text-align: center;
+  }
+}
+
+.auth-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: white;
+  color: $dark;
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid rgba($dark, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba($dark, 0.2);
+    background: rgba($dark, 0.02);
   }
 }
 
