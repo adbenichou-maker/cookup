@@ -507,65 +507,6 @@
 }
 
 /* ===========================
-   STAR RATING FILTER
-   =========================== */
-.rating-filter .stars {
-  display: flex;
-  gap: 6px;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-.rating-filter .star {
-  color: $accent-green;
-  transition: transform 0.2s ease;
-}
-
-.rating-filter .star:hover {
-  transform: scale(1.2);
-}
-
-/* ===========================
-   DIFFICULTY SLIDER
-   =========================== */
-.difficulty-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.difficulty-label {
-  font-weight: 600;
-  color: $accent-green;
-  white-space: nowrap;
-  font-size: 14px;
-}
-
-.difficulty-slider {
-  width: 20%;
-  max-width: 120px;
-  appearance: none;
-  height: 6px;
-  background: #8baa7b68;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.difficulty-slider::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  background: $accent-green;
-  border-radius: 50%;
-  transition: transform 0.2s ease;
-}
-
-.difficulty-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-}
-
-/* ===========================
    RECIPE CARDS (Search + Cookbook + Reusable)
    =========================== */
 .recipe-card {

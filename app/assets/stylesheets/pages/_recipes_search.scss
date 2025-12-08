@@ -272,7 +272,6 @@
   .recipe-text p {
     font-size: 14px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -303,4 +302,86 @@
   .rating-filter {
     margin-bottom: 15px;
   }
+}
+
+/* ===========================
+   DIFFICULTY SLIDER
+   =========================== */
+.difficulty-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.difficulty-label {
+  font-weight: 600;
+  color: $accent-green;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.difficulty-slider {
+  width: 20%;
+  max-width: 120px;
+  appearance: none;
+  height: 6px;
+  background: #8baa7b68;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.difficulty-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: $accent-green;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.difficulty-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* ===========================
+   PREP TIME SLIDER
+   =========================== */
+.prep-time-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  width: 20%;
+}
+
+.prep-time-label {
+  font-weight: 600;
+  color: $accent-green;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+/* Track matches difficulty, but full width */
+.prep-time-slider {
+  width: 100%;     // FULL WIDTH instead of fixed width
+  appearance: none;
+  height: 6px;
+  background: #8baa7b68;   // identical to difficulty slider
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Thumb identical */
+.prep-time-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: $accent-green;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.prep-time-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
 }

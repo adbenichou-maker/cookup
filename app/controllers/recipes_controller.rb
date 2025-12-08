@@ -23,14 +23,15 @@ class RecipesController < ApplicationController
       @recipes = @recipes.where(recipe_level: params[:level])
     end
 
-    # Filter by rating
-    if params[:rating].present?
-      @recipes = @recipes
-        .left_joins(:reviews)
-        .group(:id)
-        .having("ROUND(AVG(reviews.rate)) = ?", params[:rating].to_i)
+    # Filter: prep time
+    if params[:prep_time].present?
+      prep = params[:prep_time].to_i
+
+      # Only filter if user chose < 120 (120 means "unlimited")
+      if prep < 120
+        @recipes = @recipes.where("meal_prep_time <= ?", prep)
+      end
     end
-    # @steps = @recipe.steps
   end
 
   def create
