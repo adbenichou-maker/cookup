@@ -19,6 +19,7 @@ before_action :set_chat, only: [:show]
       meal_prep_time: nil,
       restrictions: nil
     }
+
   end
 
   def create
