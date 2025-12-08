@@ -209,6 +209,16 @@
   }
 }
 
+  .auth-submit:hover,
+  .auth-submit:hover span,
+  .auth-submit:hover i {
+  color: white !important;
+  }
+  .auth-submit {
+  color: white !important;
+  }
+
+
 .auth-forgot {
   text-align: center;
   margin-top: 20px;
