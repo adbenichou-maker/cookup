@@ -1,0 +1,67 @@
+/* Custom Color Variables */
+$color-beige: #F7EEDB;
+$color-accent-green: #8BAA7B;
+$color-soft-brown: #C9815B;
+$color-charcoal: #4A4A4A;
+
+
+/* In your application's CSS/SCSS file, complementing the previous definitions *
+
+/* Style for the Time Badge (Pill) */
+.badge-outline-charcoal {
+  /* Use the background color of the offcanvas so the badge looks like an outline */
+  background-color: $color-beige;
+  /* Use Clean Charcoal for the border and text */
+  border: 1px solid $color-charcoal;
+  color: $color-charcoal;
+  font-weight: 500;
+}
+
+/* Ensure the text is visible even when the link is active/soft-brown */
+.chat-sidebar-link.bg-soft-brown-active .badge-outline-charcoal {
+  /* When the link is active/selected (soft brown background), use the accent green border/text for contrast */
+  border-color: #8BAA7B;
+  color: #8BAA7B !important;
+  background-color: white; /* Light background for the badge when the container is dark */
+}
+
+/* Backgrounds */
+.bg-beige {
+  background-color: $color-beige !important;
+}
+
+/* Text Colors */
+.text-charcoal {
+  color: $color-charcoal !important;
+}
+.text-soft-brown {
+  color: $color-soft-brown !important;
+}
+
+/* Button Overrides (Accent Green) */
+.btn-accent-green {
+  background-color: $color-accent-green;
+  border-color: $color-accent-green;
+  color: white; /* Contrast text color */
+
+  &:hover {
+    background-color: darken($color-accent-green, 5%);
+    border-color: darken($color-accent-green, 5%);
+  }
+}
+
+/* Chat Link Hover/Active States (Soft Brown) */
+.chat-sidebar-link {
+  color: $color-charcoal; /* Default link text color */
+  transition: background-color 0.15s ease;
+}
+
+.chat-sidebar-link.bg-soft-brown-hover:hover {
+  background-color: rgba($color-soft-brown, 0.2) !important; /* Light brown transparent hover */
+  color: $color-charcoal;
+}
+
+.chat-sidebar-link.bg-soft-brown-active {
+  background-color: $color-soft-brown !important; /* Solid soft brown for active chat */
+  color: white !important; /* White text for contrast on soft brown background */
+}
