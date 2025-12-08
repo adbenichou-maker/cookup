@@ -13,9 +13,9 @@ class ReviewsController < ApplicationController
 
     if @review.save
       flash[:notice] = "Thank you for your review!"
-      redirect_to recipe_path(@recipe)
+      redirect_to congratulation_recipe_path(@recipe)
     else
-      render 'recipes/show', status: :unprocessable_entity
+      redirect_to congratulation_recipe_path(@recipe), alert: "Review not saved."
     end
   end
 

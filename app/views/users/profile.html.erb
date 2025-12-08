@@ -11,29 +11,24 @@
       class: "logout-btn" %>
 
   <!-- Header -->
-  <h2 class="profile-name"> Progress 📊 </h2>
+  <h2 class="badge-title"> Progress 📊 </h2>
 
-  <!-- Progressbar -->
-  <div class="profile-section">
-    <div class="profile-level-text">
-      <div style="font-weight: 900; font-size: large;">
-        Level <%= current_user.level %>
+ <!-- Level Progress Card -->
+  <div class="level-card">
+    <div class="level-header">
+      <div class="level-badge">
+        <i class="fa-solid fa-award"></i>
+        <span>Level <%= current_user.level %></span>
       </div>
-
-      <div>
-        <%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP
-      </div>
+      <span class="xp-text"><%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP</span>
     </div>
-
-
-    <div class="progress-wrapper">
-      <div class="progress-bar-fill" style="width: <%= current_user.progress_percentage %>%;">
-      </div>
+    <div class="level-progress-bar">
+      <div class="level-progress-fill" style="width: <%= current_user.progress_percentage %>%;"></div>
     </div>
   </div>
-  
+
   <!-- BADGES -->
-  <h3 class="badge-title">Badges 🎖️</h3>
+  <h2 class="badge-title">Badges 🎖️</h2>
 
   <div class="badge-wrapper-unique" data-controller="badge">
 

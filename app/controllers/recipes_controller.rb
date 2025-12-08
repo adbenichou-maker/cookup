@@ -108,31 +108,28 @@ class RecipesController < ApplicationController
   def congratulation
     @recipe = Recipe.find(params[:id])
 
-    # record completion (avoid duplicates)
-    if user_signed_in?
-      UserRecipeCompletion.find_or_create_by(user: current_user, recipe: @recipe)
-    end
-
+    # Save old values BEFORE XP happens
     @old_level = current_user.level
     @old_xp_percent = current_user.progress_percentage
 
-    xp_amount =
-      case @recipe.recipe_level
-      when "beginner" then 10
-      when "intermediate" then 20
-      when "expert" then 30
+    if user_signed_in?
+      recent_window_seconds = 30
+      recent_exist = UserRecipeCompletion.where(user: current_user, recipe: @recipe)
+                                        .where("created_at >= ?", recent_window_seconds.seconds.ago)
+                                        .exists?
+
+      unless recent_exist
+        UserRecipeCompletion.create!(user: current_user, recipe: @recipe)
       end
+    end
 
-    current_user.add_xp(xp_amount)
-
-    # Check and award badges after completion and xp
-    BadgeAwarder.new(current_user).check_all! if user_signed_in?
-
+    # Load updated values
     @new_xp_percent = current_user.progress_percentage
     @new_level = current_user.level
 
     @leveled_up = @new_level > @old_level
   end
+
 
 
   private

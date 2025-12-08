@@ -34,22 +34,25 @@
           <%= f.text_area :comment, rows: 5, class: "form-control rounded-3", placeholder: "The steps were clear and the result was fantastic!" %>
         </div>
 
-        <div class="mb-4 text-center">
-          <label class="form-label fw-bold d-block mb-3" for="review_rate_stars">Rate the Recipe</label>
-          <div class="rating d-flex flex-row-reverse justify-content-center" id="review_rate_stars">
+        <div class="mb-4 text-center" data-controller="review-stars">
+          <label class="form-label fw-bold d-block mb-3">Rate the Recipe</label>
 
-            <% 5.downto(1) do |i| %>
-              <%= f.radio_button :rate, i,
-                  id: "rate-#{i}",
-                  class: "d-none rating-input" %>
-              <label for="rate-<%= i %>" class="star-label me-1"
-                    data-value="<%= i %>"
-                    style="color: #F2C94C; font-size: 2.5rem; cursor: pointer; transition: color 0.2s;">
-                &#9733;
-              </label>
+          <div class="review-stars" data-review-stars-target="stars">
+            <% (1..5).each do |i| %>
+              <span
+                class="star"
+                data-action="click->review-stars#select mouseover->review-stars#hover mouseout->review-stars#reset"
+                data-value="<%= i %>">
+                ☆
+              </span>
             <% end %>
           </div>
-          <small class="text-muted d-block mt-2">Click a star to set your rating (1 is lowest, 5 is highest).</small>
+
+          <%= f.hidden_field :rate, value: @review.rate || 0, data: { review_stars_target: "input" } %>
+
+          <small class="text-muted d-block mt-2">
+            Click a star to set your rating.
+          </small>
         </div>
 
         <%# FIX APPLIED HERE: Added mb-5 (margin-bottom: 3rem) to the d-grid wrapper %>

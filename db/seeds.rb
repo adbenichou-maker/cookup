@@ -110,9 +110,9 @@ puts "Creating Users..."
 
 # The primary user for testing review ownership and deletion
 user = User.create!(
-  email: "santi@lewagon.com",
+  email: "adam@lewagon.com",
   password: "password",
-  username: "Santi"
+  username: "Adam"
 )
 
 # A secondary user for creating general reviews (to test non-owned reviews)
