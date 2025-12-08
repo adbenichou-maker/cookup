@@ -2,14 +2,12 @@
   <header class="mb-4">
     <div class="d-flex justify-content-between align-items-start">
 
-      <!-- Back button on the left -->
       <div style="width: 40px;">
         <%= link_to recipes_search_path, class: "profile-back" do %>
           <i class="fa-solid fa-arrow-left"></i>
         <% end %>
       </div>
 
-      <!-- Centered title -->
       <div class="text-center flex-grow-1 mx-3">
         <h1 class="display-5 fw-bold mb-0" style="color: #4A4A4A;">
           <%= @recipe.title %>
@@ -17,9 +15,20 @@
         <% if @recipe.description.present? %>
           <p class="text-muted small mt-1" style="color: #4A4A4A !important;"><%= @recipe.description %></p>
         <% end %>
+
+        <%# --- NEW: Prep Time Display --- %>
+        <% if @recipe.meal_prep_time.present? %>
+          <div class="d-inline-block px-3 py-1 mt-2 rounded-pill border fw-bold"
+               style="background-color: #FCF8EF; color: #C9815B; border-color: #C9815B !important; font-size: 0.9em;">
+            <i class="fa-regular fa-clock me-1"></i>
+            <%# Handle prep time over 60 mins by displaying "1hr +" as needed %>
+            <%= @recipe.meal_prep_time >= 60 ? '1hr +' : "#{@recipe.meal_prep_time} min" %>
+          </div>
+        <% end %>
+        <%# ------------------------------- %>
+
       </div>
 
-      <!-- Placeholder for right alignment to balance the back button -->
       <div style="width: 40px;"></div>
 
     </div>
