@@ -7,7 +7,6 @@ class UserSkillsController < ApplicationController
     if @user_skill.save
       current_user.add_xp(30)
 
-      # 🔥 Badge Awarder — Skills, Saved Recipes, Streak, etc.
       BadgeAwarder.new(current_user).check_all!
 
       flash[:notice] = "Skill '#{@skill.title}' added to your learned skills!"

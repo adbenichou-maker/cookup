@@ -35,28 +35,27 @@
     </div>
   </section>
 
-
   <div class="row justify-content-center">
     <div class="col-12 col-md-10">
-
-      <div class="d-grid mb-4">
+      <!-- ADD REVIEW BUTTON -->
+      <div class="congrats-btn-wrapper">
         <%= link_to "⭐️ ADD A REVIEW", new_recipe_review_path(@recipe),
-          class: "btn btn-lg fw-bold shadow-lg p-3 rounded-pill",
-          style: "color: #4A4A4A; border-color: #4A4A4A;" %>
+          class: "congrats-btn" %>
       </div>
 
-      <div class="d-grid gap-3 mb-5">
+      <!-- SAVE / REMOVE BUTTON -->
+      <div class="congrats-btn-wrapper">
+        <%= render partial: "favorites/favorite_button", locals: { recipe: @recipe } %>
+      </div>
 
-        <div class="cookbook-action-wrapper">
-          <%= render partial: "favorites/favorite_button", locals: { recipe: @recipe } %>
-        </div>
-
+      <!-- GO HOME BUTTON -->
+      <div class="congrats-btn-wrapper">
         <%= link_to "🏠 GO HOME", dashboard_path,
-          class: "btn btn-lg fw-bold p-3 rounded-pill",
-          style: " color: #4A4A4A; border: 2px solid #4A4A4A;" %>
+          class: "congrats-btn" %>
       </div>
     </div>
   </div>
+
 
   <% if @leveled_up %>
     <div data-controller="confetti"></div>

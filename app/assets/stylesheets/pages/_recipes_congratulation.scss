@@ -18,7 +18,7 @@
 
 /* Reset ALL favorite-btn styles only on the congratulations page */
 .congrats-page .favorite-btn {
-  all: unset;               /* wipe inherited styles */
+  all: unset;
   display: block;
   width: 100%;
   text-align: center;
@@ -27,7 +27,7 @@
   background: $background;
   border: 2px solid #C5C5C5;
   cursor: pointer;
-  font-size: 0 !important;  /* hide the + or ✔ */
+  font-size: 0 !important;
   box-shadow: 0px 6px 20px rgba(0,0,0,0.08);
   transition: background 0.2s ease, border 0.2s ease;
 }
@@ -57,4 +57,27 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+/* Wrapper für alle drei Buttons → einheitlicher Abstand */
+.congrats-btn-wrapper {
+  margin-bottom: 22px;   /* Abstand zwischen den Knöpfen */
+}
+
+/* Congrats Buttons (non-favorite-buttons) */
+.congrats-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 16px 24px;
+  border-radius: 40px;
+  background: $background;
+  border: 2px solid #C5C5C5;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4A4A4A;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.08);
+  transition: background 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
 }

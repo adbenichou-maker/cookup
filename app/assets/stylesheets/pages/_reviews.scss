@@ -1,0 +1,27 @@
+/* Review stars new design */
+.review-stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.review-stars .star {
+  font-size: 34px;
+  color: $accent-yellow;
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.review-stars .star:hover {
+  transform: scale(1.25);
+}
+
+.review-stars .star.selected {
+  color: $accent-green;
+}
+
+/* DARKER PLACEHOLDER FOR REVIEW INPUTS */
+.congrats-page ::placeholder,
+.container-fluid ::placeholder {
+  opacity: 0.4;
+}
