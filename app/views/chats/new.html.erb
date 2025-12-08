@@ -58,22 +58,32 @@
           </div>
         </div>
           <%# Removed grid/cols/gap classes, added form-row class %>
-          <div class="mb-4">
+        <div class="mb-4">
+          <h4>Prep Time</h4>
 
-              <label class="form-label">Preparation Time</label>
-            <div class="form-row">
-              <% prep_time.each do |label, value| %>
-                <input type="radio"
-                                class="btn-check"
-                                name="chat[recipe_requirements][meal_prep_time]"
-                                id="<%= value %>"
-                                value="<%= label %>"
-                                autocomplete="off"
-                                <%= 'checked' if @recipe_requirements[:meal_prep_time] == label %>>
-                          <label class="btn btn-outline-primary w-10 w-md-12" for="<%= value %>"><%= label %></label>
-                        <% end %>
+          <div data-controller="prepTime" class="prep-time-wrapper" id="prep-timer-ai">
+
+            <input
+              type="range"
+              min="0"
+              max="120"
+              step="5"
+              value="<%= @recipe_requirements[:meal_prep_time] || 120 %>"
+              class="prep-time-slider"
+              data-action="input->prepTime#update"
+              data-prepTime-target="slider"
+            >
+
+            <div class="prep-time-label" data-prepTime-target="label">
+              <%= (@recipe_requirements[:meal_prep_time].to_i == 120 || @recipe_requirements[:meal_prep_time].blank?) ? "No limit" : "#{@recipe_requirements[:meal_prep_time]} min" %>
             </div>
+
+            <%= req.hidden_field :meal_prep_time,
+                  value: @recipe_requirements[:meal_prep_time] || 120,
+                  data: { prepTime_target: "input" } %>
           </div>
+        </div>
+
         <%= req.input :restrictions,
             as: :text,
             label: "Dietary Restrictions or Notes",
