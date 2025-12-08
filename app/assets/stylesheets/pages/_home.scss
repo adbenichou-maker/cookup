@@ -1,1 +1,257 @@
-// Specific CSS for your home-page
+/* ===========================
+   LANDING PAGE STYLES
+   =========================== */
+
+.landing-container {
+  padding: 32px 24px;
+  padding-bottom: 120px;
+  background-color: $background;
+  min-height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   HERO SECTION
+   =========================== */
+.landing-hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba($accent-green, 0.15), rgba($accent-green, 0.08));
+  color: darken($accent-green, 15%);
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+
+  i {
+    font-size: 14px;
+  }
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: $accent-brown;
+  margin: 0 0 12px 0;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.hero-tagline {
+  font-size: 20px;
+  font-weight: 600;
+  color: $dark;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.hero-description {
+  font-size: 15px;
+  color: rgba($dark, 0.65);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===========================
+   FEATURES SECTION
+   =========================== */
+.landing-features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.feature-card-landing {
+  display: flex;
+  align-items: center;
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.feature-icon-landing {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  i {
+    font-size: 22px;
+    color: white;
+  }
+
+  &.green {
+    background: linear-gradient(135deg, $accent-green, darken($accent-green, 8%));
+  }
+
+  &.brown {
+    background: linear-gradient(135deg, $accent-brown, darken($accent-brown, 8%));
+  }
+
+  &.yellow {
+    background: linear-gradient(135deg, $accent-yellow, darken($accent-yellow, 8%));
+  }
+}
+
+.feature-content {
+  margin-left: 16px;
+  flex: 1;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: $dark;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+  }
+
+  p {
+    font-size: 13px;
+    color: rgba($dark, 0.55);
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+/* ===========================
+   SOCIAL PROOF SECTION
+   =========================== */
+.landing-proof {
+  margin-bottom: 36px;
+}
+
+.proof-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 800;
+  color: $accent-brown;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: rgba($dark, 0.5);
+  font-weight: 500;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba($dark, 0.1);
+}
+
+/* ===========================
+   CTA SECTION
+   =========================== */
+.landing-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cta-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, $accent-brown, darken($accent-brown, 8%));
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba($accent-brown, 0.35);
+  transition: all 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba($accent-brown, 0.45);
+    color: white;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  i {
+    font-size: 14px;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover i {
+    transform: translateX(4px);
+  }
+}
+
+.cta-secondary {
+  display: block;
+  padding: 14px 20px;
+  text-align: center;
+  color: rgba($dark, 0.7);
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba($dark, 0.04);
+    color: $dark;
+  }
+
+  strong {
+    color: $accent-brown;
+    font-weight: 600;
+  }
+}
+
+/* ===========================
+   FOOTER NOTE
+   =========================== */
+.landing-footer-note {
+  text-align: center;
+  font-size: 13px;
+  color: rgba($dark, 0.45);
+  margin-top: 20px;
+}
