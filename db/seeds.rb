@@ -429,9 +429,9 @@ end
 
 # Create random reviews for all recipes, authored by either user or generic_user
 [recipe_1, recipe_2, recipe_3, recipe_4, recipe_5,
- recipe_6, recipe_7, recipe_8, recipe_9, recipe_10,
- recipe_11, recipe_12, recipe_13, recipe_14, recipe_15,
- recipe_16, recipe_17].each do |rec| # ADDED NEW RECIPES
+recipe_6, recipe_7, recipe_8, recipe_9, recipe_10,
+recipe_11, recipe_12, recipe_13, recipe_14, recipe_15,
+recipe_16, recipe_17].each do |rec| # ADDED NEW RECIPES
   create_recipe_reviews(rec, user, generic_user)
 end
 
