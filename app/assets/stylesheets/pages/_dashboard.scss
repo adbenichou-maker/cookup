@@ -210,24 +210,59 @@
 
 .recipe-add-btn {
   margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===========================
    FAVORITE BUTTON
    =========================== */
+[id^="favorite_button_"],
+turbo-frame[id^="favorite_button_"] {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-form {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .favorite-btn {
   background: #F9F6EE;
   border: 2px solid #C5C5C5;
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 20px;
   cursor: pointer;
   color: #333;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .favorite-btn:hover {
@@ -237,7 +272,6 @@
 .favorite-btn.saved {
   border-color: #8BAA7B;
   color: #8BAA7B;
-  font-size: 24px;
 }
 
 /* ===========================

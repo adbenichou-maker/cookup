@@ -128,3 +128,37 @@
   border-radius: 10px;
   transition: width 0.9s ease;
 }
+
+/* Mobile Responsive */
+@media (max-width: 576px) {
+  .profile-container {
+    padding: 15px;
+    padding-bottom: 120px;
+  }
+
+  .profile-name {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .logout-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .badge-title {
+    margin-top: 25px;
+    font-size: 18px;
+  }
+
+  .input-field {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .update-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
