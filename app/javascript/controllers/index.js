@@ -15,3 +15,6 @@ application.register("rating", RatingController)
 
 import DifficultySliderController from "./difficulty_slider_controller"
 application.register("difficultySlider", DifficultySliderController)
+
+import PrepTimeController from "./prep_time_controller"
+application.register("prepTime", PrepTimeController)

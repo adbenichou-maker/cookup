@@ -21,13 +21,10 @@ class CookbooksController < ApplicationController
     end
 
     # Filter by rating
-    if params[:rating].present?
-      @saved_recipes = @saved_recipes
-        .left_joins(:reviews)
-        .group(:id)
-        .having("ROUND(AVG(reviews.rate)) = ?", params[:rating].to_i)
+    if params[:prep_time].present?
+      prep = params[:prep_time].to_i
+      @saved_recipes = @saved_recipes.where("meal_prep_time <= ?", prep) if prep < 120
     end
-    # @steps = @recipe.steps
   end
 
 end
