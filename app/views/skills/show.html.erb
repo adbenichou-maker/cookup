@@ -1,7 +1,7 @@
 <div class="container-fluid p-3" style="background-color: #F7EEDB;">
   <% if params[:recipe_id].present? %>
     <%# Case 1: Came from Recipe Show Page %>
-    <%= link_to recipe_path(params[:recipe_id]), class: "profile-back" do %>
+    <%= link_to recipe_steps_path(params[:recipe_id]), class: "profile-back" do %>
     <i class="fa-solid fa-arrow-left"></i>
 <% end %>
   <% else %>
