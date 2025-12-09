@@ -17,31 +17,34 @@
         <% end %>
 
         <%# --- NEW: Prep Time and Recipe Level Display --- %>
-        <div class="d-flex justify-content-center align-items-center mt-2">
+        <div class="d-flex justify-content-center align-items-center mt-2 flex-nowrap" style="overflow-x: auto;">
 
-          <% if @recipe.meal_prep_time.present? %>
-            <div class="d-inline-block px-3 py-1 rounded-pill border fw-bold me-2"
-                style="background-color: #FCF8EF; color: #C9815B; border-color: #C9815B !important; font-size: 0.9em;">
-              <i class="fa-regular fa-clock me-1"></i>
-              <%= @recipe.meal_prep_time >= 60 ? '1hr +' : "#{@recipe.meal_prep_time} min" %>
-            </div>
-          <% end %>
+        <% if @recipe.meal_prep_time.present? %>
+          <div class="d-inline-block px-3 py-1 rounded-pill border fw-bold me-2 flex-shrink-0"
+              style="background-color: #FCF8EF; color: #C9815B; border-color: #C9815B !important; font-size: 0.9em;">
+            <i class="fa-regular fa-clock me-1"></i>
+            <%= @recipe.meal_prep_time >= 60 ? '1hr +' : "#{@recipe.meal_prep_time} min" %>
+          </div>
+        <% end %>
 
-          <% if @recipe.recipe_level.present? %>
-            <%
-              level_map = { 0 => 'Beginner', 1 => 'Intermediate', 2 => 'Expert' }
-              level_text = level_map[@recipe.recipe_level]
-            %>
-            <div class="d-inline-block px-3 py-1 rounded-pill border fw-bold"
-                style="background-color: #FCF8EF; color: #8BAA7B; border-color: #8BAA7B !important; font-size: 0.9em;">
-              <i class="fa-solid fa-graduation-cap me-1"></i>
-              <%= level_text %>
-              <%= @recipe.recipe_level.capitalize %>
-            </div>
-          <% end %>
+        <% if @recipe.recipe_level.present? %>
+          <%
+            # Map integer level to text for display
+            # Note: We are using recipe_level directly here since the model example showed an integer (3) but the logic maps 0, 1, 2.
+            # Assuming 0=Beginner, 1=Intermediate, 2=Expert (as is common)
+            level_map = { 0 => 'Beginner', 1 => 'Intermediate', 2 => 'Expert', 3 => 'Expert' }
+            level_text = level_map[@recipe.recipe_level.to_i] || @recipe.recipe_level.to_s.capitalize
+          %>
+          <div class="d-inline-block px-3 py-1 rounded-pill border fw-bold flex-shrink-0"
+              style="background-color: #FCF8EF; color: #8BAA7B; border-color: #8BAA7B !important; font-size: 0.9em;">
+            <i class="fa-solid fa-graduation-cap me-1"></i>
+            <%= level_text %>
+            <%# REMOVED: <%= @recipe.recipe_level.capitalize %>
+            <%# This line was redundant if you used level_text %>
+          </div>
+        <% end %>
 
-        </div>
-        <%# ----------------------------------------------- %>
+      </div>
 
       </div>
 
@@ -82,12 +85,12 @@
             <ul class="list-unstyled d-flex flex-wrap gap-2">
               <% @skills_for_recipe.each do |skill| %>
                 <%= link_to skill_path(skill, recipe_id: @recipe.id), style: "text-decoration: none;" do %>
-                  <li class="p-2 border rounded" style="background-color: #F2C94C; border-color: #C9815B !important;">
+                  <div class="d-flex align-items-center p-2" style="background-color: #F2C94C; border: 1px solid #C9815B; border-radius: 12px;">
                     <p class="mb-0 fw-bold" style="color: #4A4A4A; font-size: 0.9em;">
                       <i class="bi bi-star-fill me-1" style="color: #8BAA7B;"></i>
                       <%= skill.title %>
                     </p>
-                  </li>
+                  </div>
                 <% end %>
               <% end %>
             </ul>
@@ -98,7 +101,7 @@
       <div class="d-grid mb-3">
         <%= link_to "START COOKING", recipe_steps_path(@recipe),
           class: "btn btn-lg fw-bold text-white shadow-lg",
-          style: "background-color: #8BAA7B; border-color: #8BAA7B;" %>
+          style: "background-color: #8BAA7B; border-color: #8BAA7B; border-radius: 12px;" %>
       </div>
       <section class="card shadow-sm mb-5">
         <div class="accordion" id="reviewsAccordion">

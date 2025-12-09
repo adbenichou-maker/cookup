@@ -60,11 +60,30 @@
           <% end %>
         </ul>
       </section>
+      <% if @recipe.tips.present? %>
+        <div class="row justify-content-center mb-5">
+          <div class="col-12 col-md-10">
+            <div class="card p-3 shadow-lg" style="background-color: #fcebe3; border: 2px solid #C9815B; border-radius: 1rem;">
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-lightbulb fa-2x me-3" style="color: #C9815B;"></i>
 
+                <div>
+                  <h2 class="h5 fw-bold mb-1" style="color: #C9815B;">Chef's Tips:</h2>
+                  <p class="mb-0" style="color: #4A4A4A; font-style: italic;">
+                    <%= @recipe.tips %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
       <div class="d-grid mb-5">
         <%= link_to "FINISHED", congratulation_recipe_path(@recipe),
           class: "btn btn-lg fw-bold text-white shadow-lg",
-          style: "background-color: #C9815B; border-color: #C9815B;" %>
+          style: "background-color: #C9815B;
+                  border-color: #C9815B;
+                  border-radius: 12px;" %>
       </div>
 
     </div>
