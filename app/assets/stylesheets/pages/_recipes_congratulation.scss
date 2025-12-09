@@ -1,114 +1,533 @@
 /* ==========================================================
-   1) REMOVE GLOBAL FAVORITE-BUTTON CONSTRAINTS IN CONGRATS PAGE
+   CONGRATULATIONS PAGE - PROFESSIONAL DESIGN
    ========================================================== */
 
-.congrats-page [id^="favorite_button_"],
-.congrats-page turbo-frame[id^="favorite_button_"],
-.congrats-page .favorite-form {
-  width: 100% !important;
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
+.congrats-page {
+  background-color: $background;
+  min-height: 100vh;
+  padding: 20px;
+  padding-bottom: 120px;
+  color: $dark;
 }
-
-/* Remove ONLY the tiny 40x40 box styles */
-.congrats-page .favorite-btn {
-  width: 100% !important;
-  height: auto !important;
-  min-width: unset !important;
-  min-height: unset !important;
-  max-width: unset !important;
-  max-height: unset !important;
-
-  padding: 16px 24px !important;
-  border-radius: 40px !important;
-  background: $background !important;
-  border: 2px solid #C5C5C5 !important;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08) !important;
-
-  text-align: center !important;
-  cursor: pointer !important;
-  font-size: 0 !important;
-  transition: background 0.2s ease, border 0.2s ease !important;
-}
-
-/* Text labels */
-.congrats-page .favorite-btn.unsaved::after {
-  content: "📚 SAVE TO COOKBOOK";
-  font-size: 18px;
-  font-weight: 600;
-  color: #4A4A4A;
-}
-
-.congrats-page .favorite-btn.saved {
-  border-color: #8BAA7B !important;
-}
-
-.congrats-page .favorite-btn.saved::after {
-  content: "REMOVE FROM COOKBOOK";
-  font-size: 18px;
-  font-weight: 600;
-  color: #8BAA7B;
-}
-
-/* Wrapper JUST to hold spacing (same as other buttons) */
-.congrats-fav-wrapper {
-  width: 100%;
-  margin-bottom: 22px !important;
-}
-
 
 /* ==========================================================
-   2) PROGRESS BAR
+   BACK BUTTON
    ========================================================== */
 
-.progress-wrapper {
-  background: #E8DEC4;
-  border-radius: 20px;
-  height: 18px;
-  overflow: hidden;
+.congrats-back-wrapper {
+  margin-bottom: 20px;
 }
 
-.progress-bar-fill {
-  background: #8BAA7B;
+.congrats-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: $card-bg;
+  border-radius: 12px;
+  color: $dark;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+
+  i {
+    font-size: 18px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: $dark;
+  }
+}
+
+/* ==========================================================
+   HERO SECTION WITH TROPHY
+   ========================================================== */
+
+.congrats-hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.congrats-trophy-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.congrats-trophy {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, $accent-yellow, darken($accent-yellow, 10%));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 8px 32px rgba($accent-yellow, 0.35),
+    0 0 0 8px rgba($accent-yellow, 0.15);
+  animation: trophy-pulse 2s ease-in-out infinite;
+
+  i {
+    font-size: 44px;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@keyframes trophy-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 8px 32px rgba($accent-yellow, 0.35),
+      0 0 0 8px rgba($accent-yellow, 0.15);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow:
+      0 12px 40px rgba($accent-yellow, 0.45),
+      0 0 0 12px rgba($accent-yellow, 0.1);
+  }
+}
+
+/* Sparkles around trophy */
+.congrats-sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  width: 0%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 18px;
+  color: $accent-yellow;
+  animation: sparkle-float 2s ease-in-out infinite;
+}
+
+.sparkle-1 {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%);
+  animation-delay: 0.5s;
+}
+
+.sparkle-3 {
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 1s;
+}
+
+.sparkle-4 {
+  top: 50%;
+  left: -15px;
+  transform: translateY(-50%);
+  animation-delay: 1.5s;
+}
+
+@keyframes sparkle-float {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.congrats-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: $dark;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.congrats-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba($dark, 0.7);
+  margin: 0;
+  line-height: 1.4;
+
+  strong {
+    color: $accent-brown;
+    font-weight: 600;
+  }
+}
+
+/* ==========================================================
+   XP PROGRESS CARD
+   ========================================================== */
+
+.congrats-xp-card {
+  background: $card-bg;
   border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.xp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.xp-level-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, $accent-yellow, darken($accent-yellow, 8%));
+  color: darken($accent-yellow, 35%);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+
+  i {
+    font-size: 16px;
+  }
+}
+
+.xp-earned-badge {
+  background: linear-gradient(135deg, $accent-green, darken($accent-green, 5%));
+  color: white;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba($accent-green, 0.25);
+}
+
+.xp-progress-wrapper {
+  width: 100%;
+  height: 14px;
+  background: rgba($accent-green, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.xp-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $accent-green, lighten($accent-green, 8%));
+  border-radius: 10px;
   transition: width 1.5s ease-out;
 }
 
+.xp-progress-text {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba($dark, 0.6);
+  margin: 0;
+}
 
 /* ==========================================================
-   3) REGULAR BUTTONS (ADD REVIEW / GO HOME)
+   ACTION CARDS
    ========================================================== */
 
-.congrats-btn-wrapper {
-  margin-bottom: 22px;
+.congrats-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-bottom: 40px;
 }
 
-.congrats-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 16px 24px;
-  border-radius: 40px;
-  background: $background;
-  border: 2px solid #C5C5C5;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
-  color: #4A4A4A;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
-  transition: background 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+.congrats-action-card {
+  display: flex;
+  align-items: center;
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 18px 20px;
   text-decoration: none;
+  color: $dark;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    color: $dark;
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
 }
 
-/* Shared hover */
-.congrats-btn:hover,
-.congrats-page .favorite-btn:hover {
-  background: lighten($background, 3%);
+.congrats-action-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba($accent-brown, 0.12);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  i {
+    font-size: 22px;
+    color: $accent-brown;
+  }
 }
 
-#save-to-cookbook{
-  margin-bottom: 22px;
+/* Star icon - yellow theme */
+.congrats-icon-star {
+  background: rgba($accent-yellow, 0.15);
+
+  i {
+    color: darken($accent-yellow, 10%);
+  }
+}
+
+/* Cookbook icon - green theme */
+.congrats-icon-cookbook {
+  background: rgba($accent-green, 0.12);
+
+  i {
+    color: $accent-green;
+  }
+}
+
+.congrats-icon-cookbook-saved {
+  background: rgba($accent-green, 0.2);
+
+  i {
+    color: $accent-green;
+  }
+}
+
+.congrats-action-label {
+  flex: 1;
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.congrats-action-title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.congrats-title-saved {
+  color: $accent-green;
+}
+
+.congrats-action-subtitle {
+  font-size: 14px;
+  color: rgba($dark, 0.55);
+  margin-top: 2px;
+}
+
+.congrats-action-arrow {
+  font-size: 14px;
+  color: rgba($dark, 0.3);
+  margin-left: 8px;
+}
+
+/* ==========================================================
+   COOKBOOK/FAVORITE BUTTON STYLING
+   ========================================================== */
+
+.congrats-cookbook-wrapper {
+  width: 100%;
+}
+
+.congrats-cookbook-wrapper [id^="favorite_button_"],
+.congrats-cookbook-wrapper > div {
+  width: 100%;
+}
+
+.congrats-cookbook-wrapper .favorite-form {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.congrats-cookbook-wrapper .favorite-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: $dark;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0;
+  height: auto;
+  min-width: unset;
+  min-height: unset;
+  max-width: unset;
+  max-height: unset;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  // Hide the heart icon
+  i {
+    display: none;
+  }
+
+  // Icon box
+  &::before {
+    content: '\f02d'; // fa-book
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 22px;
+    color: $accent-green;
+    width: 50px;
+    height: 50px;
+    background: rgba($accent-green, 0.12);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  // Label text
+  &::after {
+    content: 'Save to Cookbook';
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 600;
+    color: $dark;
+    margin-left: 16px;
+    flex: 1;
+  }
+}
+
+.congrats-cookbook-wrapper .favorite-btn.saved {
+  &::before {
+    content: '\f02d'; // fa-book
+    background: rgba($accent-green, 0.2);
+  }
+
+  &::after {
+    content: 'Saved to Cookbook';
+    color: $accent-green;
+  }
+}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.congrats-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.congrats-footer-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+/* ==========================================================
+   MOBILE RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 576px) {
+  .congrats-page {
+    padding: 16px;
+    padding-bottom: 100px;
+  }
+
+  .congrats-trophy {
+    width: 85px;
+    height: 85px;
+
+    i {
+      font-size: 38px;
+    }
+  }
+
+  .congrats-title {
+    font-size: 28px;
+  }
+
+  .congrats-subtitle {
+    font-size: 16px;
+  }
+
+  .congrats-xp-card {
+    padding: 20px;
+  }
+
+  .xp-level-badge,
+  .xp-earned-badge {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .congrats-action-card {
+    padding: 16px;
+  }
+
+  .congrats-action-icon {
+    width: 44px;
+    height: 44px;
+
+    i {
+      font-size: 20px;
+    }
+  }
+
+  .congrats-action-title {
+    font-size: 16px;
+  }
+
+  .congrats-action-subtitle {
+    font-size: 13px;
+  }
+
+  .congrats-cookbook-wrapper .favorite-btn {
+    padding: 16px;
+
+    &::before {
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+    }
+
+    &::after {
+      font-size: 16px;
+    }
+  }
 }

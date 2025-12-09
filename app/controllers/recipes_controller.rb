@@ -115,7 +115,7 @@ class RecipesController < ApplicationController
     @old_xp_percent = current_user.progress_percentage
 
     if user_signed_in?
-      recent_window_seconds = 30
+      recent_window_seconds = 300 # 5 minutes
       recent_exist = UserRecipeCompletion.where(user: current_user, recipe: @recipe)
                                         .where("created_at >= ?", recent_window_seconds.seconds.ago)
                                         .exists?
