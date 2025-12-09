@@ -4,22 +4,33 @@ export default class extends Controller {
   static targets = ["messages"]
 
   connect() {
-    this.scrollToLatest()
+    // Small delay to ensure DOM is fully rendered
+    setTimeout(() => this.scrollToLatestMessage(), 50)
   }
 
   messagesTargetChanged() {
-    this.scrollToLatest()
+    this.scrollToLatestMessage()
   }
 
-  scrollToLatest() {
+  scrollToLatestMessage() {
     const container = this.messagesTarget
-    const messages = container.children
+    const messageRows = container.querySelectorAll(".message-row")
 
-    if (messages.length === 0) return
+    if (messageRows.length === 0) return
 
-    const lastMessage = messages[messages.length - 1]
+    // Find the last assistant message
+    let lastAssistantMessage = null
+    for (let i = messageRows.length - 1; i >= 0; i--) {
+      if (messageRows[i].querySelector(".chat-assistant")) {
+        lastAssistantMessage = messageRows[i]
+        break
+      }
+    }
 
-    // Scroll so that the last message appears at the TOP of the container
-    container.scrollTop = lastMessage.offsetTop
+    // Scroll to the top of the last assistant message, or last message if no assistant
+    const targetMessage = lastAssistantMessage || messageRows[messageRows.length - 1]
+
+    // Use scrollIntoView to position message at the top of visible area
+    targetMessage.scrollIntoView({ behavior: "auto", block: "start" })
   }
 }
