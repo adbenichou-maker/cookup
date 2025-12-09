@@ -1,99 +1,180 @@
-<div class="ai-form-container">
-  <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="ai-cook-page">
+  <!-- Header -->
+  <div class="ai-cook-header">
     <%= link_to dashboard_path, class: "profile-back" do %>
       <i class="fa-solid fa-arrow-left"></i>
     <% end %>
-    <a class="btn btn-secondary btn-sm" href="#" data-bs-toggle="offcanvas" data-bs-target="#chatsOffcanvas" aria-controls="chatsOffcanvas">
-      <i class="fa-solid fa-bars me-2"></i>Chats
+    <a class="ai-cook-history-btn" href="#" data-bs-toggle="offcanvas" data-bs-target="#chatsOffcanvas" aria-controls="chatsOffcanvas">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <span>History</span>
     </a>
   </div>
-  <h1 class="mt-4">What's Cooking?</h1>
-  <p class="opacity-75">Tell your AI Chef about the dish you want to create.</p>
 
-  <%= simple_form_for @chat, url: chats_path, method: :post do |f| %>
+  <!-- Hero Section -->
+  <div class="ai-cook-hero">
+    <div class="ai-cook-icon-wrapper">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+    </div>
+    <h1 class="ai-cook-title">What's Cooking?</h1>
+    <p class="ai-cook-subtitle">Tell your AI Chef about the dish you want to create</p>
+  </div>
 
-    <%= f.simple_fields_for :recipe_requirements, @recipe_requirements do |req| %>
-      <% meal_types = ['Breakfast', 'Lunch', 'Dinner', 'Dessert'] %>
-      <% skill_levels = ['Beginner', 'Intermediate', 'Advanced'] %>
-      <% prep_time = [[10,10],[15,15],[20,20],[30,30],[45,45],["1hr +",60]] %>
+  <!-- Form Card -->
+  <div class="ai-form-card">
+    <%= simple_form_for @chat, url: chats_path, method: :post do |f| %>
+      <%= f.simple_fields_for :recipe_requirements, @recipe_requirements do |req| %>
+        <% meal_types = ['Breakfast', 'Lunch', 'Dinner', 'Dessert'] %>
+        <% skill_levels = ['Beginner', 'Intermediate', 'Advanced'] %>
 
-      <div class="space-y-6">
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Ingredients Section -->
+        <div class="ai-form-section">
+          <div class="ai-form-section-header">
+            <div class="ai-form-section-icon">
+              <i class="fa-solid fa-carrot"></i>
+            </div>
+            <div class="ai-form-section-label">
+              <span class="ai-form-section-title">Key Ingredients</span>
+              <span class="ai-form-section-hint">What do you have?</span>
+            </div>
+          </div>
           <%= req.input :ingredients,
-            label: "Key Ingredients",
-            input_html: { class: "form-control input" },
-            placeholder: "e.g., chicken, basil, tomatoes" %>
+            label: false,
+            input_html: { class: "ai-form-input", placeholder: "e.g., chicken, basil, tomatoes..." } %>
         </div>
 
-        <div class="mb-4">
-          <label class="form-label">Your Cooking Skill Level</label>
-          <div class="d-flex w-100" aria-label="Skill level selection">
-            <% skill_levels.each do |level| %>
+        <!-- Skill Level Section -->
+        <div class="ai-form-section">
+          <div class="ai-form-section-header">
+            <div class="ai-form-section-icon">
+              <i class="fa-solid fa-chart-simple"></i>
+            </div>
+            <div class="ai-form-section-label">
+              <span class="ai-form-section-title">Skill Level</span>
+              <span class="ai-form-section-hint">Your cooking experience</span>
+            </div>
+          </div>
+          <div class="ai-toggle-group ai-toggle-3">
+            <% skill_levels.each_with_index do |level, index| %>
               <% level_id = "skill_#{level.downcase}" %>
               <input type="radio"
-                    class="btn-check"
+                    class="ai-toggle-input"
                     name="chat[recipe_requirements][skill_level]"
                     id="<%= level_id %>"
                     value="<%= level %>"
                     autocomplete="off"
                     <%= 'checked' if @recipe_requirements[:skill_level] == level %>>
-              <label class="btn btn-outline-primary flex-grow-1" for="<%= level_id %>"><%= level %></label>
+              <label class="ai-toggle-label" for="<%= level_id %>">
+                <% if index == 0 %>
+                  <i class="fa-solid fa-seedling"></i>
+                <% elsif index == 1 %>
+                  <i class="fa-solid fa-fire-flame-curved"></i>
+                <% else %>
+                  <i class="fa-solid fa-crown"></i>
+                <% end %>
+                <span><%= level %></span>
+              </label>
             <% end %>
           </div>
-        <div class="mb-4">
-          <label class="form-label">Meal Type</label>
-          <div class="d-flex flex-wrap w-100" role="group" aria-label="Meal type selection">
-            <% meal_types.each do |type| %>
+        </div>
+
+        <!-- Meal Type Section -->
+        <div class="ai-form-section">
+          <div class="ai-form-section-header">
+            <div class="ai-form-section-icon">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div class="ai-form-section-label">
+              <span class="ai-form-section-title">Meal Type</span>
+              <span class="ai-form-section-hint">What are you making?</span>
+            </div>
+          </div>
+          <div class="ai-toggle-group ai-toggle-4">
+            <% meal_types.each_with_index do |type, index| %>
               <% type_id = "meal_#{type.downcase}" %>
               <input type="radio"
-                    class="btn-check"
+                    class="ai-toggle-input"
                     name="chat[recipe_requirements][meal_type]"
                     id="<%= type_id %>"
                     value="<%= type %>"
                     autocomplete="off"
                     <%= 'checked' if @recipe_requirements[:meal_type] == type %>>
-              <label class="btn btn-outline-primary w-50 w-md-25" for="<%= type_id %>"><%= type %></label>
+              <label class="ai-toggle-label" for="<%= type_id %>">
+                <% if index == 0 %>
+                  <i class="fa-solid fa-sun"></i>
+                <% elsif index == 1 %>
+                  <i class="fa-solid fa-cloud-sun"></i>
+                <% elsif index == 2 %>
+                  <i class="fa-solid fa-moon"></i>
+                <% else %>
+                  <i class="fa-solid fa-cake-candles"></i>
+                <% end %>
+                <span><%= type %></span>
+              </label>
             <% end %>
           </div>
         </div>
-          <%# Removed grid/cols/gap classes, added form-row class %>
-        <div class="mb-4">
-          <h4>Prep Time</h4>
 
-          <div data-controller="prepTime" class="prep-time-wrapper" id="prep-timer-ai">
+        <!-- Prep Time Section -->
+        <div class="ai-form-section">
+          <div class="ai-form-section-header">
+            <div class="ai-form-section-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div class="ai-form-section-label">
+              <span class="ai-form-section-title">Prep Time</span>
+              <span class="ai-form-section-hint">How much time do you have?</span>
+            </div>
+          </div>
 
+          <div data-controller="prepTime" class="ai-prep-time-container" id="prep-timer-ai">
+            <div class="ai-prep-time-display" data-prepTime-target="label">
+              <%= (@recipe_requirements[:meal_prep_time].to_i == 120 || @recipe_requirements[:meal_prep_time].blank?) ? "No limit" : "#{@recipe_requirements[:meal_prep_time]} min" %>
+            </div>
             <input
               type="range"
-              min="0"
+              min="5"
               max="120"
               step="5"
               value="<%= @recipe_requirements[:meal_prep_time] || 120 %>"
-              class="prep-time-slider"
+              class="ai-prep-time-slider"
               data-action="input->prepTime#update"
               data-prepTime-target="slider"
             >
-
-            <div class="prep-time-label" data-prepTime-target="label">
-              <%= (@recipe_requirements[:meal_prep_time].to_i == 120 || @recipe_requirements[:meal_prep_time].blank?) ? "No limit" : "#{@recipe_requirements[:meal_prep_time]} min" %>
+            <div class="ai-prep-time-labels">
+              <span>5 min</span>
+              <span>No limit</span>
             </div>
-
             <%= req.hidden_field :meal_prep_time,
                   value: @recipe_requirements[:meal_prep_time] || 120,
                   data: { prepTime_target: "input" } %>
           </div>
         </div>
 
-        <%= req.input :restrictions,
-            as: :text,
-            label: "Dietary Restrictions or Notes",
-            input_html: { rows: 4, class: "form-control input" } %>
+        <!-- Dietary Restrictions Section -->
+        <div class="ai-form-section">
+          <div class="ai-form-section-header">
+            <div class="ai-form-section-icon">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="ai-form-section-label">
+              <span class="ai-form-section-title">Dietary Notes</span>
+              <span class="ai-form-section-hint">Allergies, preferences, etc.</span>
+            </div>
+          </div>
+          <%= req.input :restrictions,
+              as: :text,
+              label: false,
+              input_html: { rows: 3, class: "ai-form-textarea", placeholder: "e.g., vegetarian, no nuts, low sodium..." } %>
+        </div>
+
+      <% end %>
+
+      <!-- Submit Button -->
+      <div class="ai-form-submit">
+        <%= f.submit 'Generate Recipes', class: 'ai-submit-btn' %>
       </div>
     <% end %>
-    <div class="mt-6 mb-5">
-      <%= f.submit 'Generate Recipes!', class: 'btn btn-primary w-100' %>
-    </div>
-  <% end %>
+  </div>
 </div>
 
 <%= render 'shared/offcanvas' if user_signed_in? %>
