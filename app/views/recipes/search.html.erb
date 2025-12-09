@@ -72,10 +72,9 @@
 
       <%= f.submit "Apply Filters", class: "search-submit-btn" %>
 
-    <% end %>   <!-- ✅ THIS WAS MISSING -->
+    <% end %>
 
   </div>
-
 
   <!-- Results -->
   <% @recipes.each do |recipe| %>
@@ -101,10 +100,26 @@
         </div>
       <% end %>
 
-      <!-- Favorite Button (Turbo Frame prevents scroll jump) -->
-      <turbo-frame id="favorite_button_<%= recipe.id %>">
-        <%= render "favorites/favorite_button", recipe: recipe %>
-      </turbo-frame>
+      <!-- RIGHT SIDE WRAPPER (we create a new flex box for icon + favorite button) -->
+      <div class="right-icons">
+
+        <% level_colors = {
+          "beginner" => "#8BAA7B",
+          "intermediate" => "#D6A84A",
+          "expert" => "#C94A4A"
+        } %>
+
+        <% if recipe.recipe_level.present? %>
+          <i class="fa-solid fa-graduation-cap difficulty-icon"
+            style="color:<%= level_colors[recipe.recipe_level] %>;"></i>
+        <% end %>
+
+        <!-- Favorite Button -->
+        <turbo-frame id="favorite_button_<%= recipe.id %>">
+          <%= render "favorites/favorite_button", recipe: recipe %>
+        </turbo-frame>
+
+      </div>
 
     </div>
   <% end %>
