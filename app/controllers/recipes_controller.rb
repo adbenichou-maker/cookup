@@ -122,6 +122,7 @@ class RecipesController < ApplicationController
 
       unless recent_exist
         UserRecipeCompletion.create!(user: current_user, recipe: @recipe)
+        check_badges_and_notify
       end
     end
 

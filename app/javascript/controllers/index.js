@@ -7,6 +7,9 @@ eagerLoadControllersFrom("controllers", application)
 import BadgeController from "./badge_controller"
 application.register("badge", BadgeController)
 
+import BadgeNotificationController from "./badge_notification_controller"
+application.register("badge-notification", BadgeNotificationController)
+
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
 
