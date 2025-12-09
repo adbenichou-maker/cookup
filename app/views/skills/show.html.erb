@@ -1,34 +1,53 @@
-<div class="container-fluid p-3" style="background-color: #F7EEDB;">
+<div class="container-fluid p-3" style="background-color: #F7EEDB; min-height: 100vh;">
+
+  <!-- Back Button -->
   <% if params[:recipe_id].present? %>
-    <%# Case 1: Came from Recipe Show Page %>
     <%= link_to recipe_steps_path(params[:recipe_id]), class: "profile-back" do %>
-    <i class="fa-solid fa-arrow-left"></i>
-<% end %>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
   <% else %>
-    <%# Case 2: Came from Skills Index/Levels Page %>
     <%= link_to skills_path, class: "profile-back" do %>
-    <i class="fa-solid fa-arrow-left"></i>
+      <i class="fa-solid fa-arrow-left"></i>
     <% end %>
   <% end %>
-  <header class="text-center mb-4">
-    <h1 class="display-5 fw-bold mb-2" style="color: #4A4A4A;">
-      <%= @skill.title %>
-    </h1>
 
-    <div class="d-inline-flex align-items-center p-2 rounded-pill shadow-sm"
-        style="background-color: #F2C94C; color: #4A4A4A;">
-      <i class="bi bi-award-fill me-2" style="color: #C9815B;"></i>
-      <span class="fw-bold">
-        Skill Level: <%= @skill.skill_level.humanize %>
-      </span>
+  <!-- Header -->
+  <header class="mb-4 pt-3">
+    <div class="text-center">
+      <h1 class="display-5 fw-bold mb-3" style="color: #4A4A4A;">
+        <%= @skill.title %>
+      </h1>
+
+      <!-- Skill Level Badge -->
+      <%
+        level = @skill.skill_level.to_s.downcase
+        badge_bg = case level
+                   when "beginner" then "#8BAA7B"
+                   when "intermediate" then "#F2C94C"
+                   when "expert" then "#C9815B"
+                   else "#F2C94C"
+                   end
+        badge_text = level == "intermediate" ? "#4A4A4A" : "#FFFFFF"
+      %>
+      <div class="d-inline-flex align-items-center px-3 py-2 rounded-pill shadow-sm"
+           style="background-color: <%= badge_bg %>; color: <%= badge_text %>;">
+        <i class="fa-solid fa-graduation-cap me-2"></i>
+        <span class="fw-bold"><%= @skill.skill_level.humanize %></span>
+      </div>
     </div>
+    <hr class="mt-4" style="border-color: #8BAA7B;">
   </header>
 
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
 
-      <%# Skill Video Section %>
-      <section class="card shadow-lg mb-4 border-0" style="border-radius: 12px; overflow: hidden;">
+      <!-- Video Section -->
+      <section class="card shadow-sm mb-4 border-0" style="border-radius: 16px; overflow: hidden;">
+        <div class="card-header text-white py-3" style="background-color: #8BAA7B;">
+          <h2 class="h5 mb-0 fw-bold">
+            <i class="fa-solid fa-play-circle me-2"></i>Watch & Learn
+          </h2>
+        </div>
         <div class="ratio ratio-16x9">
           <%= video_tag @skill.video,
               controls: true,
@@ -38,35 +57,44 @@
         </div>
       </section>
 
-      <%# Skill Description Section %>
-      <section class="card shadow-sm mb-4 border-start border-4"
-              style="border-color: #8BAA7B !important; background-color: rgba(255, 255, 255, 0.7);">
-        <div class="card-body">
-          <h2 class="h5 fw-bold mb-3" style="color: #C9815B;">
-            What You Will Learn
+      <!-- Description Section -->
+      <section class="card shadow-sm mb-4 border-0" style="border-radius: 16px; overflow: hidden;">
+        <div class="card-header text-white py-3" style="background-color: #C9815B;">
+          <h2 class="h5 mb-0 fw-bold">
+            <i class="fa-solid fa-lightbulb me-2"></i>Video Content
           </h2>
-          <p class="card-text lead" style="color: #4A4A4A;">
+        </div>
+        <div class="card-body p-4" style="background-color: #FCF8EF;">
+          <p class="mb-0" style="color: #4A4A4A; font-size: 1.1em; line-height: 1.7;">
             <%= @skill.description %>
           </p>
         </div>
       </section>
+
+      <!-- Action Section -->
       <% if user_signed_in? %>
         <div class="d-grid mb-5">
           <% if !current_user.user_skills.exists?(skill_id: @skill.id) %>
-            <%= button_to "Mark as Learned 🧑‍🍳",
-                skill_user_skills_path(@skill, recipe_id: params[:recipe_id]),
+            <%= button_to skill_user_skills_path(@skill, recipe_id: params[:recipe_id]),
                 method: :post,
                 form: { data: { turbo_confirm: "Are you sure you mastered this skill?" } },
                 class: "btn btn-lg fw-bold text-white shadow-lg",
-                style: "background-color: #8BAA7B; border-color: #8BAA7B;" %>
-
+                style: "background-color: #8BAA7B; border-color: #8BAA7B; border-radius: 12px; padding: 16px;" do %>
+              <i class="fa-solid fa-check-circle me-2"></i>Mark as Learned
+            <% end %>
           <% else %>
-            <div class="text-center p-3 mb-3 border border-3 rounded-5 shadow-sm"
-              style="border-color: #8BAA7B !important; background-color: rgba(255, 255, 255, 0.7); color: #4A4A4A;">
-              <i class="bi bi-check-circle-fill me-2" style="color: #8BAA7B;"></i>
-              <span class="fw-bold">You've already mastered this skill ✅</span>
+            <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
+              <div class="card-body text-center p-4" style="background-color: #FCF8EF;">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
+                     style="width: 64px; height: 64px; background-color: rgba(139, 170, 123, 0.15);">
+                  <i class="fa-solid fa-trophy fa-2x" style="color: #8BAA7B;"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2" style="color: #4A4A4A;">Skill Mastered!</h3>
+                <p class="mb-0" style="color: #8BAA7B; font-weight: 500;">
+                  You've already learned this technique
+                </p>
+              </div>
             </div>
-
           <% end %>
         </div>
       <% end %>
