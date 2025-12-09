@@ -1,27 +1,63 @@
-<h2>Change your password</h2>
+<% content_for :hide_navbar, true %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
-
-  <div class="form-inputs">
-    <%= f.input :password,
-                label: "New password",
-                required: true,
-                autofocus: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                label: "Confirm your new password",
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+<div class="auth-container">
+  <!-- Header -->
+  <div class="auth-header">
+    <%= link_to new_user_session_path, class: "auth-back-link" do %>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+    <%= image_tag "logo_cookup.png", class: "auth-logo" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
+  <!-- Welcome Section -->
+  <div class="auth-welcome">
+    <div class="auth-icon green">
+      <i class="fa-solid fa-lock"></i>
+    </div>
+    <h2 class="auth-title">Reset Password</h2>
+    <p class="auth-subtitle">Create a new secure password</p>
   </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+  <!-- Form Card -->
+  <div class="auth-card">
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification message: "Please fix the errors below:" %>
+
+      <%= f.input :reset_password_token, as: :hidden %>
+      <%= f.full_error :reset_password_token %>
+
+      <div class="auth-form">
+        <div class="auth-input-group">
+          <label class="auth-label">New Password</label>
+          <%= f.input :password,
+                      required: true,
+                      autofocus: true,
+                      label: false,
+                      hint: false,
+                      placeholder: "Enter your new password",
+                      input_html: { autocomplete: "new-password", class: "auth-input" } %>
+          <span class="auth-hint"><%= "#{@minimum_password_length} characters minimum" if @minimum_password_length %></span>
+        </div>
+
+        <div class="auth-input-group">
+          <label class="auth-label">Confirm Password</label>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      label: false,
+                      placeholder: "Confirm your new password",
+                      input_html: { autocomplete: "new-password", class: "auth-input" } %>
+        </div>
+
+        <%= f.button :submit, "Change Password", class: "auth-submit" do %>
+          <span>Change Password</span>
+          <i class="fa-solid fa-check"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Footer Link -->
+  <div class="auth-footer">
+    <p>Remember your password? <%= link_to "Sign In", new_user_session_path, class: "auth-link" %></p>
+  </div>
+</div>
