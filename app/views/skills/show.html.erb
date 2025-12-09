@@ -22,15 +22,15 @@
       <%
         level = @skill.skill_level.to_s.downcase
         badge_bg = case level
-                   when "beginner" then "#8BAA7B"
-                   when "intermediate" then "#F2C94C"
-                   when "expert" then "#C9815B"
-                   else "#F2C94C"
-                   end
+                  when "beginner" then "#8BAA7B"
+                  when "intermediate" then "#F2C94C"
+                  when "expert" then "#C9815B"
+                  else "#F2C94C"
+                  end
         badge_text = level == "intermediate" ? "#4A4A4A" : "#FFFFFF"
       %>
       <div class="d-inline-flex align-items-center px-3 py-2 rounded-pill shadow-sm"
-           style="background-color: <%= badge_bg %>; color: <%= badge_text %>;">
+          style="background-color: <%= badge_bg %>; color: <%= badge_text %>;">
         <i class="fa-solid fa-graduation-cap me-2"></i>
         <span class="fw-bold"><%= @skill.skill_level.humanize %></span>
       </div>
@@ -49,11 +49,12 @@
           </h2>
         </div>
         <div class="ratio ratio-16x9">
+
           <%= video_tag @skill.video,
               controls: true,
               autoplay: false,
               class: "w-100",
-              style: "background-color: #4A4A4A;" %>
+              style: "background-color: #4A4A4A;"%>
         </div>
       </section>
 
