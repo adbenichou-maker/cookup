@@ -1,0 +1,311 @@
+@import "config/colors";
+@import "config/fonts";
+
+/* ============================================
+   BADGE NOTIFICATION POPUP
+   ============================================ */
+
+.badge-notification-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    display: flex;
+    opacity: 1;
+  }
+
+  &.closing {
+    opacity: 0;
+  }
+}
+
+.badge-notification-content {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff 0%, #faf8f5 100%);
+  padding: 40px 35px;
+  border-radius: 24px;
+  text-align: center;
+  width: 320px;
+  max-width: 90vw;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  animation: badgePopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  overflow: hidden;
+}
+
+/* Glow effect behind the card */
+.badge-notification-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba($accent-yellow, 0.3),
+    transparent,
+    rgba($accent-green, 0.3),
+    transparent
+  );
+  animation: rotateGlow 4s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.badge-notification-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.badge-notification-sparkle {
+  font-size: 20px;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.badge-notification-sparkle:last-child {
+  animation-delay: 0.5s;
+}
+
+.badge-notification-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: $dark;
+  margin: 0;
+  background: linear-gradient(135deg, $accent-brown, $accent-yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.badge-notification-emoji-wrapper {
+  position: relative;
+  margin: 0 auto 20px;
+}
+
+.badge-notification-emoji {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
+  margin: 0 auto;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+  animation: badgeBounce 0.6s ease-out 0.3s both, badgePulse 2s ease-in-out 1s infinite;
+  position: relative;
+}
+
+.badge-notification-emoji::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $accent-yellow, $accent-brown, $accent-green);
+  z-index: -1;
+  animation: borderRotate 3s linear infinite;
+}
+
+.badge-notification-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: $dark;
+  margin: 0 0 8px 0;
+  animation: slideUp 0.4s ease-out 0.4s both;
+}
+
+.badge-notification-level {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  padding: 6px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  animation: slideUp 0.4s ease-out 0.5s both;
+
+  &.badge-level-1 {
+    background: linear-gradient(135deg, #cd7f32, #b87333);
+    color: white;
+    box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4);
+  }
+
+  &.badge-level-2 {
+    background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+    color: #333;
+    box-shadow: 0 4px 15px rgba(192, 192, 192, 0.4);
+  }
+
+  &.badge-level-3 {
+    background: linear-gradient(135deg, #FFD700, #FFC125);
+    color: #333;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  }
+
+  &.badge-level-4 {
+    background: linear-gradient(135deg, #E5E4E2, #D4D4D4);
+    color: #333;
+    box-shadow: 0 4px 15px rgba(229, 228, 226, 0.4),
+                0 0 20px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.badge-notification-description {
+  font-size: 14px;
+  color: rgba($dark, 0.7);
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+  animation: slideUp 0.4s ease-out 0.6s both;
+}
+
+.badge-notification-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, $accent-green, darken($accent-green, 8%));
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba($accent-green, 0.35);
+  transition: all 0.25s ease;
+  animation: slideUp 0.4s ease-out 0.7s both;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba($accent-green, 0.45);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes badgePopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes badgeBounce {
+  0% {
+    transform: scale(0) rotate(-180deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  70% {
+    transform: scale(0.9) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.15),
+      inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2) rotate(15deg);
+  }
+}
+
+@keyframes rotateGlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes borderRotate {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 576px) {
+  .badge-notification-content {
+    width: 90%;
+    padding: 30px 25px;
+  }
+
+  .badge-notification-emoji {
+    width: 100px;
+    height: 100px;
+    font-size: 55px;
+  }
+
+  .badge-notification-title {
+    font-size: 20px;
+  }
+
+  .badge-notification-name {
+    font-size: 20px;
+  }
+
+  .badge-notification-level {
+    font-size: 14px;
+  }
+}

@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.new(user: current_user, recipe: @recipe)
 
     if @favorite.save
-      BadgeAwarder.new(current_user).check_all!
+      check_badges_and_notify
       redirect_back fallback_location: recipe_path(@recipe), notice: "Recipe saved!"
     else
       redirect_back fallback_location: recipe_path(@recipe), alert: "Already saved."

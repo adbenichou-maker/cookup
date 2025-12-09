@@ -13,6 +13,7 @@
   <body>
     <%= render "shared/navbar" unless content_for?(:hide_navbar) %>
     <%= render "shared/flashes" %>
+    <%= render "shared/badge_notification" %>
 
     <%= yield %>
   </body>

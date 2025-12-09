@@ -6,6 +6,13 @@ class BadgeAwarder
     4 => 20   # Platinum
   }.freeze
 
+  LEVEL_NAMES = {
+    1 => "Bronze",
+    2 => "Silver",
+    3 => "Gold",
+    4 => "Platinum"
+  }.freeze
+
   RECIPE_LEVELS = {
     beginner: 0,
     intermediate: 1,
@@ -14,13 +21,17 @@ class BadgeAwarder
 
   def initialize(user)
     @user = user
+    @newly_earned = []
   end
 
+  # Returns array of newly earned badges with their level info
   def check_all!
+    @newly_earned = []
     check_recipe_level_badges
     check_saved_recipes_badges
     check_skills_badges
     check_streak_badges
+    @newly_earned
   end
 
   private
@@ -34,10 +45,18 @@ class BadgeAwarder
     new_level =
       LEVELS.keys.reverse.find { |level| count >= LEVELS[level] } || 0
 
-    if (user_badge.level || 0) < new_level
+    old_level = user_badge.level || 0
+    if old_level < new_level
       user_badge.level = new_level
       user_badge.awarded_at = Time.current
       user_badge.save!
+
+      @newly_earned << {
+        badge: badge,
+        level: new_level,
+        level_name: LEVEL_NAMES[new_level],
+        upgraded: old_level > 0
+      }
     end
   end
 

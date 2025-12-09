@@ -11,13 +11,12 @@ class UserRecipeCompletion < ApplicationRecord
     2 => 60
   }.freeze
 
-  after_create :give_xp_and_check_badges
+  after_create :give_xp
 
   private
 
-  def give_xp_and_check_badges
+  def give_xp
     xp = XP_REWARD[recipe.recipe_level.to_i] || 20
     user.add_xp(xp)
-    BadgeAwarder.new(user).check_all!
   end
 end

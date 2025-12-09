@@ -1,0 +1,58 @@
+<% if session[:earned_badges].present? %>
+  <%
+    badge_emojis = {
+      "recipe_beginner" => "👨‍🍳",
+      "recipe_intermediate" => "🍳",
+      "recipe_expert" => "🔥",
+      "saved_recipes" => "📖",
+      "skills_completed" => "🧠",
+      "streak" => "📅"
+    }
+
+    badges_data = session[:earned_badges].map do |b|
+      {
+        name: b["name"],
+        description: b["description"],
+        emoji: badge_emojis[b["rule_key"]] || "🏆",
+        level: b["level"],
+        level_name: b["level_name"],
+        upgraded: b["upgraded"]
+      }
+    end
+
+    session.delete(:earned_badges)
+  %>
+
+  <div data-controller="badge-notification"
+       data-badge-notification-badges-value="<%= badges_data.to_json %>">
+
+    <div class="badge-notification-overlay"
+         data-badge-notification-target="overlay"
+         data-action="click->badge-notification#closeOnBackground">
+
+      <div class="badge-notification-content"
+           data-action="click->badge-notification#stopPropagation">
+
+        <div class="badge-notification-glow"></div>
+
+        <div class="badge-notification-header">
+          <span class="badge-notification-sparkle">✨</span>
+          <h2 class="badge-notification-title">Badge Earned!</h2>
+          <span class="badge-notification-sparkle">✨</span>
+        </div>
+
+        <div class="badge-notification-emoji-wrapper">
+          <div class="badge-notification-emoji" data-badge-notification-target="emoji"></div>
+        </div>
+
+        <h3 class="badge-notification-name" data-badge-notification-target="name"></h3>
+        <p class="badge-notification-level" data-badge-notification-target="level"></p>
+        <p class="badge-notification-description" data-badge-notification-target="description"></p>
+
+        <button class="badge-notification-btn" data-action="click->badge-notification#close">
+          Awesome! 🎉
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>

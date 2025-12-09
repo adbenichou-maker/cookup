@@ -6,7 +6,7 @@ class UserSkillsController < ApplicationController
 
     if @user_skill.save
       current_user.add_xp(30)
-      BadgeAwarder.new(current_user).check_all!
+      check_badges_and_notify
 
       flash[:notice] = "Skill '#{@skill.title}' added to your learned skills!"
 
