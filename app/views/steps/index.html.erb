@@ -1,89 +1,120 @@
-<div class="container-fluid p-3" style="background-color: #F7EEDB;">
+<div class="container-fluid p-3" style="background-color: #F7EEDB; min-height: 100vh;">
+
+  <!-- Back Button -->
   <%= link_to recipe_path(params[:recipe_id]), class: "profile-back" do %>
     <i class="fa-solid fa-arrow-left"></i>
-    <% end %>
-  <header class="mb-4 pt-3">
-    <div class="d-flex justify-content-between align-items-start">
-      <div class="text-center flex-grow-1 mx-3">
-        <h1 class="display-5 fw-bold mb-0" style="color: #4A4A4A;">
-          <%= @recipe.title %> Steps
-        </h1>
-        <p class="text-muted small mt-1" style="color: #C9815B !important;">Follow these instructions to complete the dish.</p>
-      </div>
+  <% end %>
 
+  <!-- Header -->
+  <header class="mb-4 pt-3">
+    <div class="text-center">
+      <h1 class="display-5 fw-bold mb-2" style="color: #4A4A4A;">
+        <%= @recipe.title %>
+      </h1>
+      <p class="mb-0" style="color: #C9815B; font-weight: 500;">
+        Follow these instructions to complete the dish
+      </p>
     </div>
-    <hr style="border-color: #8BAA7B;">
+    <hr class="mt-4" style="border-color: #8BAA7B;">
   </header>
 
-  <div class="row">
-    <div class="col-12">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
 
-      <section class="card shadow-sm mb-4">
-        <ul class="list-group list-group-flush">
+      <!-- Steps Section -->
+      <section class="card shadow-sm mb-4 border-0" style="border-radius: 16px; overflow: hidden;">
+        <div class="card-header text-white py-3" style="background-color: #8BAA7B;">
+          <h2 class="h5 mb-0 fw-bold">
+            <i class="fa-solid fa-list-check me-2"></i>Instructions
+          </h2>
+        </div>
+
+        <div class="card-body p-0">
           <% @recipe.steps.each_with_index do |step, index| %>
+            <div class="p-4 <%= index < @recipe.steps.length - 1 ? 'border-bottom' : '' %>"
+                 style="background-color: #FCF8EF;">
 
-            <li class="list-group-item p-4" style="border-left: 5px solid #8BAA7B;">
-
-              <div class="d-flex align-items-center mb-2">
-                <span class="badge rounded-pill me-3 p-2 fw-bold text-white"
-                      style="background-color: #8BAA7B;">
-                  <%= index + 1 %>
-                </span>
-
-                <h3 class="h5 fw-bold mb-0" style="color: #4A4A4A;">
-                  <%= step.title %>
-                </h3>
+              <!-- Step Header -->
+              <div class="d-flex align-items-start mb-3">
+                <div class="d-flex align-items-center justify-content-center rounded-circle me-3 flex-shrink-0"
+                     style="width: 40px; height: 40px; background-color: #8BAA7B;">
+                  <span class="fw-bold text-white"><%= index + 1 %></span>
+                </div>
+                <div class="flex-grow-1">
+                  <h3 class="h5 fw-bold mb-0" style="color: #4A4A4A;">
+                    <%= step.title %>
+                  </h3>
+                </div>
               </div>
 
-              <p class="mb-0 ms-4" style="color: #4A4A4A; border-left: 1px dashed #C9815B; padding-left: 1rem;">
-                <%= step.content %>
-              </p>
+              <!-- Step Content -->
+              <div class="ms-5 ps-2">
+                <p class="mb-0" style="color: #4A4A4A; line-height: 1.7; border-left: 3px solid #C9815B; padding-left: 16px;">
+                  <%= step.content %>
+                </p>
 
-              <% if step.skill.present? %>
-                <%# Skill link is styled as a standalone block, not within a list %>
-                <div class="mt-3 ms-4">
-                  <h3 class="h6 fw-bold mb-2" style="color: #4A4A4A;">
-                    Skill Required:
-                  </h3>
-                  <%= link_to skill_path(step.skill, recipe_id: @recipe.id), style: "text-decoration: none;" do %>
-                    <div class="d-flex align-items-center p-2 rounded" style="background-color: #F2C94C; border: 1px solid #C9815B;">
-                        <i class="bi bi-tools me-2" style="color: #4A4A4A;"></i>
-                        <small class="fw-bold" style="color: #C9815B;">
-                          <%= step.skill.title %>
-                        </small>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
+                <!-- Skill CTA -->
+                <% if step.skill.present? %>
+                  <div class="mt-4">
+                    <%= link_to skill_path(step.skill, recipe_id: @recipe.id), style: "text-decoration: none;" do %>
+                      <div class="d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm"
+                           style="background: linear-gradient(135deg, #F2C94C 0%, #E5B93D 100%); transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center justify-content-center rounded-circle me-3"
+                               style="width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.3);">
+                            <i class="fa-solid fa-graduation-cap fa-lg" style="color: #4A4A4A;"></i>
+                          </div>
+                          <div>
+                            <small class="d-block fw-bold" style="color: #4A4A4A; opacity: 0.7; font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.5px;">
+                              Learn This Technique
+                            </small>
+                            <span class="fw-bold" style="color: #4A4A4A; font-size: 1.1em;">
+                              <%= step.skill.title %>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <span class="me-2 fw-bold d-none d-sm-inline" style="color: #C9815B;">Watch Video</span>
+                          <i class="fa-solid fa-circle-play fa-2x" style="color: #C9815B;"></i>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
 
-            </li>
+            </div>
           <% end %>
-        </ul>
+        </div>
       </section>
-      <% if @recipe.tips.present? %>
-        <div class="row justify-content-center mb-5">
-          <div class="col-12 col-md-10">
-            <div class="card p-3 shadow-lg" style="background-color: #fcebe3; border: 2px solid #C9815B; border-radius: 1rem;">
-              <div class="d-flex align-items-center">
-                <i class="fa-solid fa-lightbulb fa-2x me-3" style="color: #C9815B;"></i>
 
-                <div>
-                  <h2 class="h5 fw-bold mb-1" style="color: #C9815B;">Chef's Tips:</h2>
-                  <p class="mb-0" style="color: #4A4A4A; font-style: italic;">
-                    <%= @recipe.tips %>
-                  </p>
-                </div>
+      <!-- Chef's Tips -->
+      <% if @recipe.tips.present? %>
+        <section class="card shadow-sm mb-4 border-0" style="border-radius: 16px; overflow: hidden;">
+          <div class="card-body p-4" style="background: linear-gradient(135deg, #FCF0E8 0%, #FCEADE 100%); border: 2px solid #C9815B; border-radius: 16px;">
+            <div class="d-flex align-items-start">
+              <div class="d-flex align-items-center justify-content-center rounded-circle me-3 flex-shrink-0"
+                   style="width: 52px; height: 52px; background-color: rgba(201, 129, 91, 0.15);">
+                <i class="fa-solid fa-lightbulb fa-xl" style="color: #C9815B;"></i>
+              </div>
+              <div>
+                <h2 class="h5 fw-bold mb-2" style="color: #C9815B;">Chef's Tips</h2>
+                <p class="mb-0" style="color: #4A4A4A; line-height: 1.7; font-style: italic;">
+                  <%= @recipe.tips %>
+                </p>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       <% end %>
+
+      <!-- Finished Button -->
       <div class="d-grid mb-5">
-        <%= link_to "FINISHED", congratulation_recipe_path(@recipe),
-          class: "btn btn-lg fw-bold text-white shadow-lg",
-          style: "background-color: #C9815B;
-                  border-color: #C9815B;
-                  border-radius: 12px;" %>
+        <%= link_to congratulation_recipe_path(@recipe),
+            class: "btn btn-lg fw-bold text-white shadow-lg",
+            style: "background-color: #C9815B; border-color: #C9815B; border-radius: 12px; padding: 16px;" do %>
+          <i class="fa-solid fa-flag-checkered me-2"></i>FINISHED
+        <% end %>
       </div>
 
     </div>
