@@ -50,7 +50,7 @@ class RecipesController < ApplicationController
           "<ingredient_name>": "<quantity_as_string>"
         },
         "recipe_level": integer (0 for beginner, 1 for intermediate, 2 for expert),
-        "prep_time": integer (in minutes),
+        "meal_prep_time": integer (in minutes),
         "steps_attributes": [
           {
             "title": string,
@@ -115,7 +115,7 @@ class RecipesController < ApplicationController
     @old_xp_percent = current_user.progress_percentage
 
     if user_signed_in?
-      recent_window_seconds = 30
+      recent_window_seconds = 300 # 5 minutes
       recent_exist = UserRecipeCompletion.where(user: current_user, recipe: @recipe)
                                         .where("created_at >= ?", recent_window_seconds.seconds.ago)
                                         .exists?

@@ -1,4 +1,370 @@
-/* Container styling */
+/* ===========================
+   AI COOK PAGE - FULL REDESIGN
+   =========================== */
+
+.ai-cook-page {
+  background: $background;
+  min-height: 100vh;
+  padding: 20px;
+  padding-bottom: 120px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Header */
+.ai-cook-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.ai-cook-history-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: $card-bg;
+  color: $dark;
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+
+  i {
+    color: $accent-brown;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: $dark;
+  }
+}
+
+/* Hero Section */
+.ai-cook-hero {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.ai-cook-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, $accent-green, darken($accent-green, 8%));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 24px rgba($accent-green, 0.3);
+
+  i {
+    font-size: 32px;
+    color: white;
+  }
+}
+
+.ai-cook-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: $dark;
+  margin: 0 0 8px 0;
+}
+
+.ai-cook-subtitle {
+  font-size: 15px;
+  color: rgba($dark, 0.6);
+  margin: 0;
+}
+
+/* Form Card */
+.ai-form-card {
+  background: $card-bg;
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Form Sections */
+.ai-form-section {
+  margin-bottom: 24px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.ai-form-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ai-form-section-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba($accent-brown, 0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  i {
+    font-size: 18px;
+    color: $accent-brown;
+  }
+}
+
+.ai-form-section-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-form-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: $dark;
+  line-height: 1.2;
+}
+
+.ai-form-section-hint {
+  font-size: 13px;
+  color: rgba($dark, 0.5);
+  margin-top: 2px;
+}
+
+/* Form Inputs */
+.ai-form-input,
+.ai-form-textarea {
+  width: 100%;
+  background: rgba($background, 0.6);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: $dark;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: rgba($dark, 0.4);
+  }
+
+  &:focus {
+    outline: none;
+    background: white;
+    border-color: $accent-green;
+    box-shadow: 0 0 0 4px rgba($accent-green, 0.12);
+  }
+}
+
+.ai-form-textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+/* Toggle Groups (Radio Buttons) */
+.ai-toggle-group {
+  display: grid;
+  gap: 10px;
+}
+
+.ai-toggle-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ai-toggle-4 {
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ai-toggle-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ai-toggle-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba($background, 0.6);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 14px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+
+  i {
+    font-size: 20px;
+    color: rgba($dark, 0.4);
+    transition: all 0.2s ease;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba($dark, 0.6);
+    transition: all 0.2s ease;
+  }
+
+  &:hover {
+    background: rgba($accent-green, 0.08);
+    border-color: rgba($accent-green, 0.3);
+
+    i {
+      color: $accent-green;
+    }
+  }
+}
+
+.ai-toggle-input:checked + .ai-toggle-label {
+  background: rgba($accent-green, 0.12);
+  border-color: $accent-green;
+
+  i {
+    color: $accent-green;
+  }
+
+  span {
+    color: $dark;
+  }
+}
+
+/* Prep Time Slider */
+.ai-prep-time-container {
+  background: rgba($background, 0.6);
+  border-radius: 12px;
+  padding: 20px 16px;
+}
+
+.ai-prep-time-display {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: $accent-green;
+  margin-bottom: 16px;
+}
+
+.ai-prep-time-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: rgba($accent-green, 0.2);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, $accent-green, darken($accent-green, 8%));
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba($accent-green, 0.4);
+    transition: transform 0.15s ease;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, $accent-green, darken($accent-green, 8%));
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba($accent-green, 0.4);
+  }
+}
+
+.ai-prep-time-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  span {
+    font-size: 12px;
+    color: rgba($dark, 0.5);
+    font-weight: 500;
+  }
+}
+
+/* Submit Button */
+.ai-form-submit {
+  margin-top: 28px;
+}
+
+.ai-submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, $accent-green, darken($accent-green, 6%));
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 24px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba($accent-green, 0.35);
+  transition: all 0.2s ease;
+
+  i {
+    font-size: 18px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba($accent-green, 0.45);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* Simple Form overrides */
+.ai-form-card .form-group {
+  margin-bottom: 0;
+}
+
+.ai-form-card .string,
+.ai-form-card .text {
+  margin-bottom: 0;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   LEGACY - Keep for existing ai-form-container
+   =========================== */
 .ai-form-container {
   background: #ffffff;
   border-radius: 20px;
@@ -17,7 +383,6 @@
   justify-content: center;
 }
 
-/* Title */
 .ai-form-container h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -27,13 +392,11 @@
   margin-bottom: 1.5rem;
 }
 
-/* Description */
 .ai-form-container p {
   color: #7A7A7A;
   font-size: 1.05rem;
 }
 
-/* Inputs */
 .ai-form-container .input {
   background: #F5F1E7;
   border: 1px solid #D8D2C0;
@@ -49,98 +412,111 @@
   box-shadow: 0 0 6px rgba(139, 170, 123, 0.4);
 }
 
-/* Labels */
 .ai-form-container label {
   font-weight: 600;
   color: #4A4A4A;
 }
 
-/* Textarea */
 .ai-form-container textarea {
   resize: none;
 }
 
-.form-select.input {
-  background-color: #F5F1E7 !important;
-  border: 1px solid #D8D2C0 !important;
-  padding: 10px 14px !important;
-}
-
-.form-select.input:focus {
-  border-color: $accent-green !important;
-  // box-shadow: 0 0 6px rgba(map-get($theme-colors, "primary"), 0.4) !important;
-  box-shadow: 0 0 6px rgba(139, 170, 123, 0.4) !important;
-}
-
-/* Submit button */
-.ai-form-container .btn-primary {
-  background-color: #8BAA7B !important;
-  border-color: #8BAA7B !important;
-  padding: 14px 18px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  border-radius: 12px;
-  width: 100%;
-  transition: transform 0.15s ease, background-color 0.2s ease;
-}
-
-.ai-form-container .btn-secondary {
-  background-color: #8BAA7B !important;
-  border-color: #8BAA7B !important;
-  padding: 14px 18px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  border-radius: 12px;
-  // width: 100%;
-  transition: transform 0.15s ease, background-color 0.2s ease;
-}
-
-.ai-form-container .btn-outline-primary {
-  // background-color: #8BAA7B !important;
-  border-color: #8BAA7B !important;
-  padding: 10px 14px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 12px;
-  // width: 100%;
-
-// color: white !important;
-  transition: transform 0.15s ease, background-color 0.2s ease;
-}
-
-.ai-form-container .btn-primary:hover {
-  background-color: #789567 !important;
-  transform: translateY(-2px);
-
-}
-
-.ai-form-container .btn-primary:active {
-  transform: translateY(0);
-}
-
-.ai-form-container .btn-outline-primary:hover {
-  background-color: #789567 !important;
-  transform: translateY(-2px);
-  color: white !important;
-}
-
-.ai-form-container .btn-outline-primary:active {
-  transform: translateY(0);
-}
-
-
-/* Fade animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+/* ===========================
+   RESPONSIVE STYLES
+   =========================== */
+@media (max-width: 576px) {
+  .ai-cook-page {
+    padding: 16px;
+    padding-bottom: 100px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .ai-cook-icon-wrapper {
+    width: 64px;
+    height: 64px;
+
+    i {
+      font-size: 28px;
+    }
+  }
+
+  .ai-cook-title {
+    font-size: 24px;
+  }
+
+  .ai-cook-subtitle {
+    font-size: 14px;
+  }
+
+  .ai-form-card {
+    padding: 20px 16px;
+  }
+
+  .ai-form-section-icon {
+    width: 36px;
+    height: 36px;
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  .ai-form-section-title {
+    font-size: 15px;
+  }
+
+  .ai-toggle-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .ai-toggle-label {
+    padding: 12px 6px;
+
+    i {
+      font-size: 18px;
+    }
+
+    span {
+      font-size: 11px;
+    }
+  }
+
+  .ai-prep-time-display {
+    font-size: 24px;
+  }
+
+  .ai-submit-btn {
+    padding: 14px 20px;
+    font-size: 16px;
   }
 }
 
+/* Tablet styles */
+@media (min-width: 768px) {
+  .ai-cook-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    padding-bottom: 120px;
+  }
+
+  .ai-form-card {
+    padding: 32px 28px;
+  }
+
+  .ai-cook-icon-wrapper {
+    width: 80px;
+    height: 80px;
+
+    i {
+      font-size: 36px;
+    }
+  }
+
+  .ai-cook-title {
+    font-size: 32px;
+  }
+}
 
 
 
