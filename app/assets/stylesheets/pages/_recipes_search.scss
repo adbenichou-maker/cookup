@@ -394,3 +394,14 @@
 .prep-time-slider::-webkit-slider-thumb:hover {
   transform: scale(1.15);
 }
+
+
+@media (max-width: 576px) {
+  .prep-time-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  width: 50%;
+  }
+}
