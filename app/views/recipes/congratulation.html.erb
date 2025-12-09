@@ -1,5 +1,3 @@
-<% content_for :hide_navbar, true %>
-
 <div class="congrats-page">
   <!-- Back Button -->
   <div class="congrats-back-wrapper">
@@ -37,7 +35,7 @@
         <i class="fa-solid fa-award"></i>
         <span>Level <%= current_user.level %></span>
       </div>
-      <% xp_earned = { 0 => 20, 1 => 40, 2 => 60 }[@recipe.recipe_level_before_type_cast] || 20 %>
+      <% xp_earned = { 0 => 10, 1 => 20, 2 => 30 }[@recipe.recipe_level_before_type_cast] || 10 %>
       <span class="xp-earned-badge">+<%= xp_earned %> XP</span>
     </div>
 
