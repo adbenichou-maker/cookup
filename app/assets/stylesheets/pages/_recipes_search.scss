@@ -247,7 +247,7 @@
 
   /* Recipe Cards - Vertical Layout on Mobile */
   .recipe-card {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     gap: 15px;
     padding: 15px;
