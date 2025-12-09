@@ -93,7 +93,7 @@ class RecipesController < ApplicationController
       chat = @message.chat
       favorites = Favorite.new(user: current_user, recipe: @recipe)
       favorites.save
-      redirect_to chat_path(chat), notice: "Saved Recipe!"
+      redirect_to recipe_path(@recipe), notice: "Recipe saved!"
     else
       @message = @recipe.message
         render :new, status: :unprocessable_entity
