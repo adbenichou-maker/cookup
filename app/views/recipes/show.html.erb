@@ -36,15 +36,15 @@
             level_text = level_map[@recipe.recipe_level.to_i] || @recipe.recipe_level.to_s.capitalize
             level_key = level_text.downcase
             badge_bg = case level_key
-                       when "beginner" then "#8BAA7B"
-                       when "intermediate" then "#F2C94C"
-                       when "expert" then "#C9815B"
-                       else "#8BAA7B"
-                       end
-            badge_text = level_key == "intermediate" ? "#4A4A4A" : "#FFFFFF"
+                      when "beginner" then "#8BAA7B"
+                      when "intermediate" then "#F2C94C"
+                      when "expert" then "#C9815B"
+                      else "#8BAA7B"
+                      end
+            badge_text = level_key == "intermediate" ? "#141111ff" : "#FFFFFF"
           %>
           <div class="d-inline-flex align-items-center px-3 py-2 rounded-pill shadow-sm"
-               style="background-color: <%= badge_bg %>; color: <%= badge_text %>;">
+              style="background-color: <%= badge_bg %>; color: <%= badge_text %>;">
             <i class="fa-solid fa-graduation-cap me-2"></i>
             <span class="fw-bold"><%= level_text %></span>
           </div>
@@ -94,7 +94,7 @@
               <% @skills_for_recipe.each do |skill| %>
                 <%= link_to skill_path(skill, recipe_id: @recipe.id), style: "text-decoration: none;" do %>
                   <div class="d-inline-flex align-items-center px-3 py-2 rounded-pill shadow-sm"
-                       style="background-color: #F2C94C; transition: transform 0.2s ease;">
+                      style="background-color: #F2C94C; transition: transform 0.2s ease;">
                     <i class="fa-solid fa-star me-2" style="color: #C9815B;"></i>
                     <span class="fw-bold" style="color: #4A4A4A;"><%= skill.title %></span>
                   </div>
@@ -131,7 +131,7 @@
               </button>
             </h2>
 
-            <div id="collapseAllReviews" class="accordion-collapse collapse" data-bs-parent="#reviewsAccordion">
+            <div id="collapseAllReviews" class="accordion-collapse collapse show" data-bs-parent="#reviewsAccordion">
               <div class="accordion-body p-3" style="background-color: #FCF8EF;">
 
                 <% if @recipe.reviews.any? %>
@@ -145,7 +145,7 @@
                           <div class="flex-grow-1 me-3">
                             <div class="d-flex align-items-center mb-2">
                               <div class="d-inline-flex align-items-center justify-content-center rounded-circle me-2"
-                                   style="width: 36px; height: 36px; background-color: rgba(139, 170, 123, 0.15);">
+                                  style="width: 36px; height: 36px; background-color: rgba(139, 170, 123, 0.15);">
                                 <i class="fa-solid fa-user" style="color: #8BAA7B;"></i>
                               </div>
                               <div>
