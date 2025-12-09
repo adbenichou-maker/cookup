@@ -50,28 +50,22 @@
           </p>
         </div>
       </section>
-
-      <%# Action Block: Mark as Learned Button or Mastered Message %>
       <% if user_signed_in? %>
         <div class="d-grid mb-5">
           <% if !current_user.user_skills.exists?(skill_id: @skill.id) %>
-
-            <%# Show button if not learned %>
             <%= button_to "Mark as Learned 🧑‍🍳",
-                skill_user_skills_path(@skill),
+                skill_user_skills_path(@skill, recipe_id: params[:recipe_id]),
                 method: :post,
                 form: { data: { turbo_confirm: "Are you sure you mastered this skill?" } },
                 class: "btn btn-lg fw-bold text-white shadow-lg",
                 style: "background-color: #8BAA7B; border-color: #8BAA7B;" %>
 
           <% else %>
-
-            <%# Show mastered text if learned, styled with accent colors %>
             <div class="text-center p-3 mb-3 border border-3 rounded-5 shadow-sm"
               style="border-color: #8BAA7B !important; background-color: rgba(255, 255, 255, 0.7); color: #4A4A4A;">
-            <i class="bi bi-check-circle-fill me-2" style="color: #8BAA7B;"></i>
-            <span class="fw-bold">You've already mastered this skill ✅</span>
-          </div>
+              <i class="bi bi-check-circle-fill me-2" style="color: #8BAA7B;"></i>
+              <span class="fw-bold">You've already mastered this skill ✅</span>
+            </div>
 
           <% end %>
         </div>
