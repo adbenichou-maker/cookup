@@ -35,6 +35,9 @@ class ChatsController < ApplicationController
     prep = recipe_requirements[:meal_prep_time].to_i
     @meal_prep_time = (prep == 120 ? nil : prep)
 
+    # Parse restrictions: treat blank as nil
+    @restrictions = nil if @restrictions.blank?
+
     # Build a sensible title (fallback if ingredients missing)
     title = @ingredients.present? ? @ingredients : "New Chat"
     @chat = Chat.new(user: current_user, title: title)
@@ -42,7 +45,8 @@ class ChatsController < ApplicationController
     if @chat.save
       # Build text for the prompt with a friendly phrasing
       prep_text = @meal_prep_time.nil? ? "no time limit" : "#{@meal_prep_time} minutes"
-      user_prompt = "My ingredients are: #{@ingredients}, my skill level is: #{@skill_level}, I have #{prep_text} to prepare it, my food restriction are: #{@restrictions}"
+      restr_text = @restrictions.nil? ? "I have no diatary restrictions." : "My diatary restrictions are: #{@restrictions}."
+      user_prompt = "My ingredients are #{@ingredients}. I want to make #{@meal_type}. I have #{prep_text} to prepare it. I consider myself a #{@skill_level} cook. #{restr_text}"
 
       # Save the user message for history
       user_message = Message.create!(
