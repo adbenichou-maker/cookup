@@ -36,7 +36,10 @@ Skill.create!([
   { title: "Kneading and Proofing Dough", description: "Develop the gluten structure for a perfect rise.", video: "nxjrshfbpodqaxvh4kp3.mp4", skill_level: 2 },
   { title: "Cooking Risotto (Proper Stirring)", description: "Add stock slowly while stirring to achieve creamy risotto.", video: "lpvbvkjr09qpu0sjv5wa.mp4", skill_level: 2 },
   { title: "Checking Meat Internal Temperature", description: "Use a thermometer to ensure meat is cooked properly.", video: "luhlhziraf08afsknfj8.mp4", skill_level: 0 },
-  { title: "Braising Meat", description: "Slow-cooking meat in liquid for maximum tenderness and flavor.", video: "gamrvinxg6hxfwrtdeqi.mp4", skill_level: 1 }
+  { title: "Braising Meat", description: "Slow-cooking meat in liquid for maximum tenderness and flavor.", video: "gamrvinxg6hxfwrtdeqi.mp4", skill_level: 1 },
+  { title: "Basic Knife Skills", description: "Learn the proper grip and basic cuts like chop, dice, and mince.", video: "ypjsz5i7fozswa6l5rxy.mp4", skill_level: 0 },
+  { title: "Making Hollandaise Sauce", description: "Master the classic French emulsion sauce made from egg yolks, melted butter, and lemon juice.", video: "hhinzxu2qyahhouygjro.mp4", skill_level: 1
+}
 ])
 
 
@@ -99,7 +102,8 @@ def find_skill_for_step(text)
   return Skill.find_by(title: "Cooking Risotto (Proper Stirring)") if t.match?(/\brisotto\b|\bstir\b|\badd stock\b/)
   return Skill.find_by(title: "Braising Meat") if t.match?(/\bbraise\b|\bslow-cook\b|\bbraising\b/)
   return Skill.find_by(title: "Checking Meat Internal Temperature") if t.match?(/\btemperature\b|\bthermometer\b|\binternal temperature\b|\b74°C\b|\b165°F\b/)
-  return Skill.find_by(title: "Emulsifying Vinaigrette") if t.match?(/emulsif|whisk|emulsify/)
+  return Skill.find_by(title: "Making Hollandaise Sauce") if t.match?(/whisk|emulsify/) && t.match?(/yolks|butter|gentle\sheat/)
+  return Skill.find_by(title: "Emulsifying Vinaigrette") if t.match?(/whisk|emulsify/) && t.match?(/vinegar|oil|acid/)
   nil
 end
 
