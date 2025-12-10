@@ -26,18 +26,19 @@ puts "Destroyed all records."
 puts "Creating Skills..."
 
 Skill.create!([
-  { title: "Basic Knife Skills", description: "Learn the proper grip and basic cuts like chop, dice, and mince.", video: "dice-chop-mince.mp4", skill_level: 0 },
-  { title: "Dicing an Onion", description: "Learn proper professional onion dicing technique.", video: "dice-onion.mp4", skill_level: 0 },
-  { title: "Cutting Julienne", description: "Achieve the precise matchstick cut for vegetables.", video: "cutting-julienne.mp4", skill_level: 1 },
-  { title: "Cutting Brunoise", description: "Master the fine dice (tiny cubes) used for garnishes and aromatic bases.", video: "cutting_brunoise.mp4", skill_level: 2 },
-  { title: "Emulsifying Vinaigrette", description: "Create a stable, creamy dressing from oil and vinegar.", video: "emulsified-vinaigrette.mp4", skill_level: 1 },
-  { title: "Making a Basic Roux", description: "Combining butter and flour to create a thickening agent for sauces and soups.", video: "basic-roux.mp4", skill_level: 0 },
-  { title: "Making Béchamel Sauce", description: "Master the classic French white sauce and general sauce-building techniques.", video: "bechamel.mp4", skill_level: 1 },
-  { title: "Kneading and Proofing Dough", description: "Develop the gluten structure for a perfect rise.", video: "dough-preparation.mp4", skill_level: 2 },
-  { title: "Cooking Risotto (Proper Stirring)", description: "Add stock slowly while stirring to achieve creamy risotto.", video: "cooking-risotto.mp4", skill_level: 2 },
-  { title: "Checking Meat Internal Temperature", description: "Use a thermometer to ensure meat is cooked properly.", video: "meat-temperature.mp4", skill_level: 0 },
-  { title: "Braising Meat", description: "Slow-cooking meat in liquid for maximum tenderness and flavor.", video: "braising-technique.mp4", skill_level: 1 }
+  { title: "Basic Knife Skills", description: "Learn the proper grip and basic cuts like chop, dice, and mince.", video: "ypjsz5i7fozswa6l5rxy.mp4", skill_level: 0 },
+  { title: "Dicing an Onion", description: "Learn proper professional onion dicing technique.", video: "brbvydzx58divep5it19.mp4", skill_level: 0 },
+  { title: "Cutting Julienne", description: "Achieve the precise matchstick cut for vegetables.", video: "pbsxy3ersnifmexgpgro.mp4", skill_level: 1 },
+  { title: "Cutting Brunoise", description: "Master the fine dice (tiny cubes) used for garnishes and aromatic bases.", video: "i5b0keozhjizlaaygudl.mp4", skill_level: 2 },
+  { title: "Emulsifying Vinaigrette", description: "Create a stable, creamy dressing from oil and vinegar.", video: "b6uzzmdngdf62hdhpijc.mp4", skill_level: 1 },
+  { title: "Making a Basic Roux", description: "Combining butter and flour to create a thickening agent for sauces and soups.", video: "t0chjvppjipozpnlhkvx.mp4", skill_level: 0 },
+  { title: "Making Béchamel Sauce", description: "Master the classic French white sauce and general sauce-building techniques.", video: "crawulksr4evydltk5qs.mp4", skill_level: 1 },
+  { title: "Kneading and Proofing Dough", description: "Develop the gluten structure for a perfect rise.", video: "nxjrshfbpodqaxvh4kp3.mp4", skill_level: 2 },
+  { title: "Cooking Risotto (Proper Stirring)", description: "Add stock slowly while stirring to achieve creamy risotto.", video: "lpvbvkjr09qpu0sjv5wa.mp4", skill_level: 2 },
+  { title: "Checking Meat Internal Temperature", description: "Use a thermometer to ensure meat is cooked properly.", video: "luhlhziraf08afsknfj8.mp4", skill_level: 0 },
+  { title: "Braising Meat", description: "Slow-cooking meat in liquid for maximum tenderness and flavor.", video: "gamrvinxg6hxfwrtdeqi.mp4", skill_level: 1 }
 ])
+
 
 puts "Created #{Skill.count} skills."
 
