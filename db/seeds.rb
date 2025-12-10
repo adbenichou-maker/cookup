@@ -75,7 +75,7 @@ user = User.create!(
 generic_user = User.create!(
   email: "generic@test.com",
   password: "password",
-  username: "John Doe"
+  username: "Maria Doe"
 )
 
 puts "Created users: #{User.count}"
