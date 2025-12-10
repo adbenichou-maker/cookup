@@ -170,18 +170,8 @@
       <% end %>
 
       <!-- Submit Button -->
-      <div class="ai-form-submit" data-controller="submit-loading">
-        <button type="submit"
-                class="ai-submit-btn"
-                data-submit-loading-target="button"
-                data-action="click->submit-loading#showLoading">
-          <span class="btn-text">Generate Recipes</span>
-          <span class="ai-submit-spinner hidden" data-submit-loading-target="spinner">
-            <span class="spinner-dot"></span>
-            <span class="spinner-dot"></span>
-            <span class="spinner-dot"></span>
-          </span>
-        </button>
+      <div class="ai-form-submit">
+        <%= f.submit 'Generate Recipes', class: 'ai-submit-btn' %>
       </div>
     <% end %>
   </div>
