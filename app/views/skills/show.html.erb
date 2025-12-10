@@ -1,6 +1,5 @@
 <div class="container-fluid p-3" style="background-color: #F7EEDB; min-height: 100vh;">
 
-  <!-- Back Button -->
   <% if params[:recipe_id].present? %>
     <%= link_to recipe_steps_path(params[:recipe_id]), class: "profile-back" do %>
       <i class="fa-solid fa-arrow-left"></i>
@@ -11,14 +10,12 @@
     <% end %>
   <% end %>
 
-  <!-- Header -->
   <header class="mb-4 pt-3">
     <div class="text-center">
       <h1 class="display-5 fw-bold mb-3" style="color: #4A4A4A;">
         <%= @skill.title %>
       </h1>
 
-      <!-- Skill Level Badge -->
       <%
         level = @skill.skill_level.to_s.downcase
         badge_bg = case level
@@ -41,24 +38,36 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
 
-      <!-- Video Section -->
-      <section class="card shadow-sm mb-4 border-0" style="border-radius: 16px; overflow: hidden;">
-        <div class="card-header text-white py-3" style="background-color: #8BAA7B;">
-          <h2 class="h5 mb-0 fw-bold">
-            <i class="fa-solid fa-play-circle me-2"></i>Watch & Learn
-          </h2>
-        </div>
-        <div class="ratio ratio-16x9">
+      <%# --- Dynamic Video URL Construction --- %>
+    <% if @skill.video.present? %>
+  <%# Use the model helper to get the fully constructed, optimized URL %>
+  <% final_video_url = @skill.cloudinary_video_url() %>
 
-          <%= video_tag @skill.video,
-              controls: true,
-              autoplay: false,
-              class: "w-100",
-              style: "background-color: #4A4A4A;"%>
-        </div>
-      </section>
+  <section class="card shadow-sm mb-4 border-0" style="border-radius: 16px; overflow: hidden;">
+    <div class="card-header text-white py-3" style="background-color: #8BAA7B;">
+      <h2 class="h5 mb-0 fw-bold">
+        <i class="fa-solid fa-play-circle me-2"></i>Watch & Learn
+      </h2>
+    </div>
+    <div class="ratio ratio-16x9">
 
-      <!-- Description Section -->
+      <%# USE standard HTML5 <video> tag %>
+      <video
+        controls
+        class="w-100"
+        style="background-color: #4A4A4A;"
+        preload="metadata"
+      >
+        <source src="<%= final_video_url %>" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+    </div>
+  </section>
+<% else %>
+  <p class="text-danger text-center">Video not available for this skill.</p>
+<% end %>
+
       <section class="card shadow-sm mb-4 border-0" style="border-radius: 16px; overflow: hidden;">
         <div class="card-header text-white py-3" style="background-color: #C9815B;">
           <h2 class="h5 mb-0 fw-bold">
@@ -72,7 +81,6 @@
         </div>
       </section>
 
-      <!-- Action Section -->
       <% if user_signed_in? %>
         <div class="d-grid mb-5">
           <% if !current_user.user_skills.exists?(skill_id: @skill.id) %>
@@ -87,7 +95,7 @@
             <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
               <div class="card-body text-center p-4" style="background-color: #FCF8EF;">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-                     style="width: 64px; height: 64px; background-color: rgba(139, 170, 123, 0.15);">
+                    style="width: 64px; height: 64px; background-color: rgba(139, 170, 123, 0.15);">
                   <i class="fa-solid fa-trophy fa-2x" style="color: #8BAA7B;"></i>
                 </div>
                 <h3 class="h5 fw-bold mb-2" style="color: #4A4A4A;">Skill Mastered!</h3>
