@@ -33,7 +33,11 @@
       <% if message.role == "user" %>
         <div class="message-row">
           <div class="chat-bubble chat-user">
-            <%= message.content %>
+            <% if message.content.include?("Number them as Option 1, Option 2, Option 3") %>
+              Give me 3 more recipes
+            <% else %>
+              <%= message.content %>
+            <% end %>
           </div>
         </div>
 
@@ -98,11 +102,13 @@
       <% end %>
 
       <%# Always show New Recipes button %>
-      <%= f.button :submit, "New Recipes",
-          class: "chat-new-recipes-btn",
-          name: "message[content]",
-          value: "Give me 3 more recipes",
-          data: { chat_form_loading_target: "submitBtn" } %>
+      <button type="submit"
+          class="chat-new-recipes-btn"
+          name="message[content]"
+          value="Give me 3 new recipes. Number them as Option 1, Option 2, Option 3 (start from 1, not 4)."
+          data-chat-form-loading-target="submitBtn">
+        Generate 3 more Recipes
+      </button>
 
     </div>
 
