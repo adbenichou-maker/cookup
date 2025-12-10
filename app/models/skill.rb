@@ -1,7 +1,7 @@
 class Skill < ApplicationRecord
   enum :skill_level, [ :beginner, :intermediate, :expert ], _prefix: true
   has_one :step
-  has_one_attached :video
+
   validates :title, :description, :video, :skill_level, presence: true
 
   def cloudinary_video_url(width: 700, quality: 'auto', format: 'auto')
