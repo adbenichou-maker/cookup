@@ -32,7 +32,7 @@
 
         <% if @recipe.recipe_level.present? %>
           <%
-            level_map = { 0 => 'Beginner', 1 => 'Intermediate', 2 => 'Expert', 3 => 'Expert' }
+            level_map = { "beginner" => 'Beginner', "intermediate" => 'Intermediate', "expert" => 'Expert' }
             level_text = level_map[@recipe.recipe_level.to_i] || @recipe.recipe_level.to_s.capitalize
             level_key = level_text.downcase
             badge_bg = case level_key
