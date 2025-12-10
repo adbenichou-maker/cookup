@@ -21,3 +21,6 @@ application.register("difficultySlider", DifficultySliderController)
 
 import PrepTimeController from "./prep_time_controller"
 application.register("prepTime", PrepTimeController)
+
+import RecipeLoaderController from "./recipe_loader_controller"
+application.register("recipe-loader", RecipeLoaderController)
