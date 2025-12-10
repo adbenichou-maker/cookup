@@ -11,10 +11,10 @@ export default class extends Controller {
     console.log("badge open fired", event.currentTarget)
     const el = event.currentTarget
 
-    const name = el.dataset.badgeName
-    const description = el.dataset.badgeDescription
+    const name = el.dataset.badgeName || "Unknown"
+    const description = el.dataset.badgeDescription || "No description"
     const level = parseInt(el.dataset.badgeLevel || "0", 10)
-    const emoji = el.dataset.badgeEmoji
+    const emoji = el.dataset.badgeEmoji || ""
 
     const ranks = {
       0: "Not unlocked",
@@ -26,7 +26,7 @@ export default class extends Controller {
 
     this.nameTarget.textContent = name
     this.descriptionTarget.textContent = description
-    this.rankTarget.textContent = ranks[level]
+    this.rankTarget.textContent = ranks[level] || "Unknown"
     this.emojiTarget.textContent = emoji
 
     this.overlayTarget.classList.remove("hidden")
