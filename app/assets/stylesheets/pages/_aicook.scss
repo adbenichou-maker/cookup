@@ -325,6 +325,8 @@
   cursor: pointer;
   box-shadow: 0 4px 16px rgba($accent-green, 0.35);
   transition: all 0.2s ease;
+  position: relative;
+  min-height: 56px;
 
   i {
     font-size: 18px;
@@ -337,6 +339,57 @@
 
   &:active {
     transform: translateY(0);
+  }
+
+  &.ai-submit-btn-loading {
+    cursor: not-allowed;
+
+    .btn-text {
+      display: none;
+    }
+
+    .ai-submit-spinner {
+      display: flex !important;
+    }
+  }
+}
+
+/* Loading Spinner for Submit Button */
+.ai-submit-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  &.hidden {
+    display: none !important;
+  }
+
+  .spinner-dot {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    animation: submitBounce 0.9s infinite ease-in-out;
+  }
+
+  .spinner-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .spinner-dot:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+}
+
+@keyframes submitBounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
   }
 }
 
@@ -618,7 +671,7 @@
 /* Chat Buttons Row */
 .chat-buttons-row {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
 }
@@ -627,17 +680,18 @@
 .chat-option-btn {
   background: white;
   color: $dark;
-  padding: 10px 12px;
+  padding: 10px 8px;
   border-radius: 10px;
   border: 1.5px solid rgba($dark, 0.15);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
   line-height: 1.2;
-  min-height: 40px;
-  flex: 1;
+  min-height: 38px;
+  flex: 1 1 auto;
+  min-width: 60px;
   transition: all 0.2s ease;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 
@@ -655,17 +709,18 @@
 .chat-new-recipes-btn {
   background: white;
   color: $accent-brown;
-  padding: 10px 14px;
+  padding: 10px 8px;
   border-radius: 10px;
   border: 1.5px solid $accent-brown;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
   line-height: 1.2;
-  min-height: 40px;
-  flex: 1;
+  min-height: 38px;
+  flex: 1 1 auto;
+  min-width: 70px;
   transition: all 0.2s ease;
 
   &:hover {
@@ -682,20 +737,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   background: $accent-green;
   color: white !important;
-  padding: 10px 14px;
+  padding: 10px 8px;
   border-radius: 10px;
   border: none;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
   line-height: 1.2;
-  min-height: 40px;
-  flex: 1;
+  min-height: 38px;
+  flex: 1 1 auto;
+  min-width: 80px;
   transition: all 0.2s ease;
   text-decoration: none;
 
@@ -787,19 +843,30 @@
     padding: 24px 40px 140px 40px;
   }
 
+  .chat-buttons-row {
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: 100%;
+  }
+
   .chat-submit-btn,
   .chat-option-btn,
   .chat-new-recipes-btn,
   .chat-form-save-btn {
     font-size: 0.9rem;
-    padding: 12px 20px;
+    padding: 10px 20px;
+    min-height: auto;
+    flex: 1 1 0;
+    overflow: visible;
   }
 
   .chat-form {
-    padding: 12px 24px;
-    max-width: 800px;
-    left: 50%;
-    transform: translateX(-50%);
+    padding: 14px 24px;
+    max-width: 100%;
+    width: 100%;
+    left: 0;
+    transform: none;
+    box-sizing: border-box;
   }
 }
 

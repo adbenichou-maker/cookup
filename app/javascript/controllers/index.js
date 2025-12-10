@@ -21,3 +21,6 @@ application.register("difficultySlider", DifficultySliderController)
 
 import PrepTimeController from "./prep_time_controller"
 application.register("prepTime", PrepTimeController)
+
+import SubmitLoadingController from "./submit_loading_controller"
+application.register("submit-loading", SubmitLoadingController)

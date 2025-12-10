@@ -66,27 +66,8 @@
 
     <div class="chat-buttons-row" data-chat-form-loading-target="buttons">
 
-      <% if has_selected_recipe %>
-        <%# User has selected a recipe - show Save and New Recipes buttons %>
-
-        <% if last_assistant_message %>
-          <%= link_to message_recipes_path(last_assistant_message),
-              data: { turbo_method: "post" },
-              class: "chat-form-save-btn" do %>
-            <i class="fas fa-bookmark"></i>
-            Save Recipe
-          <% end %>
-        <% end %>
-
-        <%= f.button :submit, "New Recipes",
-            class: "chat-new-recipes-btn",
-            name: "message[content]",
-            value: "Give me 3 more recipes",
-            data: { chat_form_loading_target: "submitBtn" } %>
-
-      <% else %>
-        <%# Initial state - show 3 option buttons %>
-
+      <% unless has_selected_recipe %>
+        <%# Show option buttons when recipe not yet selected %>
         <%= f.button :submit, "Option 1",
             class: "chat-option-btn",
             value: "Select Option 1",
@@ -104,8 +85,24 @@
             value: "Select Option 3",
             name: "message[content]",
             data: { chat_form_loading_target: "submitBtn" } %>
-
       <% end %>
+
+      <% if has_selected_recipe && last_assistant_message %>
+        <%# Show Save button only after recipe selected %>
+        <%= link_to message_recipes_path(last_assistant_message),
+            data: { turbo_method: "post" },
+            class: "chat-form-save-btn" do %>
+          <i class="fas fa-bookmark"></i>
+          Save Recipe
+        <% end %>
+      <% end %>
+
+      <%# Always show New Recipes button %>
+      <%= f.button :submit, "New Recipes",
+          class: "chat-new-recipes-btn",
+          name: "message[content]",
+          value: "Give me 3 more recipes",
+          data: { chat_form_loading_target: "submitBtn" } %>
 
     </div>
 
