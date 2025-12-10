@@ -21,7 +21,7 @@
 
   <!-- Form Card -->
   <div class="ai-form-card">
-    <%= simple_form_for @chat, url: chats_path, method: :post do |f| %>
+    <%= simple_form_for @chat, url: chats_path, method: :post, html: { data: { controller: "recipe-loader", action: "submit->recipe-loader#showLoader" } } do |f| %>
       <%= f.simple_fields_for :recipe_requirements, @recipe_requirements do |req| %>
         <% meal_types = ['Breakfast', 'Lunch', 'Dinner', 'Dessert'] %>
         <% skill_levels = ['Beginner', 'Intermediate', 'Advanced'] %>
@@ -171,7 +171,29 @@
 
       <!-- Submit Button -->
       <div class="ai-form-submit">
-        <%= f.submit 'Generate Recipes', class: 'ai-submit-btn' %>
+        <%= f.submit 'Generate Recipes', class: 'ai-submit-btn', data: { "recipe-loader-target": "submitBtn" } %>
+
+        <!-- Cooking Loader -->
+        <div class="cooking-loader hidden" data-recipe-loader-target="loader">
+          <div class="cooking-pot">
+            <div class="pot-body">
+              <div class="pot-content">
+                <div class="bubble bubble-1"></div>
+                <div class="bubble bubble-2"></div>
+                <div class="bubble bubble-3"></div>
+                <div class="ingredient ingredient-1"><i class="fa-solid fa-carrot"></i></div>
+                <div class="ingredient ingredient-2"><i class="fa-solid fa-leaf"></i></div>
+                <div class="ingredient ingredient-3"><i class="fa-solid fa-pepper-hot"></i></div>
+              </div>
+            </div>
+            <div class="pot-handle-left"></div>
+            <div class="pot-handle-right"></div>
+          </div>
+          <div class="cooking-loader-text">
+            <span class="loader-text-main">Cooking up recipes</span>
+            <span class="loader-dots"><span>.</span><span>.</span><span>.</span></span>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
