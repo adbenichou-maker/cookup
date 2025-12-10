@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
-before_action :set_chat, only: [:show]
+  before_action :set_chat, only: [:show]
 
   def index
     @chats = Chat.all.order(updated_at: :desc)
@@ -10,7 +10,7 @@ before_action :set_chat, only: [:show]
   end
 
   def new
-    @chat = Chat.new()
+    @chat = Chat.new
 
     @recipe_requirements = {
       ingredients: nil,
@@ -22,53 +22,58 @@ before_action :set_chat, only: [:show]
   end
 
   def create
-    # Récupérer les paramètres autorisés (y compris le hash imbriqué)
-    recipe_requirements = chat_params[:recipe_requirements]
-    # Accéder aux ingrédients (vous pouvez les utiliser pour générer le premier message/prompt)
-    @ingredients = recipe_requirements[:ingredients]
-    @skill_level = recipe_requirements[:skill_level]
-    @meal_type = recipe_requirements[:meal_type]
-    @meal_prep_time = recipe_requirements[:meal_prep_time]
+    # Safely extract nested hash (avoid nil)
+    recipe_requirements = chat_params[:recipe_requirements] || {}
+
+    # Read values from nested hash
+    @ingredients  = recipe_requirements[:ingredients]
+    @skill_level  = recipe_requirements[:skill_level]
+    @meal_type    = recipe_requirements[:meal_type]
     @restrictions = recipe_requirements[:restrictions]
 
-    # Créer le Chat
+    # Parse prep time from slider: 120 = "no limit"
+    prep = recipe_requirements[:meal_prep_time].to_i
+    @meal_prep_time = (prep == 120 ? nil : prep)
 
-    @chat = Chat.new(user: current_user, title: recipe_requirements[:ingredients])
+    # Parse restrictions: treat blank as nil
+    @restrictions = nil if @restrictions.blank?
 
-    # ... logique de création de message et LLM ici ...
+    # Build a sensible title (fallback if ingredients missing)
+    title = @ingredients.present? ? @ingredients : "New Chat"
+    @chat = Chat.new(user: current_user, title: title)
 
     if @chat.save
-      user_prompt = "My ingredients are: #{recipe_requirements[:ingredients]}, my skill level is: #{recipe_requirements[:skill_level]}, I have #{recipe_requirements[:meal_prep_time]} min to prepare it, my food restriction are: #{recipe_requirements[:restrictions]}"
+      # Build text for the prompt with a friendly phrasing
+      prep_text = @meal_prep_time.nil? ? "no time limit" : "#{@meal_prep_time} minutes"
+      restr_text = @restrictions.nil? ? "I have no diatary restrictions." : "My diatary restrictions are: #{@restrictions}."
+      user_prompt = "My ingredients are #{@ingredients}. I want to make #{@meal_type}. I have #{prep_text} to prepare it. I consider myself a #{@skill_level} cook. #{restr_text}"
 
-      # 2. Enregistrer le message de l'utilisateur (pour l'historique)
+      # Save the user message for history
       user_message = Message.create!(
         chat: @chat,
         role: "user",
-        content: user_prompt,
+        content: user_prompt
       )
 
+      # Prepare and call the LLM
       @ruby_llm_chat = RubyLLM.chat
       build_conversation_history
 
-      # 4. Appeler l'IA
-      # Assurez-vous que RubyLLM est bien configuré (clé API et modèle)
+      # Ensure RubyLLM configured — then ask
       response = RubyLLM.chat.with_instructions(system_prompt).ask(user_message.content)
 
-      # 5. Sauvegarder la réponse de l'assistant
+      # Save assistant response
       Message.create!(
         chat: @chat,
         role: "assistant",
-        content: response.content,
-        # message_type: "multichoice"
+        content: response.content
       )
 
-      # 6. Rediriger (UNE SEULE FOIS)
+      # Redirect to the chat view
       redirect_to chat_path(@chat)
     else
-      # Gérer l'erreur
       render :new, status: :unprocessable_entity
     end
-
   end
 
   private
@@ -77,28 +82,22 @@ before_action :set_chat, only: [:show]
     @chat = current_user.chats.find(params[:id])
   end
 
-
   def chat_params
-  # 1. Requérir la clé principale :chat
-  params.require(:chat).permit(
-    # 2. Permettre les autres attributs directs du Chat si besoin (ex: title)
-    :title,
-
-    # 3. Permettre le hash imbriqué :recipe_requirements
-    #    et lister toutes ses sous-clés autorisées (Strong Parameters)
-    recipe_requirements: [
-      :cuisine,
-      :ingredients,
-      :skill_level,
-      :meal_type,
-      :meal_prep_time,
-      :restrictions
-    ]
-  )
+    params.require(:chat).permit(
+      :title,
+      recipe_requirements: [
+        :cuisine,
+        :ingredients,
+        :skill_level,
+        :meal_type,
+        :meal_prep_time,
+        :restrictions
+      ]
+    )
   end
 
   def system_prompt
-    Chat::SYSTEM_PROMPT + "  username:" + current_user.username
+    Chat::SYSTEM_PROMPT + " username:" + current_user.username.to_s
   end
 
   def build_conversation_history
@@ -106,5 +105,4 @@ before_action :set_chat, only: [:show]
       @ruby_llm_chat.add_message(message)
     end
   end
-
 end

@@ -1,87 +1,110 @@
-<div class="home-container">
+<div class="dashboard-container">
 
-  <!-- Welcome -->
-  <div class="home-header">
-    <div>
-      <h1 style="text-align: left; margin-bottom: 10px"> Hi <%= current_user.username || current_user.email.split("@").first %>,</h1>
-      <h2>What are we cooking?</h2>
+  <!-- Header Section -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1 class="greeting-name">Welcome back <%= current_user.username || current_user.email.split("@").first %>,</h1>
+      <h1 class="greeting-sentence">What are we cooking today?</h1>
     </div>
 
-    <!-- Profile Logout (Temp) -->
-    <%= link_to profile_path do %>
-      <div>
-        <%= image_tag "santi.png", alt: "profile picture image", class: "profile-picture-placeholder" %>
-      </div>
+    <%= link_to profile_path, class: "profile-avatar-link" do %>
+      <%= image_tag "adampic.png", alt: "Profile", class: "profile-avatar" %>
     <% end %>
-  </div>
+  </header>
 
-  <!-- Progress Bar -->
-  <div class="profile-section">
-    <div class="profile-level-text">
-      <div style="font-weight: 900; font-size: large;">
-        Level <%= current_user.level %>
+  <!-- Level Progress Card -->
+  <div class="level-card">
+    <div class="level-header">
+      <div class="level-badge">
+        <i class="fa-solid fa-award"></i>
+        <span>Level <%= current_user.level %></span>
       </div>
-
-      <div>
-        <%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP
-      </div>
+      <span class="xp-text"><%= current_user.xp %> / <%= current_user.xp_required_for_current_level %> XP</span>
     </div>
-
-
-    <div class="progress-wrapper">
-      <div class="progress-bar-fill" style="width: <%= current_user.progress_percentage %>%;">
-      </div>
+    <div class="level-progress-bar">
+      <div class="level-progress-fill" style="width: <%= current_user.progress_percentage %>%;"></div>
     </div>
   </div>
 
+  <!-- Quick Actions -->
+  <section class="quick-actions">
+    <h2 class="section-title">Quick Actions</h2>
+    <div class="action-cards">
 
-  <!-- Cards -->
-  <div class="feature-cards">
-
-    <%= link_to skills_path, class: "feature-card" do %>
-      <div class="circle-icon">
-        <i class="fa-solid fa-kitchen-set overlay-icon"></i>
-      </div>
-      <p>Chef Skills</p>
-    <% end %>
-
-    <%= link_to recipes_search_path, class: "feature-card" do %>
-      <div class="circle-icon">
-        <i class="fa-solid fa-book overlay-icon"></i>
-      </div>
-      <p>All Recipes</p>
-    <% end %>
-
-    <%= link_to new_chat_path, class: "feature-card" do %>
-      <div class="circle-icon">
-        <i class="fa-solid fa-comments overlay-icon"></i>
-      </div>
-      <p style="margin-bottom: 0px" >AI</p>
-      <p>Cook</p>
-    <% end %>
-
-  </div>
-
-  <!-- Saved Recipes -->
-
-    <%= link_to "/cookbook", class: "saved" do %>
-      Saved Recipes
-    <% end %>
-
-  <!-- Recipe sug -->
-  <% if @saved_recipes.any? %>
-    <% @saved_recipes.each do |recipe| %>
-      <%= link_to recipe_path(recipe), class: "content-card" do %>
-        <div class="content-image-placeholder"></div>
-
-        <div>
-          <h3><%= recipe.title %></h3>
-          <p><%= truncate(recipe.description, length: 80) %></p>
+      <%= link_to skills_path, class: "action-card" do %>
+        <div class="action-icon">
+          <i class="fa-solid fa-kitchen-set"></i>
         </div>
+        <div class="action-label">
+          <span class="action-title">Chef Skills</span>
+          <span class="action-subtitle">Master techniques</span>
+        </div>
+        <i class="fa-solid fa-chevron-right action-arrow"></i>
       <% end %>
+
+      <%= link_to recipes_search_path, class: "action-card" do %>
+        <div class="action-icon">
+          <i class="fa-solid fa-book"></i>
+        </div>
+        <div class="action-label">
+          <span class="action-title">All Recipes</span>
+          <span class="action-subtitle">Browse collection</span>
+        </div>
+        <i class="fa-solid fa-chevron-right action-arrow"></i>
+      <% end %>
+
+      <%= link_to new_chat_path, class: "action-card" do %>
+        <div class="action-icon">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="action-label">
+          <span class="action-title">AI Cook</span>
+          <span class="action-subtitle">Get suggestions</span>
+        </div>
+        <i class="fa-solid fa-chevron-right action-arrow"></i>
+      <% end %>
+
+    </div>
+  </section>
+
+  <!-- Favorites Section -->
+  <section class="favorites-section">
+    <div class="section-header">
+      <h2 class="section-title">Your Favorites</h2>
+      <%= link_to "/cookbook", class: "view-all-link" do %>
+        View all <i class="fa-solid fa-arrow-right"></i>
+      <% end %>
+    </div>
+
+    <% if @saved_recipes.any? %>
+      <div class="favorites-list">
+        <% @saved_recipes.each do |recipe| %>
+          <%= link_to recipe_path(recipe), class: "favorite-recipe-card" do %>
+            <div class="recipe-thumbnail">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div class="recipe-info">
+              <h3 class="recipe-title"><%= recipe.title %></h3>
+              <p class="recipe-description"><%= truncate(recipe.description, length: 60) %></p>
+            </div>
+            <i class="fa-solid fa-chevron-right recipe-arrow"></i>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-favorites">
+        <div class="empty-icon">
+          <i class="fa-regular fa-heart"></i>
+        </div>
+        <p class="empty-text">No favorites yet</p>
+        <p class="empty-subtext">Save recipes to see them here</p>
+      </div>
     <% end %>
-  <% else %>
-    <p>You haven’t saved any recipes yet.</p>
-  <% end %>
+  </section>
+
+  <!-- Footer Logo -->
+  <footer class="dashboard-footer">
+    <%= image_tag "logo_cookup.png", class: "dashboard-footer-logo" %>
+  </footer>
 
 </div>

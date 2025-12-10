@@ -1,3 +1,5 @@
+@import "config/fonts";
+
 .profile-container {
   background-color: $background;
   padding: 20px;
@@ -14,10 +16,11 @@
   float: right;
   background: $accent-green;
   padding: 8px 14px;
-  border-radius: 12px;
+  border-radius: 10px;
   color: white;
   text-decoration: none;
   transition: all 0.3s ease;
+  font-family: $body-font;
 }
 
 .logout-btn:hover {
@@ -88,11 +91,18 @@
   width: 100%;
   background: $accent-green;
   padding: 12px;
-  border-radius: 25px;
+  border-radius: 10px;
   color: white;
   border: none;
   font-size: 16px;
+  font-family: $body-font;
   margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.update-btn:hover {
+  background: darken($accent-green, 10%);
+  cursor: pointer;
 }
 
 
@@ -127,4 +137,38 @@
   background: $accent-green;
   border-radius: 10px;
   transition: width 0.9s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 576px) {
+  .profile-container {
+    padding: 15px;
+    padding-bottom: 120px;
+  }
+
+  .profile-name {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .logout-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .badge-title {
+    margin-top: 25px;
+    font-size: 18px;
+  }
+
+  .input-field {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .update-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
 }

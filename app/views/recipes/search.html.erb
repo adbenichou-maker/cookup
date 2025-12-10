@@ -10,13 +10,13 @@
 
   <!-- Search Bar -->
   <div class="search-bar-wrapper">
-    <%= form_with url: recipes_search_path, method: :get, local: true, class: "search-form" do |f| %>
+    <%= form_with url: recipes_search_path, method: :get, local: true, class: "search-form", id: "cookbook-search-form" do |f| %>
       <%= f.text_field :query, placeholder: "Search", class: "search-input", value: @query %>
-      <%= f.submit "Search", class: "search-submit-btn" %>
-    <% end %>
+        <button type="button" data-action="click->filter#toggle" data-filter-target="button" class="filter-btn"><i class="fa-solid fa-filter"></i></button>
+      <% end %>
 
-    <button data-action="click->filter#toggle" class="filter-btn">Filters</button>
-  </div>
+      <button type="submit" form="cookbook-search-form" class="search-submit-btn">Search</button>
+    </div>
 
   <!-- Filter Panel -->
   <div data-filter-target="panel" class="filter-panel hidden">
@@ -46,29 +46,35 @@
         <%= f.hidden_field :level, value: params[:level], data: { difficultySlider_target: "input" } %>
       </div>
 
-      <!-- Rating Filter -->
-      <h4>Rating</h4>
 
-      <div data-controller="rating" class="rating-filter">
-        <div class="stars" data-rating-target="stars">
-          <% 5.times do |i| %>
-            <span class="star"
-              data-action="click->rating#select"
-              data-rating-value="<%= i + 1 %>">
-              ☆
-            </span>
-          <% end %>
+      <!-- Prep Time -->
+      <h4>Prep Time</h4>
+
+      <div data-controller="prepTime" class="prep-time-wrapper">
+
+        <input
+          type="range"
+          min="0"
+          max="120"
+          step="5"
+          value="<%= params[:prep_time] || 120 %>"
+          class="prep-time-slider"
+          data-action="input->prepTime#update"
+          data-prepTime-target="slider"
+        >
+
+        <div class="prep-time-label" data-prepTime-target="label">
+          <%= (params[:prep_time].to_i == 120 || params[:prep_time].blank?) ? "No limit" : "#{params[:prep_time]} min" %>
         </div>
 
-        <%= f.hidden_field :rating, value: params[:rating], data: { rating_target: "input" } %>
+        <%= f.hidden_field :prep_time, value: params[:prep_time] || 120, data: { prepTime_target: "input" } %>
       </div>
 
       <%= f.submit "Apply Filters", class: "search-submit-btn" %>
+
     <% end %>
 
   </div>
-
-
 
   <!-- Results -->
   <% @recipes.each do |recipe| %>
@@ -76,7 +82,7 @@
 
       <!-- Clickable recipe section -->
       <%= link_to recipe_path(recipe), class: "recipe-main" do %>
-        <div class="recipe-image-placeholder"></div>
+        <div class="recipe-image-placeholder fa-solid fa-utensils"></div>
 
         <div class="recipe-text">
           <h3><%= recipe.title %></h3>
@@ -94,10 +100,26 @@
         </div>
       <% end %>
 
-      <!-- Favorite Button (Turbo Frame prevents scroll jump) -->
-      <turbo-frame id="favorite_button_<%= recipe.id %>">
-        <%= render "favorites/favorite_button", recipe: recipe %>
-      </turbo-frame>
+      <!-- RIGHT SIDE WRAPPER (we create a new flex box for icon + favorite button) -->
+      <div class="right-icons">
+
+        <% level_colors = {
+          "beginner" => "#8BAA7B",
+          "intermediate" => "#D6A84A",
+          "expert" => "#C94A4A"
+        } %>
+
+        <% if recipe.recipe_level.present? %>
+          <i class="fa-solid fa-graduation-cap difficulty-icon"
+            style="color:<%= level_colors[recipe.recipe_level] %>;"></i>
+        <% end %>
+
+        <!-- Favorite Button -->
+        <turbo-frame id="favorite_button_<%= recipe.id %>">
+          <%= render "favorites/favorite_button", recipe: recipe %>
+        </turbo-frame>
+
+      </div>
 
     </div>
   <% end %>

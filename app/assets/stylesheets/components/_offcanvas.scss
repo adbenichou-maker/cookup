@@ -1,0 +1,357 @@
+/* ==========================================================
+   OFFCANVAS / CHAT SIDEBAR
+   ========================================================== */
+
+/* Custom Color Variables */
+$color-beige: #F7EEDB;
+$color-accent-green: #8BAA7B;
+$color-soft-brown: #C9815B;
+$color-charcoal: #4A4A4A;
+$color-card-bg: #FCF8EF;
+
+/* ==========================================================
+   BASE OFFCANVAS STYLING
+   ========================================================== */
+
+.sidebar.offcanvas {
+  max-width: 320px;
+  border-left: none;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Backgrounds */
+.bg-beige {
+  background-color: $color-beige !important;
+}
+
+/* Text Colors */
+.text-charcoal {
+  color: $color-charcoal !important;
+}
+
+/* ==========================================================
+   OFFCANVAS HEADER
+   ========================================================== */
+
+.sidebar .offcanvas-header {
+  padding: 20px;
+  padding-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offcanvas-logo-link {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.offcanvas-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.offcanvas-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: $color-card-bg;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-charcoal;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  i {
+    font-size: 16px;
+  }
+
+  &:hover {
+    background: darken($color-card-bg, 5%);
+  }
+}
+
+/* ==========================================================
+   OFFCANVAS BODY
+   ========================================================== */
+
+.sidebar .offcanvas-body {
+  padding: 0 20px 20px;
+}
+
+/* ==========================================================
+   NEW CHAT BUTTON
+   ========================================================== */
+
+.offcanvas-new-chat-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: linear-gradient(135deg, $color-accent-green, darken($color-accent-green, 5%));
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba($color-accent-green, 0.25);
+  transition: all 0.2s ease;
+  margin-bottom: 24px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba($color-accent-green, 0.35);
+    color: white;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.new-chat-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(white, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+
+  i {
+    font-size: 16px;
+  }
+}
+
+.new-chat-arrow {
+  margin-left: auto;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* ==========================================================
+   SECTION TITLE
+   ========================================================== */
+
+.offcanvas-section {
+  margin-top: 8px;
+}
+
+.offcanvas-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba($color-charcoal, 0.5);
+  margin-bottom: 12px;
+  padding-left: 4px;
+
+  i {
+    font-size: 12px;
+  }
+}
+
+/* ==========================================================
+   CHAT LIST
+   ========================================================== */
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  background: $color-card-bg;
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: $color-charcoal;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: darken($color-card-bg, 3%);
+    transform: translateX(4px);
+    color: $color-charcoal;
+  }
+
+  &:active {
+    transform: translateX(2px);
+  }
+}
+
+.chat-item-active {
+  background: $color-soft-brown;
+  color: white;
+  box-shadow: 0 4px 12px rgba($color-soft-brown, 0.25);
+
+  &:hover {
+    background: $color-soft-brown;
+    color: white;
+  }
+
+  .chat-item-icon {
+    background: rgba(white, 0.2);
+
+    i {
+      color: white;
+    }
+  }
+
+  .chat-item-title {
+    color: white;
+  }
+
+  .chat-item-time {
+    color: rgba(white, 0.7);
+  }
+
+  .chat-item-arrow {
+    color: rgba(white, 0.5);
+  }
+}
+
+.chat-item-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba($color-soft-brown, 0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  i {
+    font-size: 16px;
+    color: $color-soft-brown;
+  }
+}
+
+.chat-item-content {
+  flex: 1;
+  margin-left: 12px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: $color-charcoal;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-item-time {
+  font-size: 12px;
+  color: rgba($color-charcoal, 0.5);
+  margin-top: 2px;
+}
+
+.chat-item-arrow {
+  font-size: 12px;
+  color: rgba($color-charcoal, 0.3);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================
+   EMPTY STATE
+   ========================================================== */
+
+.chat-empty-state {
+  background: $color-card-bg;
+  border-radius: 16px;
+  padding: 32px 20px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.chat-empty-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba($color-soft-brown, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+
+  i {
+    font-size: 24px;
+    color: $color-soft-brown;
+  }
+}
+
+.chat-empty-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: $color-charcoal;
+  margin: 0 0 4px 0;
+}
+
+.chat-empty-subtext {
+  font-size: 14px;
+  color: rgba($color-charcoal, 0.5);
+  margin: 0;
+}
+
+/* ==========================================================
+   LEGACY CLASSES (kept for compatibility)
+   ========================================================== */
+
+.btn-accent-green {
+  background-color: $color-accent-green;
+  border-color: $color-accent-green;
+  color: white;
+
+  &:hover {
+    background-color: darken($color-accent-green, 5%);
+    border-color: darken($color-accent-green, 5%);
+  }
+}
+
+.text-soft-brown {
+  color: $color-soft-brown !important;
+}
+
+.chat-sidebar-link {
+  color: $color-charcoal;
+  transition: background-color 0.15s ease;
+}
+
+.chat-sidebar-link.bg-soft-brown-hover:hover {
+  background-color: rgba($color-soft-brown, 0.2) !important;
+  color: $color-charcoal;
+}
+
+.chat-sidebar-link.bg-soft-brown-active {
+  background-color: $color-soft-brown !important;
+  color: white !important;
+}
+
+.badge-outline-charcoal {
+  background-color: $color-beige;
+  border: 1px solid $color-charcoal;
+  color: $color-charcoal;
+  font-weight: 500;
+}
+
+.chat-sidebar-link.bg-soft-brown-active .badge-outline-charcoal {
+  border-color: $color-accent-green;
+  color: $color-accent-green !important;
+  background-color: white;
+}

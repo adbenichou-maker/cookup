@@ -1,35 +1,97 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% content_for :hide_navbar, true %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+<div class="auth-container">
+  <!-- Header -->
+  <div class="auth-header">
+    <%= link_to root_path, class: "auth-back-link" do %>
+      <i class="fa-solid fa-arrow-left"></i>
     <% end %>
-
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+    <%= image_tag "logo_cookup.png", class: "auth-logo" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <!-- Welcome Section -->
+  <div class="auth-welcome">
+    <div class="auth-icon">
+      <i class="fa-solid fa-user-gear"></i>
+    </div>
+    <h2 class="auth-title">Edit Account</h2>
+    <p class="auth-subtitle">Update your profile settings</p>
   </div>
-<% end %>
 
-<h3>Cancel my account</h3>
+  <!-- Form Card -->
+  <div class="auth-card">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification message: "Please fix the errors below:" %>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+      <div class="auth-form">
+        <div class="auth-input-group">
+          <label class="auth-label">Email</label>
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      label: false,
+                      placeholder: "Enter your email",
+                      input_html: { autocomplete: "email", class: "auth-input" } %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <span class="auth-hint">Currently waiting confirmation for: <%= resource.unconfirmed_email %></span>
+          <% end %>
+        </div>
 
-<%= link_to "Back", :back %>
+        <div class="auth-input-group">
+          <label class="auth-label">New Password</label>
+          <%= f.input :password,
+                      required: false,
+                      label: false,
+                      hint: false,
+                      placeholder: "Leave blank to keep current",
+                      input_html: { autocomplete: "new-password", class: "auth-input" } %>
+          <span class="auth-hint">Leave blank if you don't want to change it</span>
+        </div>
+
+        <div class="auth-input-group">
+          <label class="auth-label">Confirm New Password</label>
+          <%= f.input :password_confirmation,
+                      required: false,
+                      label: false,
+                      placeholder: "Confirm new password",
+                      input_html: { autocomplete: "new-password", class: "auth-input" } %>
+        </div>
+
+        <div class="auth-input-group">
+          <label class="auth-label">Current Password</label>
+          <%= f.input :current_password,
+                      required: true,
+                      label: false,
+                      hint: false,
+                      placeholder: "Enter current password to confirm",
+                      input_html: { autocomplete: "current-password", class: "auth-input" } %>
+          <span class="auth-hint">We need your current password to confirm changes</span>
+        </div>
+
+        <%= f.button :submit, "Update Account", class: "auth-submit" do %>
+          <span>Update Account</span>
+          <i class="fa-solid fa-check"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Danger Zone Card -->
+  <div class="auth-card auth-danger-zone">
+    <h3 class="auth-danger-title">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      Danger Zone
+    </h3>
+    <p class="auth-danger-text">Once you delete your account, there is no going back. Please be certain.</p>
+    <%= button_to "Delete My Account",
+                  registration_path(resource_name),
+                  method: :delete,
+                  class: "auth-danger-btn",
+                  data: { turbo_confirm: "Are you sure you want to delete your account? This action cannot be undone." } %>
+  </div>
+
+  <!-- Footer Link -->
+  <div class="auth-footer">
+    <p><%= link_to "Back to Home", root_path, class: "auth-link" %></p>
+  </div>
+</div>

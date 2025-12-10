@@ -5,16 +5,16 @@
     <i class="fa-solid fa-arrow-left"></i>
   <% end %>
 
-  <h1 class="search-title">Saved Recipes</h1>
+  <h1 class="search-title">Favorites</h1>
 
   <!-- Search Bar -->
   <div class="search-bar-wrapper">
-    <%= form_with url: "/cookbook", method: :get, local: true, class: "search-form" do |f| %>
+    <%= form_with url: "/cookbook", method: :get, local: true, class: "search-form", id: "cookbook-search-form" do |f| %>
       <%= f.text_field :query, placeholder: "Search", class: "search-input", value: @query %>
-      <%= f.submit "Search", class: "search-submit-btn" %>
+      <button type="button" data-action="click->filter#toggle" data-filter-target="button" class="filter-btn"><i class="fa-solid fa-filter"></i></button>
     <% end %>
 
-    <button data-action="click->filter#toggle" class="filter-btn">Filters</button>
+    <button type="submit" form="cookbook-search-form" class="search-submit-btn">Search</button>
   </div>
 
   <!-- Filter -->
@@ -73,7 +73,7 @@
 
       <!-- Only this part is clickable -->
       <%= link_to recipe_path(recipe), class: "recipe-main" do %>
-        <div class="recipe-image-placeholder"></div>
+        <div class="recipe-image-placeholder fa-solid fa-utensils"></div>
 
         <div class="recipe-text">
           <h3><%= recipe.title %></h3>
@@ -91,10 +91,8 @@
         </div>
       <% end %>
 
-      <!-- Favorite button OUTSIDE the link -->
-      <div class="recipe-add-btn">
-        <%= render "favorites/favorite_button", recipe: recipe %>
-      </div>
+      <!-- Favorite Button (refreshes page when unsaved) -->
+      <%= render "favorites/favorite_button", recipe: recipe, refresh_on_remove: true %>
 
     </div>
   <% end %>

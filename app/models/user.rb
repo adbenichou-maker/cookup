@@ -24,7 +24,6 @@ class User < ApplicationRecord
     (100 * (1.15 ** (level - 1))).round
   end
 
-  # Add XP and handle leveling up
   def add_xp(amount)
     self.xp ||= 0
     self.level ||= 1

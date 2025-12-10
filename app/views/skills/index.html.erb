@@ -7,7 +7,7 @@
   <% if @skill_levels %>
     <header class="text-center mb-5 pt-3">
       <h1 class="display-4 fw-bold mb-3" style="color: #4A4A4A;">
-        On What Level Are You? 🔪
+        On What Level Are You? 🧑‍🍳
       </h1>
       <p class="lead" style="color: #C9815B;">
         Select your current skill level to see suggested techniques.
@@ -15,10 +15,10 @@
     </header>
     <div class="row justify-content-center mb-5">
       <% @skill_levels.each do |level| %>
-        <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-4">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-3">
 
           <% card_bg = level == "beginner" ? "#8BAA7B" : (level == "intermediate" ? "#F2C94C" : "#C9815B") %>
-          <% text_color = level == "intermediate" ? "#4A4A4A" : "#F7EEDB" %>
+          <% text_color = level == "intermediate" ? "#ffffffff" : "#F7EEDB" %>
 
           <%= link_to skills_path(level: level),
               class: "list-group-item list-group-item-action p-0 border-0 rounded-4 shadow-lg",
@@ -26,7 +26,7 @@
 
             <div class="card rounded-4 border-0 text-center p-3"
                 style="background-color: <%= card_bg %>; color: <%= text_color %>;">
-              <div class="card-body">
+              <div class="card-body" style="padding: 0.5em">
                 <h2 class="h3 card-title fw-bolder mb-0">
                   <%= level.humanize %>
                 </h2>

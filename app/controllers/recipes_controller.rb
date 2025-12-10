@@ -23,14 +23,15 @@ class RecipesController < ApplicationController
       @recipes = @recipes.where(recipe_level: params[:level])
     end
 
-    # Filter by rating
-    if params[:rating].present?
-      @recipes = @recipes
-        .left_joins(:reviews)
-        .group(:id)
-        .having("ROUND(AVG(reviews.rate)) = ?", params[:rating].to_i)
+    # Filter: prep time
+    if params[:prep_time].present?
+      prep = params[:prep_time].to_i
+
+      # Only filter if user chose < 120 (120 means "unlimited")
+      if prep < 120
+        @recipes = @recipes.where("meal_prep_time <= ?", prep)
+      end
     end
-    # @steps = @recipe.steps
   end
 
   def create
@@ -49,6 +50,8 @@ class RecipesController < ApplicationController
           "<ingredient_name>": "<quantity_as_string>"
         },
         "recipe_level": integer (0 for beginner, 1 for intermediate, 2 for expert),
+        "meal_prep_time": integer (in minutes),
+        "tips": string (optional),
         "steps_attributes": [
           {
             "title": string,
@@ -91,7 +94,7 @@ class RecipesController < ApplicationController
       chat = @message.chat
       favorites = Favorite.new(user: current_user, recipe: @recipe)
       favorites.save
-      redirect_to chat_path(chat), notice: "Saved Recipe!"
+      redirect_to recipe_path(@recipe), notice: "Recipe saved!"
     else
       @message = @recipe.message
         render :new, status: :unprocessable_entity
@@ -108,31 +111,29 @@ class RecipesController < ApplicationController
   def congratulation
     @recipe = Recipe.find(params[:id])
 
-    # record completion (avoid duplicates)
-    if user_signed_in?
-      UserRecipeCompletion.find_or_create_by(user: current_user, recipe: @recipe)
-    end
-
+    # Save old values BEFORE XP happens
     @old_level = current_user.level
     @old_xp_percent = current_user.progress_percentage
 
-    xp_amount =
-      case @recipe.recipe_level
-      when "beginner" then 10
-      when "intermediate" then 20
-      when "expert" then 30
+    if user_signed_in?
+      recent_window_seconds = 300 # 5 minutes
+      recent_exist = UserRecipeCompletion.where(user: current_user, recipe: @recipe)
+                                        .where("created_at >= ?", recent_window_seconds.seconds.ago)
+                                        .exists?
+
+      unless recent_exist
+        UserRecipeCompletion.create!(user: current_user, recipe: @recipe)
+        check_badges_and_notify
       end
+    end
 
-    current_user.add_xp(xp_amount)
-
-    # Check and award badges after completion and xp
-    BadgeAwarder.new(current_user).check_all! if user_signed_in?
-
+    # Load updated values
     @new_xp_percent = current_user.progress_percentage
     @new_level = current_user.level
 
     @leveled_up = @new_level > @old_level
   end
+
 
 
   private

@@ -1,5 +1,403 @@
 /* ===========================
-   PAGE LAYOUT
+   DASHBOARD CONTAINER
+   =========================== */
+.dashboard-container {
+  padding: 24px 20px;
+  padding-bottom: 120px;
+  background-color: $background;
+  color: $dark;
+  min-height: 100vh;
+}
+
+/* ===========================
+   FOOTER LOGO
+   =========================== */
+.dashboard-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-footer-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* ===========================
+   HEADER SECTION
+   =========================== */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.header-content {
+  flex: 1;
+}
+
+
+.greeting-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: $dark;
+  margin: 4px 0 8px 0;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.greeting-sentence {
+  font-size: 20px;
+  font-weight: 300;
+  color: $dark;
+  margin: 4px 0 8px 0;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.profile-avatar-link {
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.profile-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid $card-bg;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ===========================
+   LEVEL PROGRESS CARD
+   =========================== */
+.level-card {
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.level-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.level-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, $accent-yellow, darken($accent-yellow, 8%));
+  color: darken($accent-yellow, 35%);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+
+  i {
+    font-size: 14px;
+  }
+}
+
+.xp-text {
+  font-size: 13px;
+  color: rgba($dark, 0.6);
+  font-weight: 500;
+}
+
+.level-progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba($accent-green, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.level-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $accent-green, lighten($accent-green, 8%));
+  border-radius: 8px;
+  transition: width 0.5s ease;
+}
+
+/* ===========================
+   SECTION STYLING
+   =========================== */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: $dark;
+  margin: 0 0 16px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .section-title {
+    margin: 0;
+  }
+}
+
+.view-all-link {
+  font-size: 14px;
+  color: $accent-brown;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: darken($accent-brown, 10%);
+  }
+
+  i {
+    font-size: 12px;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover i {
+    transform: translateX(3px);
+  }
+}
+
+/* ===========================
+   QUICK ACTIONS
+   =========================== */
+.quick-actions {
+  margin-bottom: 32px;
+}
+
+.action-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-card {
+  display: flex;
+  align-items: center;
+  background: $card-bg;
+  border-radius: 14px;
+  padding: 16px;
+  text-decoration: none;
+  color: $dark;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    color: $dark;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.action-card-highlight {
+  background: linear-gradient(135deg, $accent-brown, darken($accent-brown, 5%));
+  color: white;
+
+  &:hover {
+    color: white;
+    box-shadow: 0 4px 20px rgba($accent-brown, 0.35);
+  }
+
+  .action-icon-ai {
+    background: rgba(white, 0.2);
+    color: white;
+  }
+
+  .action-subtitle {
+    color: rgba(white, 0.8);
+  }
+
+  .action-arrow {
+    color: rgba(white, 0.7);
+  }
+}
+
+.action-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba($accent-brown, 0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  i {
+    font-size: 20px;
+    color: $accent-brown;
+  }
+}
+
+.action-label {
+  flex: 1;
+  margin-left: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.action-subtitle {
+  font-size: 13px;
+  color: rgba($dark, 0.55);
+  margin-top: 2px;
+}
+
+.action-arrow {
+  font-size: 14px;
+  color: rgba($dark, 0.3);
+  margin-left: 8px;
+}
+
+/* ===========================
+   FAVORITES SECTION
+   =========================== */
+.favorites-section {
+  margin-bottom: 5px;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.favorite-recipe-card {
+  display: flex;
+  align-items: center;
+  background: $card-bg;
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: $dark;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    color: $dark;
+  }
+}
+
+.recipe-thumbnail {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, $accent-green, darken($accent-green, 8%));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  i {
+    font-size: 22px;
+    color: white;
+  }
+}
+
+.recipe-info {
+  flex: 1;
+  margin-left: 14px;
+  min-width: 0;
+}
+
+.recipe-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recipe-description {
+  font-size: 13px;
+  color: rgba($dark, 0.6);
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.recipe-arrow {
+  font-size: 14px;
+  color: rgba($dark, 0.3);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* ===========================
+   EMPTY STATE
+   =========================== */
+.empty-favorites {
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba($accent-brown, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+
+  i {
+    font-size: 28px;
+    color: $accent-brown;
+  }
+}
+
+.empty-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: $dark;
+  margin: 0 0 4px 0;
+}
+
+.empty-subtext {
+  font-size: 14px;
+  color: rgba($dark, 0.5);
+  margin: 0;
+}
+
+/* ===========================
+   LEGACY STYLES (kept for other pages)
    =========================== */
 .home-container {
   padding: 20px;
@@ -14,19 +412,20 @@
   align-items: center;
 }
 
-/* ===========================
-   PROFILE
-   =========================== */
 .profile-picture-placeholder {
   width: 4rem;
   height: 4rem;
   background: $accent-yellow;
   border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.25);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
 }
 
-/* ===========================
-   LEVEL INDICATOR
-   =========================== */
 .level-row {
   display: flex;
   justify-content: space-between;
@@ -41,9 +440,6 @@
   border-radius: 50%;
 }
 
-/* ===========================
-   FEATURE CARDS (Skills / Recipes / Cookbook)
-   =========================== */
 .feature-cards {
   display: flex;
   justify-content: space-between;
@@ -60,12 +456,12 @@
   color: $dark;
   box-shadow: 0px 2px 4px rgba(0,0,0,0.08);
   transition: 0.3s ease-in-out;
-}
 
-.feature-card:hover {
-  background: $accent-brown;
-  color: $card-bg;
-  cursor: pointer;
+  &:hover {
+    background: $accent-brown;
+    color: $card-bg;
+    cursor: pointer;
+  }
 }
 
 .circle-icon {
@@ -86,9 +482,6 @@
   position: absolute;
 }
 
-/* ===========================
-   AI COOK BANNER
-   =========================== */
 .saved {
   display: block;
   background: #C9805A;
@@ -101,17 +494,14 @@
   color: white;
   transition: 0.3s ease-in-out;
   box-shadow: 0px 2px 4px rgba(0,0,0,0.08);
+
+  &:hover {
+    background: $card-bg;
+    color: #C9805A;
+    cursor: pointer;
+  }
 }
 
-.saved:hover {
-  background: $card-bg;
-  color: #C9805A;
-  cursor: pointer;
-}
-
-/* ===========================
-   RECIPE SUGGESTION CARDS
-   =========================== */
 .content-card {
   display: flex;
   gap: 20px;
@@ -129,65 +519,6 @@
   height: 80px;
   background: $accent-green;
   border-radius: 12px;
-}
-
-/* ===========================
-   STAR RATING FILTER
-   =========================== */
-.rating-filter .stars {
-  display: flex;
-  gap: 6px;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-.rating-filter .star {
-  color: $accent-green;
-  transition: transform 0.2s ease;
-}
-
-.rating-filter .star:hover {
-  transform: scale(1.2);
-}
-
-/* ===========================
-   DIFFICULTY SLIDER
-   =========================== */
-.difficulty-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.difficulty-label {
-  font-weight: 600;
-  color: $accent-green;
-  white-space: nowrap;
-  font-size: 14px;
-}
-
-.difficulty-slider {
-  width: 20%;
-  max-width: 120px;
-  appearance: none;
-  height: 6px;
-  background: #8baa7b68;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.difficulty-slider::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  background: $accent-green;
-  border-radius: 50%;
-  transition: transform 0.2s ease;
-}
-
-.difficulty-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
 }
 
 /* ===========================
@@ -210,24 +541,59 @@
 
 .recipe-add-btn {
   margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===========================
    FAVORITE BUTTON
    =========================== */
+[id^="favorite_button_"],
+turbo-frame[id^="favorite_button_"] {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-form {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .favorite-btn {
   background: #F9F6EE;
   border: 2px solid #C5C5C5;
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 20px;
   cursor: pointer;
   color: #333;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .favorite-btn:hover {
@@ -237,7 +603,6 @@
 .favorite-btn.saved {
   border-color: #8BAA7B;
   color: #8BAA7B;
-  font-size: 24px;
 }
 
 /* ===========================

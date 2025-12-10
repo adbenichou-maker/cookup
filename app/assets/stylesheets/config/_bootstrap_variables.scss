@@ -1,28 +1,35 @@
-// This is where you override default Bootstrap variables
-// 1. Find all Bootstrap variables that you can override at the end of each component's documentation under the `Sass variables` anchor
-// e.g. here are the ones you can override for the navbar https://getbootstrap.com/docs/5.3/components/navbar/#sass-variables
-// 2. These variables are defined with default value (see https://robots.thoughtbot.com/sass-default)
-// 3. You can override them below!
+// bootstrap-variables.scss
 
-// General style
+// 1. General style overrides
 $font-family-sans-serif: $body-font;
-$headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
-$font-size-base:         1rem;
+$headings-font-family: $headers-font;
+$body-bg: $background; // Uses $background: #F7EEDB;
+$font-size-base: 1rem;
 
-// Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+// 2. Core Bootstrap Color Overrides
+// These mappings tell Bootstrap which colors to use for its utility classes and calculations.
+$body-color: $dark;          // Use $dark: #4A4A4A for main text color
+$primary: $accent-green; // Set $primary to $accent-green: #8BAA7B (used by btn-primary)
+$secondary:$accent-brown; // Set $secondary to $accent-brown: #C9815B
+$info: $accent-yellow; // Set $info to $accent-yellow: #F2C94C
 
-// Buttons & inputs' radius
-$border-radius-sm:            .0625rem;
-$border-radius:               .125rem;
-$border-radius-lg:            .25rem;
-$border-radius-xl:            .5rem;
-$border-radius-xxl:           1rem;
+// Re-map base Bootstrap colors to your defined palette
+$blue: $blue;
+$green:$green;
+$red: $red;
+$yellow: $yellow;
+$orange: $orange;
+$gray: $gray; // Use your dark $gray: #0E0000;
+$light: $light-gray; // Use your light $light-gray: #F4F4F4;
+
+// 3. Components
+$card-bg: $card-bg; // Uses $card-bg: #FCF8EF;
+
+// 4. Buttons & inputs' radius (Keeping your existing values)
+$border-radius-sm: .0625rem;
+$border-radius: .125rem;
+$border-radius-lg: .25rem;
+$border-radius-xl: .5rem;
+$border-radius-xxl: 1rem;
 
 // Override other variables below!

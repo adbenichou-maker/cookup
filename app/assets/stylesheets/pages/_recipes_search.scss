@@ -24,12 +24,15 @@
 /* Search Bar */
 .search-bar-wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 10px;
   margin-bottom: 30px;
 }
 
 .search-form {
-  width: 90%;
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   background: $card-bg;
@@ -64,11 +67,37 @@
   color: $dark;
 }
 
+.recipe-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
 .recipe-image-placeholder {
   width: 90px;
   height: 90px;
-  background: $accent-brown;
+  flex-shrink: 0;
+  background: $background;
   border-radius: 15px;
+
+  /* Center the FontAwesome icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Icon appearance */
+  font-size: 28px;
+  color: $accent-brown;
+}
+
+.recipe-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .recipe-text h3 {
@@ -88,6 +117,8 @@
 .recipe-add-btn {
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   background: $accent-green;
   color: white;
   font-size: 28px;
@@ -95,6 +126,20 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* Favorite button wrappers - fixed size */
+.search-page-container {
+  [id^="favorite_button_"],
+  turbo-frame[id^="favorite_button_"] {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 
@@ -102,25 +147,33 @@
   background: $accent-green;
   border: none;
   color: white;
-  padding: 8px 14px;
+  padding: 10px 20px;
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .filter-btn {
   background: $accent-green;
   border: none;
   color: white;
-  padding: 8px 8px;
-  border-radius: 10px;
-  margin-left: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex-shrink: 0;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-.filter-btn:hover{
+.filter-btn:hover {
+  background: $accent-yellow;
+}
+
+.filter-btn.active {
   background: $accent-yellow;
 }
 
@@ -151,6 +204,267 @@
 .filter-panel:not(.hidden) {
   padding-top: 15px;
   padding-bottom: 15px;
+  margin-bottom: 20px;
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 576px) {
+  .search-page-container {
+    padding: 15px;
+  }
+
+  .search-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .search-bar-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .search-form {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .search-input {
+    font-size: 16px;
+  }
+
+  .filter-btn {
+    padding: 10px 14px;
+  }
+
+  .search-submit-btn {
+    width: 100%;
+    padding: 12px 20px;
+    text-align: center;
+  }
+
+  /* Recipe Cards - Vertical Layout on Mobile */
+  .recipe-card {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    position: relative;
+  }
+
+  .recipe-main {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .recipe-image-placeholder {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    border-radius: 12px;
+  }
+
+  .recipe-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .recipe-text h3 {
+    font-size: 16px;
+    word-wrap: break-word;
+  }
+
+  .recipe-text p {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .rating {
+    font-size: 12px;
+  }
+
+  .recipe-add-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+  }
+
+  /* Filter Panel Mobile */
+  .filter-panel:not(.hidden) {
+    margin-top: 10px;
+  }
+
+  .filter-panel h4 {
+    font-size: 16px;
+  }
+
+  .difficulty-wrapper,
+  .rating-filter {
+    margin-bottom: 15px;
+  }
+}
+
+/* ===========================
+   DIFFICULTY SLIDER
+   =========================== */
+.difficulty-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.difficulty-label {
+  font-weight: 600;
+  color: $accent-green;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.difficulty-slider {
+  width: 20%;
+  max-width: 120px;
+  appearance: none;
+  height: 6px;
+  background: #8baa7b68;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.difficulty-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: $accent-green;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.difficulty-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* ===========================
+   PREP TIME SLIDER
+   =========================== */
+.prep-time-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  width: 20%;
+}
+
+.prep-time-label {
+  font-weight: 600;
+  color: $accent-green;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+/* Track matches difficulty, but full width */
+.prep-time-slider {
+  width: 100%;     // FULL WIDTH instead of fixed width
+  appearance: none;
+  height: 6px;
+  background: #8baa7b68;   // identical to difficulty slider
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Thumb identical */
+.prep-time-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: $accent-green;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.prep-time-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+
+@media (max-width: 576px) {
+  .prep-time-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  width: 50%;
+  }
+}
+
+
+
+/*=====================
+Difficulty Indicator
+======================*/
+
+.right-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.difficulty-icon {
+  font-size: 14px !important;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+@media (max-width: 576px) {
+
+  /* Keep cards horizontal on mobile */
+  .recipe-card {
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  /* Align content + icons properly */
+  .recipe-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Image stays the same or smaller */
+  .recipe-image-placeholder {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* Text section grows but keeps space for icons */
+  .recipe-text {
+    flex: 1;
+  }
+
+  /* Move icons snugly to the right */
+  .right-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .difficulty-icon {
+    font-size: 12px !important;
+  }
+}
+
+.recipe-card:last-child {
+  margin-bottom: 50px;   /* oder 100px – wie du willst */
 }

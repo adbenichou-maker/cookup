@@ -1,0 +1,68 @@
+<div class="offcanvas offcanvas-end sidebar bg-beige text-charcoal" tabindex="-1" id="chatsOffcanvas" aria-labelledby="chatsOffcanvasLabel">
+  <div class="offcanvas-header border-0">
+    <div class="d-flex align-items-center">
+      <h5 class="offcanvas-title fw-bold text-charcoal mb-0" id="chatsOffcanvasLabel">AI Chats</h5>
+    </div>
+    <button type="button" class="offcanvas-close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <div class="offcanvas-body">
+    <% if user_signed_in? %>
+      <!-- New Chat Button -->
+      <%= link_to new_chat_path, class: "offcanvas-new-chat-btn" do %>
+        <div class="new-chat-icon">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <span>Start New Chat</span>
+        <i class="fa-solid fa-chevron-right new-chat-arrow"></i>
+      <% end %>
+
+      <!-- History Section -->
+      <div class="offcanvas-section">
+        <h6 class="offcanvas-section-title">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>History</span>
+        </h6>
+
+        <div class="chat-list">
+          <% chats = current_user.chats.order(updated_at: :desc) %>
+
+          <% if chats.any? %>
+            <% chats.each do |chat| %>
+              <% is_active = defined?(@chat) && @chat == chat %>
+              <%= link_to chat_path(chat), class: "chat-item #{'chat-item-active' if is_active}" do %>
+                <div class="chat-item-icon">
+                  <i class="fa-solid fa-message"></i>
+                </div>
+                <div class="chat-item-content">
+                  <span class="chat-item-title"><%= chat.title %></span>
+                  <span class="chat-item-time"><%= time_ago_in_words(chat.updated_at) %> ago</span>
+                </div>
+                <i class="fa-solid fa-chevron-right chat-item-arrow"></i>
+              <% end %>
+            <% end %>
+          <% else %>
+            <div class="chat-empty-state">
+              <div class="chat-empty-icon">
+                <i class="fa-regular fa-comments"></i>
+              </div>
+              <p class="chat-empty-text">No chats yet</p>
+              <p class="chat-empty-subtext">Start a conversation with AI Cook!</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    <% else %>
+      <div class="chat-empty-state">
+        <div class="chat-empty-icon">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <p class="chat-empty-text">Sign in required</p>
+        <p class="chat-empty-subtext">Please sign in to view your chat history</p>
+      </div>
+    <% end %>
+  </div>
+</div>
