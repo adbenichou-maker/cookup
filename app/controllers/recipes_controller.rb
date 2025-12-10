@@ -51,6 +51,7 @@ class RecipesController < ApplicationController
         },
         "recipe_level": integer (0 for beginner, 1 for intermediate, 2 for expert),
         "meal_prep_time": integer (in minutes),
+        "tips": string (optional),
         "steps_attributes": [
           {
             "title": string,
