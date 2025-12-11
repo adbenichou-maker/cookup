@@ -68,19 +68,6 @@ recipe_author = user_santi
 review_users = [user_santi, user_john, user_maria, user_david, user_elena]
 
 puts "Created #{User.count} users."
-user = User.create!(
-  email: "adam@lewagon.com",
-  password: "password",
-  username: "Adam",
-  level: 5,
-  xp: 125
-)
-
-generic_user = User.create!(
-  email: "generic@test.com",
-  password: "password",
-  username: "Maria Doe"
-)
 
 
 # ---------------------------
