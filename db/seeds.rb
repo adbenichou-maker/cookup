@@ -48,7 +48,7 @@ puts "Created #{Skill.count} skills."
 puts "Creating Users..."
 
 # Primary users for reviews
-user_santi = User.create!(email: "santi@lewagon.com", password: "password", username: "Santi")
+user_santi = User.create!(email: "santi@lewagon.com", password: "password", username: "Santi") # Original user
 user_john = User.create!(email: "john.doe@test.com", password: "password", username: "John Doe")
 user_maria = User.create!(email: "maria.g@test.com", password: "password", username: "Maria G")
 user_david = User.create!(email: "david.c@test.com", password: "password", username: "David C")
@@ -60,6 +60,27 @@ recipe_author = user_santi
 review_users = [user_santi, user_john, user_maria, user_david, user_elena, user_adam, generic_user]
 
 puts "Created #{User.count} users."
+
+# The author of most recipes
+recipe_author = user_santi
+
+# Array of all users for random review assignment
+review_users = [user_santi, user_john, user_maria, user_david, user_elena]
+
+puts "Created #{User.count} users."
+user = User.create!(
+  email: "adam@lewagon.com",
+  password: "password",
+  username: "Adam",
+  level: 5,
+  xp: 125
+)
+
+generic_user = User.create!(
+  email: "generic@test.com",
+  password: "password",
+  username: "Maria Doe"
+)
 
 
 # ---------------------------
