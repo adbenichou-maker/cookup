@@ -1278,7 +1278,7 @@ puts "Created placeholder UserBadges for main user Adam."
 
 # Now set requested badge levels for user_adam
 streak_badge = Badge.find_by(rule_key: "streak")
-beginner_badge = Badge.find_by(rule_key: "recipe_beginner")
+# beginner_badge = Badge.find_by(rule_key: "recipe_beginner")
 
 
 # Use safe navigation for assignment
