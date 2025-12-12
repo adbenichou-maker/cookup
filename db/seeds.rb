@@ -1325,7 +1325,6 @@ beginner_recipes.each do |recipe|
   UserRecipeCompletion.create!(
     user: user_adam,
     recipe: recipe,
-    completed_at: Time.current - rand(1..30).days
   )
 end
 
