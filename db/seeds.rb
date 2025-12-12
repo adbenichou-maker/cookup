@@ -1283,7 +1283,7 @@ streak_badge = Badge.find_by(rule_key: "streak")
 
 # Use safe navigation for assignment
 UserBadge.find_by(user: user_adam, badge: streak_badge)&.update!(level: 3, awarded_at: Time.current)
-UserBadge.find_by(user: user_adam, badge: beginner_badge)&.update!(level: 1, awarded_at: Time.current)
+# UserBadge.find_by(user: user_adam, badge: beginner_badge)&.update!(level: 1, awarded_at: Time.current)
 
 
 puts "Assigned requested badge levels to #{user_adam.username}."
