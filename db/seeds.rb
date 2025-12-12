@@ -14,7 +14,11 @@ UserBadge.destroy_all
 
 Chat.destroy_all
 Recipe.destroy_all
+puts "Deleting skills"
+puts "There is this many skills before deletion: #{Skill.count}"
 Skill.destroy_all
+puts "Deleted all skills."
+puts "there are this many skills: #{Skill.count}"
 Badge.destroy_all
 User.destroy_all
 
@@ -39,6 +43,9 @@ Skill.create!([
   { title: "Braising Meat", description: "Slow-cooking meat in liquid for maximum tenderness and flavor.", video: "gamrvinxg6hxfwrtdeqi.mp4", skill_level: 1 },
   { title: "Making Hollandaise Sauce", description: "Master the classic French emulsion sauce made from egg yolks, melted butter, and lemon juice.", video: "hhinzxu2qyahhouygjro.mp4", skill_level: 1 }
 ])
+
+puts "there is this skill for dicing an onion: #{Skill.find_by(title: "Dicing an Onion")}"
+
 
 puts "Created #{Skill.count} skills."
 
@@ -1230,4 +1237,80 @@ created_recipes.each do |recipe|
 end
 
 puts "Created #{Review.count} total reviews."
+
+
+# ---------------------------
+# CHATS & MESSAGES
+# ---------------------------
+puts "Creating example chat and messages for Adam..."
+# Using user_adam as the primary user for these entries
+chat = Chat.create!(user: user_adam, title: "Botifarra Ideas")
+Message.create!(chat: chat, role: "user", content: "I have carrots, beetroot, and botifarra. What can I cook?")
+Message.create!(chat: chat, role: "ai", content: "Here are some recipe ideas using those ingredients: 1. Botifarra and Beetroot Hash 2. Glazed Carrots with Botifarra 3. Mediterranean Botifarra Skewers.")
+puts "Created 1 Chat and 2 Messages."
+
+# ---------------------------
+# BADGES
+# ---------------------------
+puts "Creating badges..."
+Badge.create!([
+  { name: "Beginner Recipes", rule_key: "recipe_beginner", description: "Earned by completing Beginner-level recipes." },
+  { name: "Intermediate Recipes", rule_key: "recipe_intermediate", description: "Earned by mastering Intermediate-level recipes." },
+  { name: "Expert Recipes", rule_key: "recipe_expert", description: "Awarded for finishing challenging Expert-level recipes." },
+  { name: "Saved Recipes", rule_key: "saved_recipes", description: "Earned by saving many recipes to your cookbook." },
+  { name: "Skills Completed", rule_key: "skills_completed", description: "Unlocked by learning different cooking skills." },
+  { name: "Consistency", rule_key: "streak", description: "Earned by being consistently active day after day." }
+])
+puts "Created #{Badge.count} badges."
+
+# ---------------------------
+# USER BADGES: Pre-create placeholder user_badges for the main user
+# ---------------------------
+puts "Preparing placeholder user_badges for main user Adam..."
+Badge.find_each do |badge|
+  # Use user_adam here
+  UserBadge.find_or_create_by!(user: user_adam, badge: badge) do |ub|
+    ub.level = 0
+    ub.awarded_at = Time.current
+  end
+end
+puts "Created placeholder UserBadges for main user Adam."
+
+# Now set requested badge levels for user_adam
+streak_badge = Badge.find_by(rule_key: "streak")
+beginner_badge = Badge.find_by(rule_key: "recipe_beginner")
+
+
+# Use safe navigation for assignment
+UserBadge.find_by(user: user_adam, badge: streak_badge)&.update!(level: 3, awarded_at: Time.current)
+UserBadge.find_by(user: user_adam, badge: beginner_badge)&.update!(level: 1, awarded_at: Time.current)
+
+
+puts "Assigned requested badge levels to #{user_adam.username}."
+
+# ---------------------------
+# USER SKILLS (mark a few skills as completed for user_adam)
+# ---------------------------
+puts "Creating some user_skills for the main user Adam..."
+UserSkill.create!([
+  { user: user_adam,  skill: Skill.find_by(title: "Making Béchamel Sauce"), completed: true },
+  { user: user_adam, skill: Skill.find_by(title: "Cutting Brunoise"), completed: true },
+  { user: user_adam, skill: Skill.find_by(title: "Checking Meat Internal Temperature"), completed: true },
+  { user: user_adam, skill: Skill.find_by(title: "Making a Basic Roux"), completed: true }])
+puts `See all th user skills from Adam: #{UserSkill.where(user: user_adam).to_a}`
+puts "I m gonna delete this mow #{Skill.find_by(title: "Dicing an Onion")}"
+
+dice_onion = Skill.find_by(title: "Dicing an Onion")
+puts "This is the skil for dice onion in the end of seed: #{dice_onion}"
+# puts `This is the user skill for adam before recreating: #{UserSkill.find_by(user: user_adam, skill: dice_onion)}`
+UserSkill.find_by(user: user_adam, skill: dice_onion) do |us|
+  us.completed = false
+end
+
+puts "User skills created for Adam."
+
+# ---------------------------
+# IMPORTANT: We ARE NOT creating UserRecipeCompletion entries here
+# That prevents add_xp callbacks from modifying the main user's xp/level during seeding.
+# ---------------------------
 puts "Seed completed successfully!"
