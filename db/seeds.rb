@@ -868,7 +868,7 @@ recipes_data = [
     tips: "Roast pumpkin to concentrate flavor; crisp sage separately and add at the end for texture contrast.",
     steps: [
       { title: "Roast Pumpkin", content: "Roast pumpkin and keep warm." },
-      { title: "Cook Gnocchi", content: "Boil gnocchi until they float." },
+      { title: "Cook Gnocchi", content: "Knead the gnocchi dough gently and boil gnocchi until they float." },
       { title: "Brown Butter & Serve", content: "Brown butter, add sage and toss gnocchi with pumpkin." }
     ]
   },
