@@ -863,7 +863,7 @@ recipes_data = [
     title: "Brown Butter Sage Gnocchi with Pumpkin",
     description: "Tender gnocchi in brown butter with roasted pumpkin and crispy sage.",
     ingredients: { "gnocchi" => "500 g", "pumpkin" => "200 g", "butter" => "80 g", "sage" => "10 leaves" },
-    recipe_level: 1,
+    recipe_level: 0,
     meal_prep_time: 35,
     tips: "Roast pumpkin to concentrate flavor; crisp sage separately and add at the end for texture contrast.",
     steps: [
@@ -1295,8 +1295,8 @@ puts "Creating some user_skills for the main user Adam..."
 UserSkill.create!([
   { user: user_adam,  skill: Skill.find_by(title: "Making Béchamel Sauce"), completed: true },
   { user: user_adam, skill: Skill.find_by(title: "Cutting Brunoise"), completed: true },
-  { user: user_adam, skill: Skill.find_by(title: "Checking Meat Internal Temperature"), completed: true },
-  { user: user_adam, skill: Skill.find_by(title: "Making a Basic Roux"), completed: true }])
+  { user: user_adam, skill: Skill.find_by(title: "Checking Meat Internal Temperature"), completed: true }
+])
 puts `See all th user skills from Adam: #{UserSkill.where(user: user_adam).to_a}`
 puts "I m gonna delete this mow #{Skill.find_by(title: "Dicing an Onion")}"
 
@@ -1308,6 +1308,30 @@ UserSkill.find_by(user: user_adam, skill: dice_onion) do |us|
 end
 
 puts "User skills created for Adam."
+
+# ---------------------------
+# USER RECIPE COMPLETIONS (mark 4 beginner recipes as completed for user_adam)
+# ---------------------------
+puts "Creating UserRecipeCompletion entries for Adam (4 beginner recipes)..."
+
+beginner_recipes = [
+  Recipe.find_by(title: "Charred Broccoli with Anchovy & Lemon"),
+  Recipe.find_by(title: "Caramelized Onion & Gruyere Galette"),
+  Recipe.find_by(title: "Crispy Skin Salmon with Fennel & Apple Slaw"),
+  Recipe.find_by(title: "Smoked Paprika Roasted Eggplant with Yogurt")
+].compact
+
+beginner_recipes.each do |recipe|
+  UserRecipeCompletion.create!(
+    user: user_adam,
+    recipe: recipe,
+    completed_at: Time.current - rand(1..30).days
+  )
+end
+
+puts "Created #{beginner_recipes.count} beginner recipe completions for Adam."
+
+
 
 # ---------------------------
 # IMPORTANT: We ARE NOT creating UserRecipeCompletion entries here
